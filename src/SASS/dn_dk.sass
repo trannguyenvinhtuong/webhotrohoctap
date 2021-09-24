@@ -1,0 +1,77 @@
+$shadow-form: 0 10px 34px -15px #0000003d
+$color-backgroud-dn: #f8f9fd
+$color-icon-text: #8d448b 
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@200;300;500;800;900&display=swap');
+$font: 'Be Vietnam Pro', sans-serif
+$backgroud-input: #00000012
+
+
+.dangnhap
+    background-color: $color-backgroud-dn
+    padding: 2rem
+.header-dn
+    align-items: center !important
+    -webkit-box-align: center!important
+    justify-content: center !important
+    display: flex
+.icon-dn
+    border-radius: 50%
+    background-color: $color-icon-text
+    width: 80px
+    height: 80px
+    font-size: 30px    
+    line-height: 80px
+    text-align: center
+    color: #ffffff
+.wrap
+    width: 100%
+    height: auto
+    display: flex
+    justify-content: center    
+    form        
+        box-shadow: $shadow-form
+        border-radius: .7rem
+        width: 40%    
+        height: auto
+        padding: 2rem
+        background-color: #fff
+        font-family: $font
+        h2
+            text-align: center
+            text-transform: none
+            padding-top: 1rem
+            font-size: 1.3rem
+            color: $color-icon-text
+            font-weight: bold
+        button
+            margin-top: .5rem
+            width: 100%
+            padding: 1rem
+            color: #fff
+            background-color: $color-icon-text
+            border-radius: .3rem
+            transition: .5s
+        button:hover
+            background-color: #cc2bc7
+            transition: .5s
+
+.inputdn
+    width: 100%
+    font-size: 1rem !important
+    text-transform: none
+    padding: .8rem !important
+    background-color: $backgroud-input !important
+.item-forgot
+    padding-top: 1rem
+    a
+        color: $color-icon-text
+        float: right
+        font-weight: bold
+.link-dndk
+    padding-top: 1rem
+    text-align: center
+    span
+        padding: .5rem
+        text-transform: none
+        a
+            text-transform: none

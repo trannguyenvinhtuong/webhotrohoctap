@@ -1,0 +1,11 @@
+.user-style button{
+    background-color: transparent;
+    border: none;
+}
+.user-style button:hover{
+    background-color: transparent;
+}
+.user-style{
+    padding: 0;
+    margin: 0;
+}
