@@ -1,5 +1,6 @@
 import { Component } from "react";
 import bk from './../../imgs/background2.jpg';
+import {Link} from 'react-router-dom';
 
 class Tailieu extends Component {
     render() {
@@ -10,7 +11,7 @@ class Tailieu extends Component {
                 <div className="row">
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -21,12 +22,12 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -37,12 +38,12 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -53,12 +54,12 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -69,12 +70,12 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -85,12 +86,12 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -101,12 +102,12 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -117,12 +118,12 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-md-3 p-kh">
                         <div className="sanpham">
-                            <a href="#">
+                            <Link to='/tailieu'>
                                 <img src={bk} />
                                 <h3>Học đệm hát Guitar cùng Haketu</h3>
                                 <div className="thongtin-sp row">
@@ -133,13 +134,13 @@ class Tailieu extends Component {
                                         <p className="giatailieu">Miễn phí</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
-                <a href="#" className="xemthem">Xem thêm
+                <Link to="/alldisplay" className="xemthem">Xem thêm
                     <i class="fas fa-angle-double-right" style={{ color: '#0d6efd' }}></i>
-                </a>
+                </Link>
             </div>
         );
     }

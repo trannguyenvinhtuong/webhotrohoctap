@@ -8,6 +8,7 @@ import Thongtin from './component/thongtin/Index';
 import Alldislay from './component/alldisplay/Alldisplay';
 import Detailkhoahoc from './component/detailkhoahoc/Detailkhoahoc';
 import Dangkytk from './component/dangky/Dangkytk';
+import Tailieu from './component/tailieu/Tailieu';
 
 const routes = [
     {
@@ -49,6 +50,11 @@ const routes = [
         path: '/detailkhoahoc',
         exact: false,
         main: () => <Detailkhoahoc />
+    },
+    {
+        path: '/tailieu',
+        exact: false,
+        main: () => <Tailieu />
     },
     {
         path: '/dangkytk',

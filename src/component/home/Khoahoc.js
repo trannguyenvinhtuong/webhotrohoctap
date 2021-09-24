@@ -146,7 +146,7 @@ class Khoahoc extends Component {
                         </div>       
                     </div>
                 </div>
-                <Link to="/thongtin" className="xemthem">Xem thêm  
+                <Link to="/alldisplay" className="xemthem">Xem thêm  
                     <i class="fas fa-angle-double-right" style={{color:'#0d6efd'}}></i>
                 </Link>
             </div>

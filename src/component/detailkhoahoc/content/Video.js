@@ -1,11 +1,17 @@
 import { Component } from "react";
-import ci from './../../../imgs/2021-08-21 21-14-05.mp4';
+import "./../../../../node_modules/video-react/dist/video-react.css";
+import {Player} from 'video-react';
+import hinh from './../../../imgs/cntt.jpg';
 
 class Video extends Component{
     render() {
         return (
             <div>
-                video here
+                <Player 
+                    playsInline
+                    poster={hinh}
+                    src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                />
             </div>
         );
     }
