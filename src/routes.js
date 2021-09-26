@@ -9,6 +9,7 @@ import Alldislay from './component/alldisplay/Alldisplay';
 import Detailkhoahoc from './component/detailkhoahoc/Detailkhoahoc';
 import Dangkytk from './component/dangky/Dangkytk';
 import Tailieu from './component/tailieu/Tailieu';
+import Khoahoc from './component/khoahoc/Khoahoc';
 
 const routes = [
     {
@@ -55,6 +56,11 @@ const routes = [
         path: '/tailieu',
         exact: false,
         main: () => <Tailieu />
+    },
+    {
+        path: '/khoahoc',
+        exact: false,
+        main: () => <Khoahoc />
     },
     {
         path: '/dangkytk',
