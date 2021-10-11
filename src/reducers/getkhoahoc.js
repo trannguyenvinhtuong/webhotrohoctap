@@ -10,6 +10,9 @@ var myReducer = (state = initialState, action) =>{
         case type.SHOW_KHOAHOC:
             console.log(state);
             return state;    
+        case type.GET_KHOAHOCKH:
+            state = action.khoahoc;
+            return state;
         default:
             return state;
     }

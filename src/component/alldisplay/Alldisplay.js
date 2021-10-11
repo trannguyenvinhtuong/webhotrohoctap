@@ -14,13 +14,15 @@ class Alldislay extends Component{
     }
     render() {
         var {tooglefilter} = this.props;
-
+        var {match} = this.props;
+        var iddm = match.match.params.iddm;
+        
         return (
             <div style={{marginTop:'4.7rem'}} >
                 <Tab />
                 <Row className="padding-element">
                     <Col span={tooglefilter === true ? 6 : 0}>
-                        <Filter />
+                        <Filter iddm={iddm} />
                     </Col>
                     <Col span={tooglefilter === true ? 18 : 24}>
                         <Tableofdata />
@@ -33,8 +35,7 @@ class Alldislay extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-        tooglefilter: state.tooglefilter,
-        
+        tooglefilter: state.tooglefilter,        
     }
 }
 

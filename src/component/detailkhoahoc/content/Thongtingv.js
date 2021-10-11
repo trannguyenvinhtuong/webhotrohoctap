@@ -2,57 +2,51 @@ import { Component } from "react";
 import './../../../SASS/detail.sass';
 import { Row, Col } from 'antd';
 import ah from './../../../imgs/vatly.jpg';
+import {connect} from "react-redux";
+import * as action from './../../../actions/index';
 
 class Thongtingv extends Component {
+    componentDidMount(){
+        var {idkhoahoc} = this.props;
+        this.props.requestMotKhoaHoc(idkhoahoc);
+    }
+
     render() {
+        var {khoahoc} = this.props;
+        var kh = khoahoc[0]; 
         return (
             <div className="gt-qc ttgv">
                 <h1>Thông tin giảng viên</h1>
                 <Row>
                     <Col span={6} style={{textAlign:'center'}}>
-                        <img src={ah} />
+                        <img src={khoahoc.AnhDaiDien === undefined ? kh.AnhDaiDien : khoahoc.AnhDaiDien} />
                         <br/>
                         <p>
-                            <i class="fas fa-user-friends"></i>
-                            17594 học viên
+                            <i className="fas fa-user-friends"></i>
+                            {khoahoc.SoLuongHV === undefined ? kh.SoLuongHV : khoahoc.SoLuongHV} học viên
                         </p>
                         <p style={{marginTop:'-2rem'}}>
-                            <i class="fab fa-discourse"></i>
-                            6 khóa học
+                            <i className="fab fa-discourse"></i>
+                            {khoahoc.SoLuongKH === undefined ? kh.SoLuongKH : khoahoc.SoLuongKH} khóa học
                         </p>
                     </Col>
                     <Col span={18}>
-                        <h2>Đặng Trọng Khang</h2>
-                        <i>Causality Investing Speaker</i>
+                        <h2>{khoahoc.TenKH === undefined ? kh.TenKH : khoahoc.TenKH}</h2>
+                        <i>{khoahoc.TrinhDo === undefined ? kh.TrinhDo : khoahoc.TrinhDo} - 
+                            {khoahoc.ChuyenNganh ===  undefined ? kh.ChuyenNganh : khoahoc.ChuyenNganh}
+                        </i>
                         <br />
                         <br />
                         <div>
-                            Giảng viên Đặng Trọng Khang là người có thâm niên đầu tư thực tế gần 15 năm trong thị trường chứng khoán từ 2006 - 2020
+                            {khoahoc.GioiThieuBanThan === undefined ? kh.GioiThieuBanThan : khoahoc.GioiThieuBanThan}
                         </div>
                         <div>
-                            Người chia sẻ về Phương pháp đầu tư chứng khoán theo Luật Nhân Quả - Causality Investing
+                            {khoahoc.GioiThieuNgheNghiep === undefined ? kh.GioiThieuNgheNghiep : khoahoc.GioiThieuNgheNghiep}
                         </div>
                         <div>
-                            Chuyên gia chứng khoán tại NIK Capital
-                        </div>
-                        <div>
-                            CEO CTCP Minh Bảo Tín
-                        </div>
-                        <div>
-                            Trưởng VPDD Bình Dương - Cty chứng khoán Vietcombank (2016 - 2018)
-                        </div>
-                        <div>
-                            Từ 2014 đến nay, đã chia sẻ cho hơn 65.000 lượt người về đầu tư chứng khoán qua các khoá học kinh doanh "đỉnh cao"
-                        </div>
-                        <div>
-                            Là diễn giả về đầu tư cổ phiếu được đánh giá cao tại Việt Nam
-                        </div>
-                        <div>
-                            Được mời đứng chung sân khấu với nhiều doanh nhân - diễn giả hàng đầu như Thầy John C.Maxwell, Thầy Mark Victor Hansen, Doanh nhân Phạm Đình Đoàn, Doanh nhân Đỗ Cao Bảo, Thầy Nguyễn Thành Tiến...
-                        </div>
-                        <div>
-                            Website: https://dangtrongkhang.com/
-                        </div>
+                            {khoahoc.GioiThieuKinhNghiem === undefined ? kh.GioiThieuKinhNghiem : khoahoc.GioiThieuKinhNghiem}
+                        </div>                      
+    
                     </Col>
                 </Row>
             </div>
@@ -60,4 +54,18 @@ class Thongtingv extends Component {
     }
 }
 
-export default Thongtingv;
+const mapStateToProps = (state) =>{
+    return{
+        khoahoc: state.getmotkhoahoc
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) =>{
+    return{
+        requestMotKhoaHoc: (idkh) =>{
+            dispatch(action.requestMotKhoaHoc(idkh));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Thongtingv);

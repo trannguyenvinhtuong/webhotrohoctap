@@ -1,34 +1,52 @@
 import { Component } from "react";
 import './../../SASS/detail.sass';
-import im from './../../imgs/person.jpg';
-import { Row, Col } from 'antd';
+import {connect} from "react-redux";
+import * as action from './../../actions/index';
 
 class Gioithieu extends Component {
-    render() {
-        return (
-            
-                    <div className="detail-gioithieu">
-                        <h1>Nhập môn chứng khoán</h1>
-                        <p>
-                            Khóa học chứng khoán online giúp bạn nắm bắt được kiến thức đầu tư chứng khoán đầy đủ, bài bản và chi tiết nhất dành cho người mới bắt đầu tham gia. Bí quyết để nhanh chóng có được nguồn lợi nhuận khổng lồ từ thị trường chứng khoán
-                        </p>
-                        <div>
-                            <img src={im} />
-                            <span>Đặng Trọng Khang</span>
-                            <span>
-                                <i class="far fa-smile" style={{ color: 'yellow' }}></i>
-                                3950 Đánh giá
-                            </span>
-                            <span>
-                                <i class="fas fa-user-graduate"></i>
-                                4554 Học viên
-                            </span>
-                        </div>
-                    </div>
-             
+    componentDidMount() {
+        var {idkh} = this.props;
+        this.props.requestMotKhoaHoc(idkh);
+    }
 
+    render() {
+        var {khoahoc} = this.props;
+        var kh = khoahoc[0]; 
+        return (
+            <div className="detail-gioithieu">
+                <h1>{khoahoc.TenKhoaHoc === undefined ? kh.TenKhoaHoc : khoahoc.TenKhoaHoc}</h1>
+                <p>
+                    {khoahoc.MoTa === undefined ? kh.MoTa : khoahoc.MoTa}
+                </p>
+                <div>
+                    <img src={khoahoc.AnhDaiDien === undefined ? kh.AnhDaiDien : khoahoc.AnhDaiDien} />
+                    <span>{khoahoc.TenKH === undefined ? kh.TenKH: khoahoc.TenKH}</span>
+                    <span>
+                        <i className="far fa-smile" style={{ color: 'yellow' }}></i>
+                        3950 Đánh giá
+                    </span>
+                    <span>
+                        <i className="fas fa-user-graduate"></i>
+                        {khoahoc.SoLuongHV === undefined ? kh.SoLuongHV : khoahoc.SoLuongHV} Học viên
+                    </span>
+                </div>
+            </div>
         );
     }
 }
 
-export default Gioithieu;
+const mapStateToProps = (state) =>{
+    return{
+        khoahoc: state.getmotkhoahoc
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) =>{
+    return{
+        requestMotKhoaHoc: (idkh) =>{
+            dispatch(action.requestMotKhoaHoc(idkh));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Gioithieu);

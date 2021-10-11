@@ -103,7 +103,8 @@ header img{
 .marketing h3{
     color: white;
     font-family: 'Hina Mincho', serif;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 .marketing div{
     width: 100%;
@@ -174,7 +175,7 @@ header img{
 .sanpham h3{
     text-align: left;
     font-family: 'Roboto', serif;
-    font-size: 1rem;
+    font-size: .9rem;
     text-transform: none;
     padding: .7rem;
     height: 3.3rem;
@@ -455,6 +456,8 @@ header img{
 
 /* footer */
 .footer-style{
+    position: relative;
+    bottom: 0;
     background-color: var(--bgcolorfotter);
     width: 100%;
     max-height: 30rem;

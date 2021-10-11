@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import { Component } from "react";
 import './../../stylecss/Style.css';
+import {Link} from 'react-router-dom';
 
 class Marketing extends Component{
     render(){
@@ -11,8 +12,12 @@ class Marketing extends Component{
                     thiện bản thân? 
                 </h3>
                 <div>
-                    <Button className="timhieungay">Tìm hiểu ngay!</Button>
-                    <Button className="muakhoahoc">Mua khóa học</Button>
+                    <Link to='/alldisplaytailieu' >
+                        <Button className="timhieungay">Tìm hiểu ngay!</Button>
+                    </Link>
+                    <Link to='/alldisplay/0' >
+                        <Button className="muakhoahoc">Mua khóa học</Button>
+                    </Link>
                 </div>
 
             </div>

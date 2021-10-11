@@ -1,24 +1,19 @@
 import { Component } from "react";
 import { connect } from 'react-redux';
 import * as action from './../../actions/index';
-import at from './../../imgs/amthuc.jpg';
-import cntt from './../../imgs/cntt.jpg';
-import de from './../../imgs/designer.jpg';
-import dl from './../../imgs/dulich.jpg';
-import hh from './../../imgs/hoahoc.jpg';
-import kt from './../../imgs/ketoan.jpg';
+import { Link } from 'react-router-dom';
 
 class Danhmuc extends Component {
-    showDanhMuc = (khoahoc) => {
+    showDanhMuc = (chude) => {
         var rs = null;
-        rs = khoahoc.map((kh) => {
+        rs = chude.map((cd) => {
             return (
                 <div className="col-4 p-cd">
-                    <a href="#" key={kh.id}>
-                        <div className="chude" style={{ backgroundImage: `url(${at})` }}>
-                            <h3>{kh.lastname}</h3>
+                    <Link to={`/alldisplay/${cd.MaCD}`} key={cd.MaCD}>
+                        <div className="chude" style={{ backgroundImage: `url(${cd.AnhCD})` }}>
+                            <h3>{cd.TenCD}</h3>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             )
         })
@@ -26,16 +21,16 @@ class Danhmuc extends Component {
     }
 
     componentDidMount() {
-        this.props.requestKhoaHoc();
+        this.props.requestChuDe();
     }
 
     render() {
-        var { khoahoc } = this.props;
+        var { chude } = this.props;
         return (
             <div className="container" style={{ marginTop: '5rem' }}>
                 <div className="container khoahoc">
                     <div className="row">
-                        {this.showDanhMuc(khoahoc)}
+                        {this.showDanhMuc(chude)}
                     </div>
                 </div>
 
@@ -47,14 +42,14 @@ class Danhmuc extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        khoahoc: state.getkhoahoc,
+        chude: state.getchude,
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        requestKhoaHoc: () => {
-            dispatch(action.requestKhoaHoc());
+        requestChuDe: () => {
+            dispatch(action.requestChuDe());
         }
     }
 }

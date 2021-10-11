@@ -6,11 +6,13 @@ import Quangcao from './Quangcao';
 
 class Tailieu extends Component{
     render() {
+        var {match} = this.props;
+        var idtl = match.match.params.idtailieu;
         return (
             <div style={{marginTop:'5.5rem'}}>       
-                <Gioithieu />
-                <Docpdf />
-                <Tacgia />
+                <Gioithieu idtl = {idtl} />
+                <Docpdf idtl = {idtl} />
+                <Tacgia idtl = {idtl} />
                 <Quangcao />
             </div>
         );

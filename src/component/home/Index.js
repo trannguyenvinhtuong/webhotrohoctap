@@ -7,7 +7,7 @@ import Noidung from './Noidung.js';
 import Chinhphuc from './Chinhphuc.js';
 import Gvtieubieu from './Gvtieubieu';
 import Dkgiangvien from './Dkgiangvien.js';
-import Backg from './../../imgs/background4.jpg';
+import Backg from './../../imgs/background10.jpg';
 
 class Index extends Component {
     render() {

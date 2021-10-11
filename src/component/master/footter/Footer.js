@@ -16,6 +16,10 @@ class Footer extends Component{
                             <p>Nguyễn Lê Phước Hậu</p>
                         </div>
                         <div className="col">
+                            <h3>Mã số sinh viên</h3>
+                            <p>2001170228</p>
+                        </div>
+                        <div className="col">
                             <h3>Liên hệ</h3>
                             <p>vinhtuong.doubleshit@gmail.com</p>
                         </div>

@@ -35,6 +35,9 @@ class Dangkytk extends Component {
                             <Input placeholder="Số điện thoại" className="inputdn" />
                             <br />
                             <br />
+                            <Input placeholder="Địa chỉ" className="inputdn" />
+                            <br />
+                            <br />
                             <a type="submit" style={{width:'100%'}}>
                                 <button>
                                     Đăng ký

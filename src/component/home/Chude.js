@@ -1,66 +1,44 @@
 import { Component } from "react";
-import {Link} from 'react-router-dom';
-import at from './../../imgs/amthuc.jpg';
-import cntt from './../../imgs/cntt.jpg';
-import de from './../../imgs/designer.jpg';
-import dl from './../../imgs/dulich.jpg';
-import hh from './../../imgs/hoahoc.jpg';
-import kt from './../../imgs/ketoan.jpg';
-import an from './../../imgs/anhnennuoc.jpg'
+import { Link } from 'react-router-dom';
+import an from './../../imgs/anhnennuoc.jpg';
+import { connect } from 'react-redux';
+import * as action from './../../actions/index';
 
 class Chude extends Component {
+    showCD = (cd) => {
+        var rs = null;
+        if (cd) {
+            rs = cd.map((c, index) => {
+                return (
+                    <div className="col-4 p-cd" key={index}>
+                        <Link to={`/alldisplay/${c.MaCD}`}>
+                            <div className="chude" style={{ backgroundImage: `url(${c.AnhCD})` }}>
+                                <h3>{c.TenCD}</h3>
+                            </div>
+                        </Link>
+                    </div>
+                )
+            })
+        }
+        return rs;
+    }
+
+    componentDidMount(){
+        this.props.requestChuDeLimit();
+    }
+
     render() {
+        var {chude} = this.props;
         return (
-            <div className="back-cd" style={{ backgroundImage: `url(${an})`}}>
+            <div className="back-cd" style={{ backgroundImage: `url(${an})` }}>
                 <div className="container khoahoc">
                     <h3>CHỦ ĐỀ</h3>
                     <br />
                     <div className="row">
-                        <div className="col-4 p-cd">
-                            <a href="#">
-                                <div className="chude" style={{ backgroundImage: `url(${at})` }}>
-                                    <h3>Ẩm thực</h3>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="col-4 p-cd">
-                            <a href="#">
-                                <div className="chude" style={{ backgroundImage: `url(${de})` }}>
-                                    <h3>Thiết kế</h3>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="col-4 p-cd">
-                            <a href="#">
-                                <div className="chude" style={{ backgroundImage: `url(${dl})` }}>
-                                    <h3>Du lịch</h3>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="col-4 p-cd">
-                            <a href="#">
-                                <div className="chude" style={{ backgroundImage: `url(${cntt})` }}>
-                                    <h3>Công nghệ</h3>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="col-4 p-cd">
-                            <a href="#">
-                                <div className="chude" style={{ backgroundImage: `url(${kt})` }}>
-                                    <h3>Kế toán</h3>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="col-4 p-cd">
-                            <a href="#">
-                                <div className="chude" style={{ backgroundImage: `url(${hh})` }}>
-                                    <h3>Hóa học</h3>
-                                </div>
-                            </a>
-                        </div>
+                        {this.showCD(chude)}
                     </div>
                     <Link to="/danhmuc" className="xemthem">Xem thêm
-                        <i class="fas fa-angle-double-right" style={{ color: '#0d6efd' }}></i>
+                        <i className="fas fa-angle-double-right" style={{ color: '#0d6efd' }}></i>
                     </Link>
                 </div>
             </div>
@@ -68,4 +46,18 @@ class Chude extends Component {
     }
 }
 
-export default Chude;
+const mapStateToProps = (state) => {
+    return {
+        chude: state.getchudelimit,
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        requestChuDeLimit: () => {
+            dispatch(action.requestChuDeLimit());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chude);

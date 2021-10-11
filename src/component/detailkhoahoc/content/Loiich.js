@@ -1,39 +1,48 @@
 import { Component } from "react";
 import './../../../SASS/detail.sass';
 import { Row, Col } from 'antd';
+import {connect} from "react-redux";
+import * as action from './../../../actions/index';
 
 class Loiich extends Component {
+    componentDidMount(){
+        var {idkh} = this.props;
+        this.props.requestTTKH(idkh);
+    }
+
     render() {
+        var {thongtin} = this.props;
+        var tt = thongtin[0];
         return (
             <div className="gt-qc">
                 <h1>Bạn sẽ học được gì</h1>
                 <Row>
                     <Col span={12}>
                         <p>
-                            <i class="fas fa-check"></i>
-                            Kiến thức cơ bản nhất về thị trường chứng khoán, về đầu tư chứng khoán và tiềm năng
+                            <i className="fas fa-check"></i>
+                            {thongtin.Marketing1 === undefined ? tt.Marketing1 : thongtin.Marketing1}
                         </p>
                         <p>
-                            <i class="fas fa-check"></i>
-                            Nắm được những công cụ để đánh giá, phân tích và đầu tư chứng khoán sớm có lời lãi
+                            <i className="fas fa-check"></i>
+                            {thongtin.Marketing2 === undefined ? tt.Marketing2 : thongtin.Marketing2}
                         </p>
                         <p>
-                            <i class="fas fa-check"></i>
-                            Nhanh chóng biết cách đầu tư chứng khoán để đem về nguồn lợi nhuận khổng lồ
+                            <i className="fas fa-check"></i>
+                            {thongtin.Marketing3 === undefined ? tt.Marketing1 : thongtin.Marketing3}
                         </p>
                     </Col>
                     <Col span={12}>
                         <p>
-                            <i class="fas fa-check"></i>
-                            Có được tư duy đúng trong đầu tư cổ phiếu hiệu quả, thông minh
+                            <i className="fas fa-check"></i>
+                            {thongtin.Marketing4 === undefined ? tt.Marketing1 : thongtin.Marketing4}
                         </p>
                         <p>
-                            <i class="fas fa-check"></i>
-                            Tránh được những rủi ro thua lỗ, cạm bẫy trên TTCK
+                            <i className="fas fa-check"></i>
+                            {thongtin.Marketing5 === undefined ? tt.Marketing1 : thongtin.Marketing5}
                         </p>
                         <p>
-                            <i class="fas fa-check"></i>
-                            Đầy đủ những hướng dẫn "cầm tay chỉ việc" để có thể tự tin tham gia TTCK
+                            <i className="fas fa-check"></i>
+                            {thongtin.Marketing6 === undefined ? tt.Marketing1 : thongtin.Marketing6}
                         </p>
                     </Col>
                 </Row>
@@ -42,4 +51,18 @@ class Loiich extends Component {
     }
 }
 
-export default Loiich;
+const mapStateToProps = (state) =>{
+    return{
+        thongtin: state.getttkhoahoc
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) =>{
+    return{
+        requestTTKH: (idkh) =>{
+            dispatch(action.requestTTKH(idkh));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Loiich);

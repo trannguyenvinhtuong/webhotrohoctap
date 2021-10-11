@@ -1,31 +1,35 @@
 import { Component } from "react";
 import {Table} from 'antd';
 import {connect} from 'react-redux';
-import cntt from './../../imgs/cntt.jpg';
 import './../../SASS/tab.sass';
 import {Link} from 'react-router-dom';
 
 const columns = [
     {
         title: '',
-        key: 'image',
-        render: (record) => <img alt={record.img} className="img-khoahoc" src={cntt} />
+        key: 'MaKhoaHoc',
+        render: (record) => <img alt={record.MaKhoaHoc} className="img-khoahoc" src={record.AnhKhoaHoc} />
     },
     {
-        title: 'Khóa học/Tài liệu',
-        key: 'firstname',
-        render: (record) => <Link to="" className="name-kh">{record.firstname}</Link>
+        title: 'Khóa học',
+        key: 'TenKhoaHoc',
+        render: (record) => <Link to={`/Detailkhoahoc/${record.MaKhoaHoc}`} className="name-kh">{record.TenKhoaHoc}</Link>
     },
     {
         title: 'Giảng viên',
-        dataIndex: 'lastname',
-        key: 'lastname'
+        dataIndex: 'TenKH',
+        key: 'MaKH'
     },
     {
         title: 'Chủ đề',
-        dataIndex: 'email',
-        key: 'email'
-    }
+        dataIndex: 'TenCD',
+        key: 'MaCD'
+    },
+    {
+        title: 'Cấp bậc',
+        dataIndex: 'TenCB',
+        key: 'MaCB'
+    },
 ];
 
 class Tableofdata extends Component{
@@ -34,10 +38,23 @@ class Tableofdata extends Component{
         if(filter_data.keyword){
             if(khoahoc){
                 khoahoc = khoahoc.filter((kh)=>{
-                    return (kh.firstname).toLowerCase().indexOf(filter_data.keyword.toLowerCase()) !== -1;
+                    return (kh.TenKhoaHoc).toLowerCase().indexOf(filter_data.keyword.toLowerCase()) !== -1;
+                })
+            }            
+        }
+        if(filter_data.machude){
+            if(khoahoc){
+                khoahoc = khoahoc.filter((kh)=>{
+                    return kh.MaCD === filter_data.machude
                 })
             }
-            
+        }
+        if(filter_data.macapbac){
+            if(khoahoc){
+                khoahoc = khoahoc.filter((kh)=>{
+                    return kh.MaCB === filter_data.macapbac
+                })
+            }
         }
         return (
             <div>

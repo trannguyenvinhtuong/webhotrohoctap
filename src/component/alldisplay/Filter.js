@@ -11,12 +11,51 @@ class Filter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            keyword: ''
+            keyword: '',
+            machude: '',
+            macapbac: ''
         }
     }
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
+
+    componentDidMount() {
+        this.onReset();
+        this.props.requestChuDe();
+        this.props.requestCapBac();
+        var {iddm} = this.props;
+        if(iddm != 0 ){
+            this.setState({
+                machude: iddm
+            });
+            var filter = {
+                machude: iddm
+            };
+            this.props.onFilter(filter);
+        }
+        else{
+            this.onReset();
+        }
     }
+
+    handleChangeCD = (value) => {
+        var filter = {
+            machude: value
+        }
+        this.props.onFilter(filter);
+        this.setState({
+            machude: value
+        })
+    }
+
+    handleChangeCB = (value) => {
+        var filter = {
+            macapbac: value
+        }
+        this.props.onFilter(filter);
+        this.setState({
+            macapbac: value
+        })
+    }
+
     onChange = (e) => {
         var target = e.target;
         var name = target.name;
@@ -32,15 +71,46 @@ class Filter extends Component {
     }
     onReset = () => {
         var filter = {
-            keyword: ''
+            keyword: '',
+            machude: '',
+            macapbac: ''
         }
         this.props.onFilter(filter);
         this.setState({
-            keyword: ''
+            keyword: '',
+            machude: '',
+            macapbac: ''
         })
     }
+
+    showChuDe = (data) => {
+        var rs = null;
+        if (data) {
+            rs = data.map((da, index) => {
+                return (
+                    <Option value={da.MaCD}>{da.TenCD}</Option>
+                )
+            })
+        }
+        return rs;
+    }
+
+    showCapBac = (data) => {
+        var rs = null;
+        if (data) {
+            rs = data.map((da, index) => {
+                return (
+                    <Option value={da.MaCB}>{da.TenCB}</Option>
+                )
+            })
+        }
+        return rs;
+    }
+
     render() {
-        var { keyword } = this.state;
+        var { keyword, machude, macapbac } = this.state;
+        var { chude, capbac } = this.props;
+
         return (
             <div className="filter">
                 <h2>Filter</h2>
@@ -51,23 +121,19 @@ class Filter extends Component {
                     value={keyword}
                     prefix={<SearchOutlined />}
                     onChange={this.onChange} />
-                <h3>Theo thể loại</h3>
-                <Select className="select-width" defaultValue="lucy" onChange={this.handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="disabled" disabled>
-                        Disabled
-                    </Option>
-                    <Option value="Yiminghe">yiminghe</Option>
-                </Select>
                 <h3>Theo chủ đề</h3>
-                <Select className="select-width" defaultValue="lucy" onChange={this.handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="disabled" disabled>
-                        Disabled
-                    </Option>
-                    <Option value="Yiminghe">yiminghe</Option>
+                <Select className="select-width"
+                    onChange={this.handleChangeCD}
+                    value={machude === '' ? null : machude}
+                >
+                    {this.showChuDe(chude)}
+                </Select>
+                <h3>Theo cấp bậc</h3>
+                <Select className="select-width"
+                    onChange={this.handleChangeCB}
+                    value={macapbac === '' ? null : macapbac}
+                >
+                    {this.showCapBac(capbac)}
                 </Select>
                 <a onClick={this.onReset}>
                     <button className="reset-btn" block>
@@ -79,12 +145,25 @@ class Filter extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        chude: state.getchude,
+        capbac: state.getcapbac
+    }
+}
+
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onFilter: (filter_data) => {
             dispatch(action.onFilter(filter_data));
+        },
+        requestChuDe: () => {
+            dispatch(action.requestChuDe());
+        },
+        requestCapBac: () => {
+            dispatch(action.requestCapBac());
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

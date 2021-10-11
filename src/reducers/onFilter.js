@@ -1,7 +1,9 @@
 import * as type from '../constants/action_type'
 
 var initialState = {
-    keyword: ''
+    keyword: '',
+    machude: '',
+    macapbac: ''
 };
 
 var myReducer = (state = initialState, action) =>{

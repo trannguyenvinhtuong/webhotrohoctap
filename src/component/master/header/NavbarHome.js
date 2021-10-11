@@ -1,10 +1,9 @@
 import { Component } from "react";
 import './../../../stylecss/Style.css';
 import Logo from './../../../imgs/LOGO_OF_LOGO.svg'
-import Bg from './../../../imgs/background4.jpg'
+import Bg from './../../../imgs/background10.jpg'
 import { Route, NavLink, Link } from "react-router-dom";
 import './../../../stylecss/userstyle.css';
-import {connect} from 'react-redux';
 
 const menus = [
     {
@@ -56,11 +55,11 @@ class NavbarHome extends Component {
         return rs;
     }
     render() {
-        var { tkstatus } = this.props;
+        var logg = sessionStorage.getItem('user');
         return (
             <header style={{ backgroundImage: `url(${Bg})` }}>
                 <Link to='/' exact='true'>
-                    <img src={Logo} />
+                    <img srcset={Logo} />
                 </Link>
                 <div className="search">
                     <input type="text" placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
@@ -68,7 +67,7 @@ class NavbarHome extends Component {
                 </div>
                 <nav>
                     {this.Showmenu(menus)}
-                    {tkstatus === false
+                    {logg === null
                         ? <Menulink to="/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
                         : <Menulink to="/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
                             
@@ -78,10 +77,4 @@ class NavbarHome extends Component {
     }
 }
 
-const mapStateToProps = (state) =>{
-    return{
-        tkstatus : state.tkstatus
-    }
-}
-
-export default connect(mapStateToProps,null)(NavbarHome);
+export default NavbarHome;

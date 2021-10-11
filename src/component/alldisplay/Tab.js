@@ -33,7 +33,7 @@ class Tab extends Component {
         return (
             <div className="tab">
                 <div className="left-content">
-                    <h3>Learn <i class="fas fa-angle-double-right"></i> Khóa học</h3>
+                    <h3>Learn <i className="fas fa-angle-double-right"></i> Khóa học</h3>
                 </div>
                 <div className="right-content">
                     <div>

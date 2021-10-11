@@ -1,14 +1,37 @@
 import { Component } from "react";
-import fl from './../../imgs/filetest.pdf';
+import { connect } from 'react-redux';
+import * as action from './../../actions/index';
 
 class Docpdf extends Component{
+    componentDidMount(){
+        var {idtl} = this.props;
+        this.props.requestMotTaiLieu(idtl);
+    }
+
+
     render() {
+        var {tailieu} = this.props;
+        var tl = tailieu[0];
         return (
             <div className="docfilepdf">
-                <embed src={fl} />
+                <embed src={tailieu.Link === undefined ? tl.Link : tailieu.Link} />
             </div>
         );
     }
 }
 
-export default Docpdf;
+const mapStateToProps = (state) =>{
+    return{
+        tailieu: state.getmottailieu
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) =>{
+    return{
+        requestMotTaiLieu: (idtl) =>{
+            dispatch(action.requestMotTaiLieu(idtl));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Docpdf);

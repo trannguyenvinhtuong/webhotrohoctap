@@ -8,17 +8,18 @@ import './../../../SASS/detail.sass';
 
 class Content extends Component{
     render() {
+        var {idkh} = this.props;
         return (
             <div className="content">
-                <Video />
+                <Video idkh = {idkh}/>
                 <br/>
-                <Loiich />
+                <Loiich idkh = {idkh} />
                 <br/>
-                <Gioithieukhoahoc />
+                <Gioithieukhoahoc idkh = {idkh} />
                 <br/>
-                <Noidung />
+                <Noidung idkh = {idkh} />
                 <br/>
-                <Thongtingv />
+                <Thongtingv idkh = {idkh}/>
             </div>
         );
     }

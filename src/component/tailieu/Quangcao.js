@@ -12,34 +12,34 @@ class Quangcao extends Component {
                             <br />
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                          
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                            
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                           
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
@@ -49,48 +49,48 @@ class Quangcao extends Component {
                             <br />
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                           
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                            
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                          
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                            
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>
                           
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>                            
                             <p>
                                 <a href="#">
-                                    <i class="far fa-file-pdf"></i>
+                                    <i className="far fa-file-pdf"></i>
                                     SƠ LƯỢC QUA VỀ TRUYỀN HÌNH ĐEN TRẮNG VÀ KHUẾCH ĐẠI HÌNH VÀ ĐÈN HÌNH (VIDEO AMP - CRT)
                                 </a>
                             </p>

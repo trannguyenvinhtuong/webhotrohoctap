@@ -1,157 +1,98 @@
 import { Component } from "react";
-import bk from './../../imgs/background2.jpg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as action from './../../actions/index';
+
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'VND',
+    minimumFractionDigits: 0
+})
 
 class Khoahoc extends Component {
+    componentDidMount() {
+        this.props.requestKhoaHoc();
+        this.props.requestALLKMKH();
+    }
+
+    showContent = (data, km) => {
+        var rs = null;
+        if (data) {
+            rs = data.map((da, index) => {
+                return (
+                    <div className="col-md-3 p-kh" key={index}>
+                        <div className="sanpham">
+                            <Link to={`/Detailkhoahoc/${da.MaKhoaHoc}`}>
+                                <img src={da.AnhKhoaHoc} />
+                                <h3>{da.TenKhoaHoc}</h3>
+                                <div className="thongtin-sp row">
+                                    <div className="col">
+                                        <h1>{da.TenKH}</h1>
+                                    </div>
+                                    <div className="col">
+                                        <p className="giacu">{formatter.format(da.GiaKH)}</p>
+                                        <p className="giamoi">
+                                            {
+                                                this.loadgiagiam(km, da.MaKhoaHoc, da.GiaKH)
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                )
+            });
+        }
+        return rs;
+    }
+
+    loadgiagiam = (km, idkh, giacu) => {
+        var rs = null;
+        if (km) {
+            km.map((k, index) => {
+                if (k.MaKhoaHoc === idkh) {
+                    rs = formatter.format((giacu * (100 - k.PhanTramGiam)) / 100)
+                }
+            })
+        }
+        return rs;
+    }
+
     render() {
+        var { khoahoc } = this.props;
+        var { khuyenmai } = this.props;
         return (
             <div className="container khoahoc">
                 <h3>KHÓA HỌC</h3>
                 <br />
                 <div className="row">
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>                       
-                    </div>
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>       
-                    </div>
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>       
-                    </div>
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>       
-                    </div>
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>       
-                    </div>
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>       
-                    </div>
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>       
-                    </div>
-                    <div className="col-md-3 p-kh">
-                        <div className="sanpham">
-                            <Link to="/Detailkhoahoc">
-                                <img src={bk} />
-                                <h3>Học đệm hát Guitar cùng Haketu</h3>
-                                <div className="thongtin-sp row">
-                                    <div className="col">
-                                        <h1>Hà Kế Tú</h1>
-                                    </div>
-                                    <div className="col">
-                                        <p className="giacu">700.000đ</p>
-                                        <p className="giamoi">199.000đ</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>       
-                    </div>
+                    {this.showContent(khoahoc, khuyenmai)}
                 </div>
-                <Link to="/alldisplay" className="xemthem">Xem thêm  
-                    <i class="fas fa-angle-double-right" style={{color:'#0d6efd'}}></i>
+                <Link to="/alldisplay/0" className="xemthem">Xem thêm
+                    <i className="fas fa-angle-double-right" style={{ color: '#0d6efd' }}></i>
                 </Link>
             </div>
         );
     }
 }
 
-export default Khoahoc;
+const mapStateToProps = (state) => {
+    return {
+        khoahoc: state.getkhoahoc,
+        khuyenmai: state.getallkmkh
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        requestKhoaHoc: () => {
+            dispatch(action.requestKhoaHoc());
+        },
+        requestALLKMKH: () => {
+            dispatch(action.requestALLKMKH());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Khoahoc);
