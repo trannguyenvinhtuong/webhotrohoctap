@@ -30,7 +30,6 @@ class Noidung extends Component{
             }
         ]
         var {video} = this.props;
-        console.log(video);
         return (
             <div className="gt-qc">
                 <Table columns={column} dataSource={video} />

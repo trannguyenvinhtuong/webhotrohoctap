@@ -55,11 +55,11 @@ class NavbarHome extends Component {
         return rs;
     }
     render() {
-        var logg = sessionStorage.getItem('user');
+        var logg = localStorage.getItem('user');
         return (
             <header style={{ backgroundImage: `url(${Bg})` }}>
                 <Link to='/' exact='true'>
-                    <img srcset={Logo} />
+                    <img src={Logo} />
                 </Link>
                 <div className="search">
                     <input type="text" placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
@@ -67,10 +67,21 @@ class NavbarHome extends Component {
                 </div>
                 <nav>
                     {this.Showmenu(menus)}
+                    {logg !== null ?
+                        <Route path="/giohang" children={({ match }) => {
+                            var active = match ? 'active-nav' : '';
+                            return (
+                                <NavLink to="/giohang" className={`${active}`}>
+                                    <i className="fas fa-shopping-cart"></i> Giỏ hàng
+                                </NavLink>
+                            )
+                        }} />
+                    : ''
+                    }
                     {logg === null
                         ? <Menulink to="/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
                         : <Menulink to="/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
-                            
+
                 </nav>
             </header>
         );

@@ -34,7 +34,7 @@ const columns = [
 
 class Khoahoccuatoi extends Component{
     componentDidMount(){
-        var log = sessionStorage.getItem('user');
+        var log = localStorage.getItem('user');
         var jslog = JSON.parse(log);
         this.props.requestKhoaHocKH(jslog.makh);
     }

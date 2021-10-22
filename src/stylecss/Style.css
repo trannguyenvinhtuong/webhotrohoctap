@@ -37,7 +37,7 @@ header{
     z-index: 1000;
 }
 header .search input{
-    width: 25rem ;
+    width: 23rem ;
     border: none;
     box-shadow: 0px 15px 15px rgba(0,0,0,0.2);
     font-size: 1rem;
@@ -50,7 +50,6 @@ header .search input{
     text-transform: none;
 }
 header .search i{
-    padding-left: 1rem;
     font-size: 1.5rem;
     transition: .5s;
     color: white;
@@ -68,7 +67,7 @@ header a{
     color: white;
     transition: 0.5s;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 17px;
     font-family: 'Times New Roman', Times, serif;
 }
 header a:hover{

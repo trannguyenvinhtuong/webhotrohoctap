@@ -8,12 +8,12 @@ const columns = [
     {
         title: '',
         key: 'MaKhoaHoc',
-        render: (record) => <img alt={record.MaKhoaHoc} className="img-khoahoc" src={record.AnhKhoaHoc} />
+        render: (record) => <img key={record.MaKhoaHoc} alt={record.MaKhoaHoc} className="img-khoahoc" src={record.AnhKhoaHoc} />
     },
     {
         title: 'Khóa học',
-        key: 'TenKhoaHoc',
-        render: (record) => <Link to={`/Detailkhoahoc/${record.MaKhoaHoc}`} className="name-kh">{record.TenKhoaHoc}</Link>
+        key: 'MaKhoaHoc',
+        render: (record) => <Link key={record.MaKhoaHoc} to={`/Detailkhoahoc/${record.MaKhoaHoc}`} className="name-kh">{record.TenKhoaHoc}</Link>
     },
     {
         title: 'Giảng viên',
@@ -35,6 +35,7 @@ const columns = [
 class Tableofdata extends Component{
     render() {
         var {khoahoc,filter_data} = this.props;
+        console.log(khoahoc);
         if(filter_data.keyword){
             if(khoahoc){
                 khoahoc = khoahoc.filter((kh)=>{
@@ -58,7 +59,7 @@ class Tableofdata extends Component{
         }
         return (
             <div>
-                <Table columns={columns} dataSource = {khoahoc} />
+                <Table columns={columns} dataSource = {khoahoc} rowKey="name" />
             </div>
         );
     }

@@ -15,7 +15,7 @@ class Doimatkhau extends Component {
     }
 
     componentDidMount() {
-        var data = JSON.parse(sessionStorage.getItem('user'));
+        var data = JSON.parse(localStorage.getItem('user'));
         var idkh = data.makh;
         this.props.requestKhachHangByID(idkh);
     }
@@ -44,7 +44,7 @@ class Doimatkhau extends Component {
             alert("Xác nhận không đúng");
         }
         else if (kh.MatKhau === matkhaucu && xnmatkhau === matkhaumoi) {
-            var data = JSON.parse(sessionStorage.getItem('user'));
+            var data = JSON.parse(localStorage.getItem('user'));
             var idkh = data.makh;
             var anwser = window.confirm("Bạn có muốn đổi?");
             if(anwser){
@@ -61,7 +61,7 @@ class Doimatkhau extends Component {
                 alert("Thành công");
                 var rs = '';
                 this.props.updateMK(rs);
-                sessionStorage.removeItem('user');
+                localStorage.removeItem('user');
                 window.location.reload();
             }
             else {

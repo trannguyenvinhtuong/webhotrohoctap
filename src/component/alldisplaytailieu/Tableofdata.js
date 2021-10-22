@@ -64,7 +64,7 @@ class Tableofdata extends Component{
         }
         return (
             <div>
-                <Table columns={columns} dataSource = {tailieu} />
+                <Table columns={columns} dataSource = {tailieu} rowKey="name" />
             </div>
         );
     }

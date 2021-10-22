@@ -12,6 +12,7 @@ import Tailieu from './../component/tailieu/Tailieu';
 import Khoahoc from './../component/khoahoc/Khoahoc';
 import AlldisplayTaiLieu from './../component/alldisplaytailieu/AlldisplayTaiLieu';
 import Detailtailieu from '../component/detailtailieu/Detailtailieu';
+import Giohang from './../component/giohang/Giohang';
 
 const routesND = [
     {
@@ -78,6 +79,11 @@ const routesND = [
         path: '/dangkytk',
         exact: false,
         main: () => <Dangkytk />
+    },
+    {
+        path: '/giohang',
+        exact: false,
+        main: () => <Giohang />
     },
     {
         path: '',

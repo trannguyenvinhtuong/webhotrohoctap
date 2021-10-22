@@ -6,7 +6,7 @@ import * as action from './../../actions/index';
 
 class Dangxuat extends Component{
     onClick = () =>{
-        sessionStorage.removeItem('user');
+        localStorage.removeItem('user');
         window.location.reload();
     }
 

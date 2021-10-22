@@ -394,3 +394,37 @@ export const requestUpdateMK = (idkh,mkm) =>{
         })
     }
 }
+
+export const addCart = (cart) =>{
+    return{
+        type: type.ADD_CART,
+        cart
+    }
+}
+
+export const requestNhieuKhoaHoc = (idkh) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh ,
+            data: null
+        }).then(res => {
+            dispatch(getNhieuKhoaHoc(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getNhieuKhoaHoc = (khoahoc) =>{
+    return{
+        type: type.GET_NHIEUKHOAHOCTHEOID,
+        khoahoc
+    }
+}
+
+export const resetNhieuKhoaHoc = () =>{
+    return{
+        type: type.RESET_NHIEUKHOAHOC
+    }
+}

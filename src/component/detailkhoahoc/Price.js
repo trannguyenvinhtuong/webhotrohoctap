@@ -27,7 +27,7 @@ class Price extends Component {
             && today.getDate() <= ngaykt && (today.getMonth() + 1) <= thangkt && today.getFullYear() <= namkt
         ) {
             rs =
-                <p style={{color: '#db3e3e'}}>
+                <p style={{ color: '#db3e3e' }}>
                     {ngaykt - today.getDate()}
                     &nbsp; ngày &nbsp;
                     {thangkt - today.getMonth()}
@@ -38,6 +38,14 @@ class Price extends Component {
 
         }
         return rs;
+    }
+
+    addCart = (typecart, id) => {
+        var cart = {
+            typecart: typecart,
+            id: id
+        }
+        this.props.addCart(cart);        
     }
 
     render() {
@@ -63,13 +71,15 @@ class Price extends Component {
                 <br />
                 <p className="thoigian-ud">
                     <i className="fas fa-hourglass-start"></i>
-                    Thời gian ưu đãi còn 
+                    Thời gian ưu đãi còn
                 </p>
                 {this.showTimeKM(ngaybd, ngaykt, today)}
-                <button className="themvaogio">
-                    <i className="fas fa-cart-plus"></i>
-                    Thêm vào giỏ
-                </button>
+                <a onClick={()=>this.addCart('kh',khoahoc.MaKhoaHoc === undefined ? kh.MaKhoaHoc : khoahoc.MaKhoaHoc)}>
+                    <button className="themvaogio">
+                        <i className="fas fa-cart-plus"></i>
+                        Thêm vào giỏ
+                    </button>
+                </a>
                 <br />
                 <br />
                 <p className="thongtin">
@@ -113,6 +123,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         requestMotKhoaHoc: (idkh) => {
             dispatch(action.requestMotKhoaHoc(idkh));
+        },
+        addCart: (cart) => {
+            dispatch(action.addCart(cart));
         }
     }
 }

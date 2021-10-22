@@ -34,7 +34,7 @@ const columns = [
 
 class Tailieucuatoi extends Component{
     componentDidMount(){
-        var log = sessionStorage.getItem('user');
+        var log = localStorage.getItem('user');
         var jslog = JSON.parse(log);
         this.props.requestTaiLieuKH(jslog.makh);
     }

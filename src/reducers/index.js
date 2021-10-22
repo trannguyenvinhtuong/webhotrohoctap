@@ -16,6 +16,8 @@ import getcapbac from './getcapbac';
 import getkhachhang from './getkhachhang';
 import getvideokh from './getvideokh';
 import updatemk from './updatemk';
+import cart from './cart';
+import getnhieukhoahoc from './getnhieukhoahoc';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -34,7 +36,9 @@ const myReducer = combineReducers({
     getcapbac,
     getkhachhang,
     getvideokh,
-    updatemk
+    updatemk,
+    cart,
+    getnhieukhoahoc
 })
 
 export default myReducer;

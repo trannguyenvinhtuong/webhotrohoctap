@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Row, Col } from 'antd';
+import React from 'react';
 import './../../../SASS/detail.sass';
 import {connect} from "react-redux";
 import * as action from './../../../actions/index';
@@ -10,16 +10,16 @@ class Gioithieukhoahoc extends Component {
         this.props.requestTTKH(idkh);
     }
 
-    render() {
+    render() {   
+        const renderHTML = (rawHTML: string) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
         var {thongtin} = this.props;
         var tt = thongtin[0];
         return (
             <div className="gt-qc">
                 <h1>Giới thiệu khóa học</h1>
-                <p>
-                    {thongtin.GioiThieuKH === undefined ? tt.GioiThieuKH : thongtin.GioiThieuKH}
-                
-                </p>
+                <div className="detail-ndgt">
+                    {renderHTML(thongtin.GioiThieuKH === undefined ? tt.GioiThieuKH : thongtin.GioiThieuKH)}                
+                </div>
             </div>
         );
     }

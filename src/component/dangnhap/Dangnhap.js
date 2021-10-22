@@ -33,7 +33,7 @@ class Dangnhap extends Component {
             if (khachhang) {
                 var kh = khachhang[0];
                 if ((khachhang.MatKhau === undefined ? kh.MatKhau : khachhang.MatKhau) === this.state.matkhau) {
-                    sessionStorage.setItem('user', JSON.stringify({
+                    localStorage.setItem('user', JSON.stringify({
                         trangthai: 'logged',
                         makh: khachhang.MaKH === undefined ? kh.MaKH : khachhang.MaKH
                     }));
@@ -52,10 +52,7 @@ class Dangnhap extends Component {
 
     render() {
         var { tendn, matkhau } = this.state;
-        var loggedUser = sessionStorage.getItem('user');
-        if (loggedUser !== null) {
-            console.log(loggedUser.trangthai);
-        }
+
         return (
             <div className="dangnhap" style={{ marginTop: '5rem' }}>
                 <div className="wrap">
