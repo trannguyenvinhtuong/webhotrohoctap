@@ -18,6 +18,9 @@ import getvideokh from './getvideokh';
 import updatemk from './updatemk';
 import cart from './cart';
 import getnhieukhoahoc from './getnhieukhoahoc';
+import toogletailieu from './toogletailieu';
+import togglekiemtra from './togglekiemtra';
+import getdekiemtra from './getdekiemtra';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -38,7 +41,10 @@ const myReducer = combineReducers({
     getvideokh,
     updatemk,
     cart,
-    getnhieukhoahoc
-})
+    getnhieukhoahoc,
+    toogletailieu,
+    togglekiemtra,
+    getdekiemtra
+});
 
 export default myReducer;

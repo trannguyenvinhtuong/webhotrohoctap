@@ -4,23 +4,19 @@ import { Row, Col, Table } from 'antd';
 import './../../SASS/detail.sass';
 import { connect } from 'react-redux';
 import * as action from './../../actions/index';
-// import mammoth from 'mammoth';
+import TaiLieu from './TaiLieu';
+import Kiemtra from './Kiemtra';
 // firebase
 import db from './../../config/firebase.config';
 import { ref, child, get } from "firebase/database";
-//firestorage
-import storage from '../../config/firebaseFireStorage';
-import { getDownloadURL } from "firebase/storage";
-import * as str  from "firebase/storage";
-
-var mammoth = require("mammoth");
 
 class Khoahoc extends Component {
     constructor(props) {
         super(props);
         this.state = {
             link: '',
-            ten: ''
+            ten: '',
+            tailieu: false
         }
     }
 
@@ -29,7 +25,17 @@ class Khoahoc extends Component {
             link: da,
             ten: ten
         });
-        this.getFireStorage();
+    }
+
+    onToggleTaiLieu = () => {
+        this.setState({
+            tailieu: true
+        })
+        this.props.toogleTaiLieu();
+    }
+
+    onToggleKiemTra = () => {
+        this.props.toogleKiemTra();
     }
 
     componentDidMount() {
@@ -48,42 +54,6 @@ class Khoahoc extends Component {
         });
     }
 
-    getFireStorage = () => {
-        getDownloadURL(str.ref(storage, 'NoiDungKhoaHoc/test.docx'))
-            .then((url)=>{
-                this.parseWord(url);
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
-    }
-
-    readFileInputEventAsArrayBuffer = (files, callback) => {
-        var request = new XMLHttpRequest();
-        request.open('GET', files, true);
-        request.responseType = 'blob';
-        request.withCredentials = false;
-        request.onload = function () {
-            var reader = new FileReader();
-            reader.readAsArrayBuffer(request.response);
-            reader.onload = function (e) {
-                var arrayBuffer = e.target.result;
-                callback(arrayBuffer);
-            };
-        };
-        request.send();
-    }
-
-
-    parseWord = (file) => {
-        this.readFileInputEventAsArrayBuffer(file, function (arrayBuffer) {
-            mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
-                .then(function (result) {
-                    document.getElementById('word').innerHTML = (result.value);
-                })
-                .done();
-        });
-    }
 
     render() {
         const columns = [
@@ -107,7 +77,13 @@ class Khoahoc extends Component {
                             <h3>{ten}</h3>
                             <br />
                             <h2>Nội dung bài học</h2>
-                            <div id="word"></div>
+                            <a style={{ color: 'blue', textTransform: 'none' }} onClick={() => this.onToggleTaiLieu()}>Xem tài liệu <i class="fas fa-caret-down"></i></a>
+                            <TaiLieu />
+                            <br />
+                            <br />
+                            <h2>Bài kiểm tra</h2>
+                            <a style={{ color: 'blue', textTransform: 'none' }} onClick={() => this.onToggleKiemTra()}>Xem đề kiểm tra <i class="fas fa-caret-down"></i></a>
+                            <Kiemtra />
                             <br />
                             <br />
                             <div className="detail-gioithieu" style={{ borderRadius: '3px' }}>
@@ -154,6 +130,12 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         getMotKhoaHoc: (idkh) => {
             dispatch(action.requestMotKhoaHoc(idkh))
+        },
+        toogleTaiLieu: () => {
+            dispatch(action.toogleTaiLieu());
+        },
+        toogleKiemTra: () => {
+            dispatch(action.toogleKiemTra());
         }
     }
 }

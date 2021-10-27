@@ -23,7 +23,7 @@ class Showgiohang extends Component{
 
     render() {
         var {cart} = this.props;
-        var data;
+        var data = [];
         if(cart.length==undefined){
             var {getmotkhoahoc} = this.props;
             data = getmotkhoahoc;
@@ -36,12 +36,12 @@ class Showgiohang extends Component{
             {
                 title: '',
                 key: 'MaKhoaHoc',
-                render: (record) => <img src={record.AnhKhoaHoc} />
+                render: (record) => <img src={record.AnhKhoaHoc} key={record.MaKhoaHoc} />
             },
             {
                 title: 'Tên khóa học',
-                key: 'MaKhoaHoc',
-                render: (record) => <a href="#">{record.TenKhoaHoc}</a>
+                key: 'TenKhoaHoc',
+                render: (record) => <a href="#" key={record.TenKhoaHoc}>{record.TenKhoaHoc}</a>
             },
             {
                 title: 'Giảng viên',
@@ -49,7 +49,9 @@ class Showgiohang extends Component{
                 dataIndex: 'TenKhachHang'
             }
         ];
+        
         console.log(data);
+        
         return (
             <div className="container">
                 <Table dataSource={data} columns={column} rowKey="name" />

@@ -428,3 +428,22 @@ export const resetNhieuKhoaHoc = () =>{
         type: type.RESET_NHIEUKHOAHOC
     }
 }
+
+export const toogleTaiLieu = () =>{
+    return{
+        type: type.TOGGLE_TAILIEU
+    }
+}
+
+export const toogleKiemTra = () =>{
+    return{
+        type: type.TOGGLE_KIEMTRA
+    }
+}
+
+export const getDeKiemTra = (dekt) =>{
+    return{
+        type: type.GETDEKIEMTRA,
+        dekt
+    }
+}
