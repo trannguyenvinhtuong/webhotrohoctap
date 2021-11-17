@@ -21,9 +21,9 @@ class Showgiohang extends Component{
         }
     }
 
-    render() {
+    render() {       
         var {cart} = this.props;
-        var data = [];
+        var data;
         if(cart.length==undefined){
             var {getmotkhoahoc} = this.props;
             data = getmotkhoahoc;
@@ -32,6 +32,7 @@ class Showgiohang extends Component{
             var {getnhieukhoahoc} = this.props;
             data = getnhieukhoahoc;            
         }
+        console.log(data[0]);
         const column = [
             {
                 title: '',
@@ -48,9 +49,8 @@ class Showgiohang extends Component{
                 key: 'MaKH',
                 dataIndex: 'TenKhachHang'
             }
-        ];
+        ];      
         
-        console.log(data);
         
         return (
             <div className="container">

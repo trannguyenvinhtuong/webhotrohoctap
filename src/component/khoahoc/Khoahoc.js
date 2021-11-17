@@ -16,14 +16,18 @@ class Khoahoc extends Component {
         this.state = {
             link: '',
             ten: '',
-            tailieu: false
+            tailieu: false,
+            tentailieu: '',
+            idbh: ''
         }
     }
 
-    clickShow = (da, ten) => {
+    clickShow = (da, ten, tentl, idbh) => {
         this.setState({
             link: da,
-            ten: ten
+            ten: ten,
+            tentailieu: tentl,
+            idbh: idbh
         });
     }
 
@@ -60,12 +64,12 @@ class Khoahoc extends Component {
             {
                 title: 'Bài học',
                 key: 'key',
-                render: (record) => <a onClick={() => this.clickShow(record.link, record.ten)} className="namekh">
+                render: (record) => <a onClick={() => this.clickShow(record.link, record.ten, record.tentailieu, record.key)} className="namekh">
                     {record.ten === undefined ? '' : record.ten}
                 </a>
             }
         ]
-        var { link, ten } = this.state;
+        var { link, ten, tentailieu, idbh } = this.state;
         var { video, khoahoc } = this.props;
         var kh = khoahoc[0];
         return (
@@ -78,12 +82,12 @@ class Khoahoc extends Component {
                             <br />
                             <h2>Nội dung bài học</h2>
                             <a style={{ color: 'blue', textTransform: 'none' }} onClick={() => this.onToggleTaiLieu()}>Xem tài liệu <i class="fas fa-caret-down"></i></a>
-                            <TaiLieu />
+                            <TaiLieu tentailieu={tentailieu} />
                             <br />
                             <br />
                             <h2>Bài kiểm tra</h2>
                             <a style={{ color: 'blue', textTransform: 'none' }} onClick={() => this.onToggleKiemTra()}>Xem đề kiểm tra <i class="fas fa-caret-down"></i></a>
-                            <Kiemtra />
+                            <Kiemtra idbh={idbh} />
                             <br />
                             <br />
                             <div className="detail-gioithieu" style={{ borderRadius: '3px' }}>

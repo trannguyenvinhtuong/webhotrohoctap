@@ -14,20 +14,27 @@ class Kiemtra extends Component {
         this.state={
             cautraloiloai1: '',
             cautraloiloai2: '',
-            cautraloiloai3: ''
+            cautraloiloai3: '',
+            dekiemtrain: false
         }
     }
-    componentDidMount() {
-        const dbRef = ref(db, "nganhangde");
-        get(child(dbRef, "1")).then((snapshot) => {
-            if (snapshot.exists()) {
-                this.props.getdekiemtra(snapshot.val());
-            } else {
-                console.log("No data available");
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
+    componentDidUpdate() {
+        var {idbh} = this.props;    
+        var idload = "'" + idbh.toString() + "'";
+        if(idbh !== '' && idbh !== undefined){
+            const dbRef = ref(db, "nganhangde");
+            get(child(dbRef, '1')).then((snapshot) => {
+                if (snapshot.exists()) {
+                    this.props.getdekiemtra(snapshot.val());
+                    
+                } else {
+                    console.log("No data available");
+                   
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        }       
     }
 
     showCauHoi = (data) => {
@@ -93,11 +100,12 @@ class Kiemtra extends Component {
     }
 
     render() {
-        var { getde, togglekiemtra } = this.props;
+        var {dekiemtrain} = this.state;
+        var { getde, togglekiemtra, idbh } = this.props;
         return (
             <Row>
                 <Col span={togglekiemtra == true ? 24 : 0}>
-                    {this.showCauHoi(getde[1])}
+                    {idbh !== undefined ? this.showCauHoi(getde[1]) : <div>Bài học không có đề kiểm tra</div>}
                     <br />
                     <br />
                     <button className="btn-nopbai">Nộp bài</button>

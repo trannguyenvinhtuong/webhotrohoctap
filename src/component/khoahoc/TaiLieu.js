@@ -36,25 +36,30 @@ class TaiLieu extends Component{
     }
     
     getFireStorage = () => {
-        getDownloadURL(str.ref(storage, 'NoiDungKhoaHoc/test.docx'))
+        var {tentailieu} = this.props;
+     
+        if(tentailieu !== '' && tentailieu !== undefined){
+            getDownloadURL(str.ref(storage, tentailieu))
             .then((url)=>{
                 this.parseWord(url);         
             })
             .catch((error)=>{
                 console.log(error);
             });
+        }        
     }
 
-    componentDidMount(){
+    componentDidUpdate(){
         this.getFireStorage();
     }
 
     render() {
-        var {toogletailieu} = this.props;
+        var {toogletailieu, tentailieu} = this.props;
         return (
             <Row>
                 <Col span={toogletailieu === true ? 24 : "0"}>
-                    <div id="word"></div>  
+                    {tentailieu === undefined ? <div>Bài học này không có tài liệu</div> : <div id="word"></div>}
+                      
                 </Col>
                 <Col span={toogletailieu === false ? 24 : "0"}>
                     <div></div>
