@@ -29,27 +29,27 @@ export const requestKhoaHoc = () => {
 }
 
 export const toogleFilter = () => {
-    return{
-        type : type.TOGGLE_FILTER
-    }    
+    return {
+        type: type.TOGGLE_FILTER
+    }
 }
 
-export const onFilter = (filter_data) =>{
-    return{
+export const onFilter = (filter_data) => {
+    return {
         type: type.ON_FILTER,
         filter_data
     }
 }
 
-export const changePageTK = (page) =>{
-    return{
+export const changePageTK = (page) => {
+    return {
         type: type.CHANGE_PAGE_TK,
         page
     }
 }
 
-export const getOneKhoaHoc = (motkhoahoc) =>{
-    return{
+export const getOneKhoaHoc = (motkhoahoc) => {
+    return {
         type: type.GET_MOT_KHOAHOC,
         motkhoahoc
     }
@@ -65,10 +65,31 @@ export const requestMotKhoaHoc = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh ,
+            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh,
             data: null
         }).then(res => {
             dispatch(getOneKhoaHoc(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getKhoaHocTheoGH = (khoahoc) =>{
+    return{
+        type: type.GET_KHOAHOCTHEOGH,
+        khoahoc
+    } 
+}
+
+export const requestKhoaHocTheoGH = (idkh) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh,
+            data: null
+        }).then(res => {
+            dispatch(getKhoaHocTheoGH(res.data));
         }).catch(error => {
             console.log(error);
         })
@@ -222,8 +243,8 @@ export const requestMotTaiLieu = (idtl) => {
     }
 }
 
-export const onFilterTL = (filter_data) =>{
-    return{
+export const onFilterTL = (filter_data) => {
+    return {
         type: type.ON_FILTERTL,
         filter_data
     }
@@ -292,14 +313,14 @@ export const requestKhachHangByID = (idkh) => {
     }
 }
 
-export const toogleTK = () =>{
-    return{
+export const toogleTK = () => {
+    return {
         type: type.TOGGLE_TK
     }
 }
 
-export const dangxuatTK = () =>{
-    return{
+export const dangxuatTK = () => {
+    return {
         type: type.TK_DANGXUAT
     }
 }
@@ -325,8 +346,8 @@ export const requestKhoaHocKH = (idkh) => {
     }
 }
 
-export const getVideoKH = (video) =>{
-    return{
+export const getVideoKH = (video) => {
+    return {
         type: type.GET_VIDEOKH,
         video
     }
@@ -374,18 +395,18 @@ export const requestKMTL = (idtl) => {
     }
 }
 
-export const updateMK = (result) =>{
-    return{
+export const updateMK = (result) => {
+    return {
         type: type.UPDATE_MATKHAU,
         result
     }
 }
 
-export const requestUpdateMK = (idkh,mkm) =>{
+export const requestUpdateMK = (idkh, mkm) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatemk?mkmoi=' + mkm + '&idkh=' + idkh ,
+            url: 'http://localhost/backendAPI/api/updatemk?mkmoi=' + mkm + '&idkh=' + idkh,
             data: null
         }).then(res => {
             dispatch(updateMK(res.data));
@@ -395,18 +416,18 @@ export const requestUpdateMK = (idkh,mkm) =>{
     }
 }
 
-export const addCart = (cart) =>{
-    return{
+export const addCart = (cart) => {
+    return {
         type: type.ADD_CART,
         cart
     }
 }
 
-export const requestNhieuKhoaHoc = (idkh) =>{
+export const requestNhieuKhoaHoc = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh ,
+            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh,
             data: null
         }).then(res => {
             dispatch(getNhieuKhoaHoc(res.data));
@@ -416,34 +437,236 @@ export const requestNhieuKhoaHoc = (idkh) =>{
     }
 }
 
-export const getNhieuKhoaHoc = (khoahoc) =>{
-    return{
+export const getNhieuKhoaHoc = (khoahoc) => {
+    return {
         type: type.GET_NHIEUKHOAHOCTHEOID,
         khoahoc
     }
 }
 
-export const resetNhieuKhoaHoc = () =>{
-    return{
+export const resetNhieuKhoaHoc = () => {
+    return {
         type: type.RESET_NHIEUKHOAHOC
     }
 }
 
-export const toogleTaiLieu = () =>{
-    return{
+export const toogleTaiLieu = () => {
+    return {
         type: type.TOGGLE_TAILIEU
     }
 }
 
-export const toogleKiemTra = () =>{
-    return{
+export const toogleKiemTra = () => {
+    return {
         type: type.TOGGLE_KIEMTRA
     }
 }
 
-export const getDeKiemTra = (dekt) =>{
-    return{
+export const getDeKiemTra = (dekt) => {
+    return {
         type: type.GETDEKIEMTRA,
         dekt
+    }
+}
+
+export const checkGV = (gv) => {
+    return {
+        type: type.CHECKGIANGVIEN,
+        gv
+    }
+}
+
+export const requestCheckGV = (idkh) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/checkgiangvien?idkh=' + idkh,
+            data: null
+        }).then(res => {
+            dispatch(checkGV(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const togglePageGiangVien = (page, idkhoahoc) => {
+    return {
+        type: type.TOGGLE_PAGE_GIANGVIEN,
+        page,
+        idkhoahoc
+    }
+}
+
+export const requestKhoaHocTheoGV = (makh) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getkhoahoctheogv?makh=' + makh,
+            data: null
+        }).then(res => {
+            dispatch(getKhoaHocTheoGV(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getKhoaHocTheoGV = (khoahoc) => {
+    return {
+        type: type.GET_KHOAHOCTHEOGV,
+        khoahoc
+    }
+}
+
+export const getTaiLieuTheoGV = (tailieu) => {
+    return {
+        type: type.GET_TAILIEUTHEOGV,
+        tailieu
+    }
+}
+
+export const requestTaiLieuTheoGV = (makh) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/gettailieutheogv?idkh=' + makh,
+            data: null
+        }).then(res => {
+            dispatch(getTaiLieuTheoGV(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getThongTinGV = (giangvien) => {
+    return {
+        type: type.GET_THONGTINGV,
+        giangvien
+    }
+}
+
+export const requestThongTinGV = (makh) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getthongtingv?idkh=' + makh,
+            data: null
+        }).then(res => {
+            dispatch(getThongTinGV(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertKhoaHoc = (tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, ngaydang, magv,
+    gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/insertkhoahoc?tenkhoahoc=' + tenkhoahoc + '&theloai=' + theloai + '&capbac=' + capbacst +
+                '&mota=' + mota + '&gia=' + gia + '&anh=' + anh + '&video=' + videogioithieu + '&magv=' + magv + '&ngaydang=' + ngaydang,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                var makhoahoc = res.data;
+                console.log(makhoahoc);
+                dispatch(insertThongTinKhoaHoc(makhoahoc, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6));
+            }
+            else {
+                console.log("done");
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertThongTinKhoaHoc = (makhoahoc, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/insertthongtinkhoahoc?makhoahoc=' + makhoahoc +
+                '&gioithieu=' + gioithieu + '&dieu2=' + dieu2 + '&dieu3=' + dieu3 +
+                '&dieu4=' + dieu4 + '&dieu5=' + dieu5 + '&dieu6=' + dieu6 + '&dieu1=' + dieu1,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                console.log("done");
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertHoaDon = (makh, ghichu, tongtien, ngaydat) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/inserthoadon?makh='+makh+'&ghichu='+ghichu+'&tongtien='+tongtien+'&ngaydat='+ngaydat,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                var mahd = res.data;
+                var cart = JSON.parse(sessionStorage.getItem('cartdachon'));
+                if(cart.length > 1){
+                    cart.map((ca)=>{
+                        dispatch(insertCTHD(mahd,ca.id,null,ca.soluong));                      
+                    })
+                }
+                else{
+                    dispatch(insertCTHD(mahd,cart[0].id,null,cart[0].soluong));                    
+                }
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertCTHD = (mahd, makhoahoc, matl, soluong) => {
+    return (dispatch) => {
+        if(makhoahoc === null){
+            return axios({
+                method: 'get',
+                url: 'http://localhost/backendAPI/api/insertcthd?mahd='+mahd+'&matl='+matl+'&soluong='+soluong,
+                data: null
+            }).then(res => {
+                if (res.data) {
+                    console.log("done");
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+        else if(matl === null){
+            return axios({
+                method: 'get',
+                url: 'http://localhost/backendAPI/api/insertcthd?mahd='+mahd+'&makhoahoc='+makhoahoc+'&soluong='+soluong,
+                data: null
+            }).then(res => {
+                if (res.data) {
+                    console.log("done");
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+        else{
+            return axios({
+                method: 'get',
+                url: 'http://localhost/backendAPI/api/insertcthd?mahd='+mahd+'&makhoahoc='+makhoahoc+'&soluong='+soluong+'&matl='+matl,
+                data: null
+            }).then(res => {
+                if (res.data) {
+                    console.log("done");
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+        }
     }
 }

@@ -8,12 +8,12 @@ const columns = [
     {
         title: '',
         key: 'MaKhoaHoc',
-        render: (record) => <img alt={record.MaKhoaHoc} className="img-khoahoc" src={record.AnhKhoaHoc} />
+        render: (record) => <img alt={record.MaKhoaHoc} key={record.MaKhoaHoc} className="img-khoahoc" src={record.AnhKhoaHoc} />
     },
     {
         title: 'Khóa học',
         key: 'TenKhoaHoc',
-        render: (record) => <Link to={`/khoahoc/${record.MaKhoaHoc}`} className="name-kh">{record.TenKhoaHoc}</Link>
+        render: (record) => <Link to={`/nguoidung/khoahoc/${record.MaKhoaHoc}`} key={record.MaKhoaHoc} className="name-kh">{record.TenKhoaHoc}</Link>
     },
     {
         title: 'Giảng viên',
@@ -43,7 +43,7 @@ class Khoahoccuatoi extends Component{
         var {khoahoc} = this.props;
         return (
             <div>
-               <Table columns={columns} dataSource = {khoahoc} />
+               <Table columns={columns} dataSource = {khoahoc} rowKey="MaKhoaHoc" />
             </div>
         );
     }

@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 class Danhmuc extends Component {
     showDanhMuc = (chude) => {
         var rs = null;
-        rs = chude.map((cd) => {
+        rs = chude.map((cd,index) => {
             return (
                 <div className="col-4 p-cd">
-                    <Link to={`/alldisplay/${cd.MaCD}`} key={cd.MaCD}>
-                        <div className="chude" style={{ backgroundImage: `url(${cd.AnhCD})` }}>
+                    <Link to={`/nguoidung/alldisplay/${cd.MaCD}`} key={index}>
+                        <div className="chude" key={index} style={{ backgroundImage: `url(${cd.AnhCD})` } }>
                             <h3>{cd.TenCD}</h3>
                         </div>
                     </Link>

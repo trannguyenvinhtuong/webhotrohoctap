@@ -6,9 +6,12 @@ var myReducer = (state = initialState, action) =>{
     switch(action.type){       
         case type.GET_NHIEUKHOAHOCTHEOID:
             state.push(action.khoahoc[0]);
-            return state;
+            return [...state];
         case type.RESET_NHIEUKHOAHOC:
             state = [];
+            return state;
+        case type.GET_KHOAHOCTHEOGH:
+            state = action.khoahoc;
             return state;
         default:
             return state;

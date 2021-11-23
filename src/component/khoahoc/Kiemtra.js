@@ -101,6 +101,7 @@ class Kiemtra extends Component {
                     <br />
                     <br />
                     <button className="btn-nopbai">Nộp bài</button>
+
                 </Col>
                 <Col span={togglekiemtra == false ? 24 : 0}>
                     <div></div>

@@ -13,77 +13,101 @@ import Khoahoc from './../component/khoahoc/Khoahoc';
 import AlldisplayTaiLieu from './../component/alldisplaytailieu/AlldisplayTaiLieu';
 import Detailtailieu from '../component/detailtailieu/Detailtailieu';
 import Giohang from './../component/giohang/Giohang';
+import Giangvien from './../component/giangviencomponent/Giangvien';
+import Thongtinthanhtoan from '../component/thanhtoan/Thongtinthanhtoan';
+import Thanhtoanbuoc2 from '../component/thanhtoan/Thanhtoanbuoc2';
+import Thanhtoanthanhcong from '../component/thanhtoan/Thanhtoanthanhcong';
 
 const routesND = [
     {
-        path: '/',
+        path: '/nguoidung',
         exact: true,
         main: () => <Home />
     },
     {
-        path: '/danhmuc',
+        path: '/nguoidung/danhmuc',
         exact: false,
         main: () => <Danhmuc />
     },
     {
-        path: '/kichhoat',
+        path: '/nguoidung/kichhoat',
         exact: false,
         main: () => <Kichhoat />
     },
     {
-        path: '/dangnhap',
+        path: '/nguoidung/dangnhap',
         exact: false,
         main: () => <Dangnhap />
     },
     {
-        path: '/quantritk',
+        path: '/nguoidung/quantritk',
         exact: false,
         main: () => <Quantritk />
     },
     {
-        path: '/thongtin',
+        path: '/nguoidung/thongtin',
         exact: false,
         main: () => <Thongtin />
     },
     {
-        path: '/detailtailieu/:idtailieu',
+        path: '/nguoidung/detailtailieu/:idtailieu',
         exact: false,
         main: (match) => <Detailtailieu match={match} />
     },
     {
-        path: '/alldisplay/:iddm',
+        path: '/nguoidung/alldisplay/:iddm',
         exact: false,
         main: (match) => <Alldislay match={match} />
     },
     {
-        path: '/alldisplaytailieu',
+        path: '/nguoidung/alldisplaytailieu',
         exact: false,
         main: () => <AlldisplayTaiLieu />
     },
     {
-        path: '/detailkhoahoc/:idkhoahoc',
+        path: '/nguoidung/detailkhoahoc/:idkhoahoc',
         exact: false,
         main: (match) => <Detailkhoahoc match={match} />
     },
     {
-        path: '/tailieu/:idtailieu',
+        path: '/nguoidung/tailieu/:idtailieu',
         exact: false,
         main: (match) => <Tailieu match={match} />
     },
     {
-        path: '/khoahoc/:idkhoahoc',
+        path: '/nguoidung/khoahoc/:idkhoahoc',
         exact: false,
         main: (match) => <Khoahoc match={match} />
     },
     {
-        path: '/dangkytk',
+        path: '/nguoidung/dangkytk',
         exact: false,
         main: () => <Dangkytk />
     },
     {
-        path: '/giohang',
+        path: '/nguoidung/giohang',
         exact: false,
         main: () => <Giohang />
+    },
+    {
+        path: '/nguoidung/giangvien',
+        exact: false,
+        main: () => <Giangvien />
+    },
+    {
+        path: '/nguoidung/thongtinthanhtoan',
+        exact: false,
+        main: () => <Thongtinthanhtoan />
+    },
+    {
+        path: '/nguoidung/thanhtoanbuoc2',
+        exact: false,
+        main: () => <Thanhtoanbuoc2 />
+    },
+    {
+        path: '/nguoidung/thanhtoanthanhcong',
+        exact: false,
+        main: () => <Thanhtoanthanhcong />
     },
     {
         path: '',

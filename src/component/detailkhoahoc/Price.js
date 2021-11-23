@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import * as action from './../../actions/index';
+import Swal from "sweetalert2";
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -43,9 +44,17 @@ class Price extends Component {
     addCart = (typecart, id) => {
         var cart = {
             typecart: typecart,
-            id: id
+            id: id,
+            soluong: '1'
         }
-        this.props.addCart(cart);        
+        this.props.addCart(cart);
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Thêm giỏ hàng thành công',
+            showConfirmButton: false,
+            timer: 1500
+        });
     }
 
     render() {
@@ -74,7 +83,7 @@ class Price extends Component {
                     Thời gian ưu đãi còn
                 </p>
                 {this.showTimeKM(ngaybd, ngaykt, today)}
-                <a onClick={()=>this.addCart('kh',khoahoc.MaKhoaHoc === undefined ? kh.MaKhoaHoc : khoahoc.MaKhoaHoc)}>
+                <a onClick={() => this.addCart('kh', khoahoc.MaKhoaHoc === undefined ? kh.MaKhoaHoc : khoahoc.MaKhoaHoc)}>
                     <button className="themvaogio">
                         <i className="fas fa-cart-plus"></i>
                         Thêm vào giỏ

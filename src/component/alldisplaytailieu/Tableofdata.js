@@ -14,7 +14,7 @@ const columns = [
     {
         title: 'Tài liệu',
         key: 'TenTL',
-        render: (record) => <Link to={`/detailtailieu/${record.MaTL}`} className="name-kh">{record.TenTL}</Link>
+        render: (record) => <Link to={`/nguoidung/detailtailieu/${record.MaTL}`} className="name-kh">{record.TenTL}</Link>
     },
     {
         title: 'Giảng viên',

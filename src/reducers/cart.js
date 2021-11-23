@@ -18,8 +18,23 @@ var myReducer = (state = initialState, action) =>{
                     for(let i=0; i<data.length;i++){
                         state.push(data[i]);
                     }    
+                }       
+                    
+                if(state.length>0){
+                    var check = false;
+                    state.map((st)=>{
+                        if(st.id === action.cart.id){
+                            st.soluong ++;
+                            check = true;
+                        }
+                    });
+                    if(check === false){
+                        state.push(action.cart);
+                    }
+                }     
+                else{
+                    state.push(action.cart);
                 }            
-                state.push(action.cart);
                 localStorage.removeItem("cart");
                 localStorage.setItem("cart",JSON.stringify(state));
             }

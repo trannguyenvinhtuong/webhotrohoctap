@@ -21,6 +21,11 @@ import getnhieukhoahoc from './getnhieukhoahoc';
 import toogletailieu from './toogletailieu';
 import togglekiemtra from './togglekiemtra';
 import getdekiemtra from './getdekiemtra';
+import checkgv from './checkgv';
+import togglepagegiangvien from './togglepagegiangvien';
+import getkhoahoctheogv from './getkhoahoctheogv';
+import gettailieutheogv from './gettailieutheogv';
+import getthongtingv from './getthongtingv';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -44,7 +49,12 @@ const myReducer = combineReducers({
     getnhieukhoahoc,
     toogletailieu,
     togglekiemtra,
-    getdekiemtra
+    getdekiemtra,
+    checkgv,
+    togglepagegiangvien,
+    getkhoahoctheogv,
+    gettailieutheogv,
+    getthongtingv
 });
 
 export default myReducer;

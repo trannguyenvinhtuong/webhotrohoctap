@@ -40,11 +40,12 @@ class Nguoidung extends Component {
         <Messenger />
         <NavbarHome />
         <Switch>
-          {logg !== null ? <Redirect from='/dangnhap' to='/' /> : ''}
-          {logg === null ? <Redirect from='/quantritk' to='/' /> : ''}
-          {logg === null ? <Redirect from='/khoahoc' to='/' /> : ''}
-          {logg === null ? <Redirect from='/tailieu' to='/' /> : ''}
-          {logg === null ? <Redirect from='/kichhoat' to='/dangnhap' /> : ''}
+          {logg !== null ? <Redirect from='/nguoidung/dangnhap' to='/nguoidung' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/quantritk' to='/nguoidung' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/khoahoc' to='/nguoidung' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/tailieu' to='/nguoidung' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/kichhoat' to='/dangnhap' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/giohang' to='/dangnhap' /> : ''}
           {this.showContentMenu(routesND)}
         </Switch>
         <Footer />

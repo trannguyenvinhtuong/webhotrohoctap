@@ -43,7 +43,7 @@ class Tailieucuatoi extends Component{
         var {tailieu} = this.props;
         return (
             <div>
-               <Table columns={columns} dataSource = {tailieu} />
+               <Table columns={columns} dataSource = {tailieu} rowKey="MaTL" />
             </div>
         );
     }

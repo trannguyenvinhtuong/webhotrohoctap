@@ -10,16 +10,16 @@ class Showgiohangrong extends Component{
                 <h2>Thêm sản phẩm vào giỏ ngay!</h2>
                 <br/>
                 <div className="btn-option can-giua">
-                    <Link to="/alldisplay/0">
+                    <Link to="/nguoidung/alldisplay/0">
                         <button className="btn-khoahoc">Khóa học</button>
                     </Link>
-                    <Link to="/alldisplaytailieu/0">
+                    <Link to="/nguoidung/alldisplaytailieu/0">
                         <button className="btn-tailieu">Tài liệu</button>
                     </Link>                    
                 </div>
                 <br/>
                 <br/>
-                <Link to="/">
+                <Link to="/nguoidung">
                     <button className="btn-vetrangchu can-giua">Về trang chủ</button>
                 </Link>                
             </div>

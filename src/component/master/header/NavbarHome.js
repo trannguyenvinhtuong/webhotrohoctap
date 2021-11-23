@@ -8,17 +8,17 @@ import './../../../stylecss/userstyle.css';
 const menus = [
     {
         name: 'Trang chủ',
-        to: '/',
+        to: '/nguoidung',
         exact: true
     },
     {
         name: 'Danh mục',
-        to: '/danhmuc',
+        to: '/nguoidung/danhmuc',
         exact: false
     },
     {
         name: 'Kích hoạt khóa học',
-        to: '/kichhoat',
+        to: '/nguoidung/kichhoat',
         exact: false
     }
 ];
@@ -58,7 +58,7 @@ class NavbarHome extends Component {
         var logg = localStorage.getItem('user');
         return (
             <header style={{ backgroundImage: `url(${Bg})` }}>
-                <Link to='/' exact='true'>
+                <Link to='/nguoidung' exact='true'>
                     <img src={Logo} />
                 </Link>
                 <div className="search">
@@ -71,7 +71,7 @@ class NavbarHome extends Component {
                         <Route path="/giohang" children={({ match }) => {
                             var active = match ? 'active-nav' : '';
                             return (
-                                <NavLink to="/giohang" className={`${active}`}>
+                                <NavLink to="/nguoidung/giohang" className={`${active}`}>
                                     <i className="fas fa-shopping-cart"></i> Giỏ hàng
                                 </NavLink>
                             )
@@ -79,8 +79,8 @@ class NavbarHome extends Component {
                     : ''
                     }
                     {logg === null
-                        ? <Menulink to="/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
-                        : <Menulink to="/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
+                        ? <Menulink to="/nguoidung/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
+                        : <Menulink to="/nguoidung/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
 
                 </nav>
             </header>

@@ -12,10 +12,10 @@ class Marketing extends Component{
                     thiện bản thân? 
                 </h3>
                 <div>
-                    <Link to='/alldisplaytailieu' >
+                    <Link to='/nguoidung/alldisplaytailieu' >
                         <Button className="timhieungay">Tìm hiểu ngay!</Button>
                     </Link>
-                    <Link to='/alldisplay/0' >
+                    <Link to='/nguoidung/alldisplay/0' >
                         <Button className="muakhoahoc">Mua khóa học</Button>
                     </Link>
                 </div>

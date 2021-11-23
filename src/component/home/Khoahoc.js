@@ -22,7 +22,7 @@ class Khoahoc extends Component {
                 return (
                     <div className="col-md-3 p-kh" key={index}>
                         <div className="sanpham">
-                            <Link to={`/Detailkhoahoc/${da.MaKhoaHoc}`}>
+                            <Link to={`/nguoidung/Detailkhoahoc/${da.MaKhoaHoc}`}>
                                 <img src={da.AnhKhoaHoc} />
                                 <h3>{da.TenKhoaHoc}</h3>
                                 <div className="thongtin-sp row">
@@ -69,7 +69,7 @@ class Khoahoc extends Component {
                 <div className="row">
                     {this.showContent(khoahoc, khuyenmai)}
                 </div>
-                <Link to="/alldisplay/0" className="xemthem">Xem thêm
+                <Link to="/nguoidung/alldisplay/0" className="xemthem">Xem thêm
                     <i className="fas fa-angle-double-right" style={{ color: '#0d6efd' }}></i>
                 </Link>
             </div>

@@ -13,7 +13,7 @@ const columns = [
     {
         title: 'Khóa học',
         key: 'MaKhoaHoc',
-        render: (record) => <Link key={record.MaKhoaHoc} to={`/Detailkhoahoc/${record.MaKhoaHoc}`} className="name-kh">{record.TenKhoaHoc}</Link>
+        render: (record) => <Link key={record.MaKhoaHoc} to={`/nguoidung/Detailkhoahoc/${record.MaKhoaHoc}`} className="name-kh">{record.TenKhoaHoc}</Link>
     },
     {
         title: 'Giảng viên',
@@ -59,7 +59,7 @@ class Tableofdata extends Component{
         }
         return (
             <div>
-                <Table columns={columns} dataSource = {khoahoc} rowKey="name" />
+                <Table columns={columns} dataSource = {khoahoc} rowKey="MaKhoaHoc" />
             </div>
         );
     }

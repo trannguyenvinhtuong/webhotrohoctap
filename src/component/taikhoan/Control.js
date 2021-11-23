@@ -6,6 +6,7 @@ import Thongtintk from './Thongtintk';
 import Dangxuat from './Dangxuat';
 import Giangvien from './Giangvien';
 import Tailieucuatoi from './Tailieucuatoi';
+import Thongtindonhang from './Thongtindonhang';
 import {connect} from 'react-redux';
 import * as action from './../../actions/index';
 
@@ -22,6 +23,11 @@ class Control extends Component{
                 name: 'Thông tin tài khoản',
                 link: <Thongtintk />
             },
+            {
+                key: '7',
+                name: 'Thông tin đơn hàng',
+                link: <Thongtindonhang />
+            }, 
             {
                 key: '2',
                 name: 'Đổi mật khẩu',

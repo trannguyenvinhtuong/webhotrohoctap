@@ -22,7 +22,7 @@ class Tailieu extends Component {
                 return (
                     <div className="col-md-3 p-kh" key={index}>
                         <div className="sanpham">
-                            <Link to={`/detailtailieu/${da.MaTL}`}>
+                            <Link to={`/nguoidung/detailtailieu/${da.MaTL}`}>
                                 <img src={da.AnhTL} />
                                 <h3>{da.TenTL}</h3>
                                 <div className="thongtin-sp row">
