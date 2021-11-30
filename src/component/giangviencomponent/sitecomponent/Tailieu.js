@@ -53,7 +53,8 @@ class Tailieu extends Component{
             }
     
         ];
-        var tailieu = this.props.gettailieutheogv;        
+        var tailieu = this.props.gettailieutheogv;    
+        console.log(tailieu);    
         return (
             <div className="giangvien-khoahoc">
                 <a onClick={() => this.onClick(<Themtailieu />)}>

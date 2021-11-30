@@ -3,6 +3,7 @@ import { Row, Col, Select } from "antd";
 import { connect } from "react-redux";
 import * as action from './../../../../actions/index';
 import Khoahoc from "../Khoahoc";
+import Swal from "sweetalert2";
 
 const { Option } = Select;
 
@@ -115,7 +116,14 @@ class Themkhoahoc extends Component {
         this.props.insertKhoaHoc(tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, ngaydang, magv,
             gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6);
         // this.props.insertThongTinKhoaHoc("19",gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6);
-        alert("Thành công");
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Lưu thành công',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        window.location.reload();
     }
 
     render() {

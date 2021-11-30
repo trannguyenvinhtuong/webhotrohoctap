@@ -17,6 +17,9 @@ import Giangvien from './../component/giangviencomponent/Giangvien';
 import Thongtinthanhtoan from '../component/thanhtoan/Thongtinthanhtoan';
 import Thanhtoanbuoc2 from '../component/thanhtoan/Thanhtoanbuoc2';
 import Thanhtoanthanhcong from '../component/thanhtoan/Thanhtoanthanhcong';
+import Dekiemtra from '../component/dethi/Dekiemtra';
+import Kiemtra from '../component/dethi/Kiemtra';
+import Hoanthanh from '../component/dethi/Hoanthanh';
 
 const routesND = [
     {
@@ -108,6 +111,21 @@ const routesND = [
         path: '/nguoidung/thanhtoanthanhcong',
         exact: false,
         main: () => <Thanhtoanthanhcong />
+    },
+    {
+        path: '/nguoidung/alldisplaydethi',
+        exact: false,
+        main: () => <Dekiemtra />
+    },
+    {
+        path: '/nguoidung/kiemtra/:idkt',
+        exact: false,
+        main: (match) => <Kiemtra match={match} />
+    },
+    {
+        path: '/nguoidung/hoanthanhkiemtra',
+        exact: false,
+        main: () => <Hoanthanh />
     },
     {
         path: '',

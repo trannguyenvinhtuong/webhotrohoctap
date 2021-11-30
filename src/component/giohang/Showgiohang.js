@@ -102,11 +102,17 @@ class Showgiohang extends Component {
     showSoLuong = (id) => {
         var rs = null;
         var cart = JSON.parse(localStorage.getItem('cart'));
-        cart.map((ca) => {
-            if (ca.id === id) {
-                rs = ca.soluong;
-            }
-        });
+        if(cart.length>1){
+            cart.map((ca) => {
+                if (ca.id === id) {
+                    rs = ca.soluong;
+                }
+            });
+        }
+        else{
+            rs = cart.soluong;
+        }
+        
         return rs;
     }
 
@@ -175,12 +181,20 @@ class Showgiohang extends Component {
             var cartdachon = [];
             sessionStorage.removeItem("cartdachon");
             selectedData.forEach((sel,index)=>{
-                cart.forEach((ca)=>{
-                    if(sel.MaKhoaHoc === ca.id){
-                        sel.SoLuong=ca.soluong.toString();
-                        cartdachon.push({"id":sel.MaKhoaHoc,"soluong":ca.soluong.toString()});
+                if(cart.length>1){
+                    cart.forEach((ca)=>{
+                        if(sel.MaKhoaHoc === ca.id){
+                            sel.SoLuong=ca.soluong.toString();
+                            cartdachon.push({"id":sel.MaKhoaHoc,"soluong":ca.soluong.toString()});
+                        }
+                    })
+                }
+                else{
+                    if(sel.MaKhoaHoc === cart.id){
+                        sel.SoLuong=cart.soluong.toString();
+                        cartdachon.push({"id":sel.MaKhoaHoc,"soluong":cart.soluong.toString()});
                     }
-                })
+                }
             });
             sessionStorage.setItem("cartdachon",JSON.stringify(cartdachon));
             sessionStorage.setItem("tongtien",JSON.stringify({"tongtien":tongtien}))

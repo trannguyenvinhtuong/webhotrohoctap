@@ -7,6 +7,7 @@ import Hoso from "./../sitecomponent/Hoso";
 import Themkhoahoc from "../sitecomponent/khoahoc/Themkhoahoc";
 
 import { connect } from "react-redux";
+import Dethicuatoi from "../sitecomponent/Dethicuatoi";
 
 class Leftbar extends Component {
     onClick = (page) =>{
@@ -50,6 +51,11 @@ class Leftbar extends Component {
                 name: 'Hồ sơ giảng viên',
                 link: <Hoso />
             },
+            {
+                icon: 'fas fa-envelope-open-text',
+                name: 'Đề thi của tôi',
+                link: <Dethicuatoi />
+            }
         ];
         return (
             <div className="leftbar" style={{ paddingTop: '70px' }}>

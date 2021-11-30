@@ -28,9 +28,9 @@ class Index extends Component {
                 <br />
                 <br />
                 <Tailieu />
+                {/* <br />
                 <br />
-                <br />
-                <Noidung />
+                <Noidung /> */}
                 <br />
                 <br />
                 <Chinhphuc />

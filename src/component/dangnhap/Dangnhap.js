@@ -4,6 +4,7 @@ import { Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as action from './../../actions/index';
+import Swal from "sweetalert2";
 
 class Dangnhap extends Component {
     constructor(props) {
@@ -40,12 +41,20 @@ class Dangnhap extends Component {
                     window.location.reload();
                 }
                 else {
-                    alert('Sai tên đăng nhập hoặc mật khẩu');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Sai tên đăng nhập hoặc mật khẩu!'                        
+                    });                    
                 }
             }
         }
         else {
-            alert('Vui lòng điền tên đăng nhập hoặc mật khẩu');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền tên đăng nhập hoặc mật khẩu!'                        
+            });    
         }
 
     }

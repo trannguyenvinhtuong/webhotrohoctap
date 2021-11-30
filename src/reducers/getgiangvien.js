@@ -4,8 +4,8 @@ var initialState = [];
 
 var myReducer = (state = initialState, action) =>{
     switch(action.type){
-        case type.GET_TAILIEUTHEOGV:
-            state = action.tailieu;            
+        case type.GET_GIANGVIEN:
+            state = action.giangvien;            
             return [...state];   
         default:
             return state;

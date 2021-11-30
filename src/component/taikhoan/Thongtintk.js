@@ -2,12 +2,17 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import * as action from "./../../actions/index";
 import './../../SASS/quantritk.sass';
+import Chinhsuathongtin from './Chinhsuathongtin';
 
 class Thongtintk extends Component{
     componentDidMount(){
         var logg = localStorage.getItem('user');
         var jslog = JSON.parse(logg);      
         this.props.requestKhachHang(jslog.makh);
+    }
+
+    onChangePage = (page) =>{
+        this.props.onChangePage(page);
     }
 
     render() {
@@ -18,7 +23,7 @@ class Thongtintk extends Component{
                 <div className="container">                    
                     <br />
                     <h2>Thông tin tài khoản</h2>
-                    <a href="#">
+                    <a onClick = {() => this.onChangePage(<Chinhsuathongtin khachhang={kh} />)}>
                         <button className="btn btn-primary">Chỉnh sửa thông tin</button>
                     </a>
                     <br />
@@ -54,6 +59,9 @@ const mapDispatchToProps = (dispatch, props) =>{
     return{
         requestKhachHang: (idkh) =>{
             dispatch(action.requestKhachHangByID(idkh));
+        },
+        onChangePage: (page) =>{
+            dispatch(action.changePageTK(page));
         }
     }
 }

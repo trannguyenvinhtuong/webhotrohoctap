@@ -27,7 +27,7 @@ class Hoso extends Component{
     render() {
         var {giangvien} = this.props;
         var gv = giangvien[0];
-
+        console.log(giangvien);
         return (
             <div className="hosogv-gv">
                 <div className="container">

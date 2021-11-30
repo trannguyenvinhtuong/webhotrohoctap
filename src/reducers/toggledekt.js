@@ -1,12 +1,12 @@
 import * as type from '../constants/action_type'
 
-var initialState = [];
+var initialState = false;
 
 var myReducer = (state = initialState, action) =>{
     switch(action.type){
-        case type.GET_TAILIEUTHEOGV:
-            state = action.tailieu;            
-            return [...state];   
+        case type.TOGGLE_FILTER_DEKT:
+            state = !state;         
+            return state;  
         default:
             return state;
     }

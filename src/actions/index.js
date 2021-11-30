@@ -670,3 +670,151 @@ export const insertCTHD = (mahd, makhoahoc, matl, soluong) => {
         }
     }
 }
+
+export const insertTaiLieu = (tentl,mota,magv,macb,macd,anh,giatl,demo,sotrang,ngaydang,link) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/inserttailieu?tentl='+tentl+'&mota='+mota+'&magv='+magv+
+                '&macb='+macb+'&macd='+macd+'&giatl='+giatl+'&demo='+demo+'&sotrang='+sotrang+'&anh='+anh+'&ngaydang='+ngaydang,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                var matl = res.data;
+                dispatch(insertLuuTruTaiLieu(matl,link));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertLuuTruTaiLieu = (matl,link) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/insertluutrutl?matl='+matl+'&link='+link,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                console.log("done");
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const toggleDeKT = () =>{
+    return{
+        type: type.TOGGLE_FILTER_DEKT
+    }
+}
+
+export const onFilterKT = (filter_data) =>{
+    return{
+        type: type.ON_FILTERKT,
+        filter_data
+    }
+}
+
+export const insertKetQua = (makh,made,diem,tende) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/insertketqua?makh='+makh+'&made='+made+'&diem='+diem+'&tende='+tende,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                console.log("done");
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getKetQua = (ketqua) =>{
+    return{
+        type: type.GET_KETQUA,
+        ketqua  
+    }
+}
+
+export const requestKetQua = (idkh) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getdiem?idkh='+idkh,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                dispatch(getKetQua(res.data));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getHoaDon = (hoadon) =>{
+    return{
+        type: type.GET_HOADON,
+        hoadon
+    }
+}
+
+export const requestHoaDon = (idkh) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/gethoadon?id='+idkh,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                dispatch(getHoaDon(res.data));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const updateKhachHang = (makh,tenkh,sdt,diachi,email) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/updatekhachhang?makh='+makh+'&tenkh='+tenkh+'&sdt='+sdt+'&diachi='+diachi+'&email='+email,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                console.log('done');
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getGV = (giangvien) =>{
+    return{
+        type: type.GET_GIANGVIEN,
+        giangvien
+    }
+}
+
+export const requestGiangVien = () =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getgiangvien',
+            data: null
+        }).then(res => {
+            if (res.data) {
+                dispatch(getGV(res.data));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}

@@ -35,7 +35,6 @@ const columns = [
 class Tableofdata extends Component{
     render() {
         var {khoahoc,filter_data} = this.props;
-        console.log(khoahoc);
         if(filter_data.keyword){
             if(khoahoc){
                 khoahoc = khoahoc.filter((kh)=>{

@@ -9,6 +9,7 @@ import iphysics from "./../../imgs/Physics.svg";
 import ilaptrinh from "./../../imgs/laptrinh.svg";
 import ivh from "./../../imgs/vanhoc.svg";
 import ils from "./../../imgs/lichsu.svg";
+import {Link} from 'react-router-dom';
 
 class Chinhphuc extends Component {
     render() {
@@ -17,7 +18,7 @@ class Chinhphuc extends Component {
                 <h3>Chinh phục đề thi</h3>
                 <div className="row">
                     <div className="col-6">
-                        <a href="#">
+                        <Link to="/nguoidung/alldisplaydethi">
                             <div className="anhlon-cp" style={{ backgroundImage: `url(${th})` }}>
                                 <div className="txtbottom">
                                     <i>
@@ -26,10 +27,10 @@ class Chinhphuc extends Component {
                                     <label>Toán học</label>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                     <div className="col-6">
-                        <a href="#">
+                        <Link to="/nguoidung/alldisplaydethi">
                             <div className="anhlon-cp" style={{ backgroundImage: `url(${vl})` }}>
                                 <div className="txtbottom">
                                     <i>
@@ -38,12 +39,12 @@ class Chinhphuc extends Component {
                                     <label>Vật lý</label>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="row" style={{ marginTop: '1rem' }}>
                     <div className="col">
-                        <a href="#">
+                        <Link to="/nguoidung/alldisplaydethi">
                             <div className="anhnho-cp" style={{ backgroundImage: `url(${lt})` }}>
                                 <div className="txtbottom-nho">
                                     <i>
@@ -52,10 +53,10 @@ class Chinhphuc extends Component {
                                     <label>Lập trình</label>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                     <div className="col">
-                        <a href="#">
+                        <Link to="/nguoidung/alldisplaydethi">
                             <div className="anhnho-cp" style={{ backgroundImage: `url(${vh})` }}>
                                 <div className="txtbottom-nho">
                                     <i>
@@ -64,10 +65,10 @@ class Chinhphuc extends Component {
                                     <label>Văn học</label>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                     <div className="col">
-                        <a href="#">
+                        <Link to="/nguoidung/alldisplaydethi">
                             <div className="anhnho-cp" style={{ backgroundImage: `url(${ls})` }}>
                                 <div className="txtbottom-nho">
                                     <i>
@@ -76,7 +77,7 @@ class Chinhphuc extends Component {
                                     <label>Lịch sử</label>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -47,6 +47,7 @@ class Tailieu extends Component {
 
     render() {
         var { tailieu } = this.props;
+        
         return (
             <div className="container khoahoc">
                 <h3>TÀI LIỆU</h3>
@@ -54,7 +55,7 @@ class Tailieu extends Component {
                 <div className="row">
                     {this.showContent(tailieu)}
                 </div>
-                <Link to="/alldisplaytailieu" className="xemthem">Xem thêm
+                <Link to="/nguoidung/alldisplaytailieu" className="xemthem">Xem thêm
                     <i className="fas fa-angle-double-right" style={{ color: '#0d6efd' }}></i>
                 </Link>
             </div>

@@ -7,6 +7,7 @@ import Dangxuat from './Dangxuat';
 import Giangvien from './Giangvien';
 import Tailieucuatoi from './Tailieucuatoi';
 import Thongtindonhang from './Thongtindonhang';
+import Ketquahoctap from './Ketquahoctap';
 import {connect} from 'react-redux';
 import * as action from './../../actions/index';
 
@@ -44,6 +45,11 @@ class Control extends Component{
                 link: <Tailieucuatoi />
             },
             {
+                key: '8',
+                name: 'Kết quả học tập',
+                link: <Ketquahoctap />
+            },
+            {
                 key: '5',
                 name: 'Giảng viên',
                 link: <Giangvien />
@@ -63,7 +69,7 @@ class Control extends Component{
         ]
         return (
             <div>
-                <Table dataSource={controlSrc} columns={column} />
+                <Table dataSource={controlSrc} columns={column} rowKey="key" />
             </div>
         );
     }

@@ -1,172 +1,87 @@
 import { Component } from "react";
-import vl from "./../../imgs/physics.jpg";
-import ls from "./../../imgs/lichsu.jpg";
 import ps from "./../../imgs/person.jpg";
+import * as action from './../../actions/index';
+import { connect } from "react-redux";
 
 class Gvtieubieu extends Component {
+    componentDidMount() {
+        this.props.requestGiangVien();
+    }
+
+    loadItemSlide = (data) => {
+        var rs = null;
+        rs = data.map((da) => {
+            return(
+                <div className="col">
+                    <a>
+                        <div className="gv-item">
+                            <img src={da.AnhDaiDien} />
+                            <label>{da.TenKH}</label>
+                            <p>{da.TrinhDo} {da.ChuyenNganh}</p>
+                        </div>
+                    </a>
+                </div>
+            )
+        });
+        return rs;
+    }
+
+    showSlide = (data) => {
+        var rs = null;
+        if (data.length < 6) {
+            rs = (
+                <div className="carousel-inner" style={{ padding: '2rem' }}>
+                    <div className="carousel-item active">
+                        <div className="container">
+                            <div className="row">
+                                {this.loadItemSlide(data)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        if (data.length > 5 && data.length < 11) {
+            var datadau = [];
+            var datacuoi = [];
+            for (let i = 0; i < 5; i++) {
+                datadau.push(data[i]);
+            }
+            for (let i = 5; i < 9; i++) {
+                datacuoi.push(data[i]);
+            }
+            rs = (
+                <div className="carousel-inner" style={{ padding: '2rem' }}>
+                    <div className="carousel-item active">
+                        <div className="container">
+                            <div className="row">
+                                {this.loadItemSlide(datadau)}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="carousel-item">
+                        <div className="container">
+                            <div className="row">
+                                {this.loadItemSlide(datacuoi)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            )
+        }
+        return rs;
+    }
+
     render() {
+        var { giangvien } = this.props;
+
         return (
             <div className="container gvtieubieu">
                 <h3>Giảng viên tiêu biểu</h3>
                 <div id="carouselExampleControls" style={{ marginTop: '1rem' }} className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-inner" style={{ padding: '2rem' }}>
-                        <div className="carousel-item active">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn A</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn A</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn A</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn A</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn A</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                    {this.showSlide(giangvien)}
 
-                                </div>
-                            </div>
-                        </div>
-                        <div className="carousel-item">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn C</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn C</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn C</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn C</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn C</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div className="carousel-item">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn B</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn B</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn B</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn B</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="col">
-                                        <a href="#">
-                                            <div className="gv-item">
-                                                <img src={ps} />
-                                                <label>Nguyễn Văn B</label>
-                                                <p>Thạc sĩ công nghệ thông tin</p>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                         <i className="fas fa-chevron-left"></i>
                     </button>
@@ -179,4 +94,18 @@ class Gvtieubieu extends Component {
     }
 }
 
-export default Gvtieubieu;
+const mapStateToProps = (state) => {
+    return {
+        giangvien: state.getgiangvien
+    }
+}
+
+const mapDispacthToProps = (dispatch, props) => {
+    return {
+        requestGiangVien: () => {
+            dispatch(action.requestGiangVien());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispacthToProps)(Gvtieubieu);

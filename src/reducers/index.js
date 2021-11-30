@@ -26,6 +26,11 @@ import togglepagegiangvien from './togglepagegiangvien';
 import getkhoahoctheogv from './getkhoahoctheogv';
 import gettailieutheogv from './gettailieutheogv';
 import getthongtingv from './getthongtingv';
+import toggledekt from './toggledekt';
+import onfilterkt from './onFilterKT';
+import getketqua from './getketqua';
+import gethoadon from './gethoadon';
+import getgiangvien from './getgiangvien';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -54,7 +59,12 @@ const myReducer = combineReducers({
     togglepagegiangvien,
     getkhoahoctheogv,
     gettailieutheogv,
-    getthongtingv
+    getthongtingv,
+    toggledekt,
+    onfilterkt,
+    getketqua,
+    gethoadon,
+    getgiangvien
 });
 
 export default myReducer;

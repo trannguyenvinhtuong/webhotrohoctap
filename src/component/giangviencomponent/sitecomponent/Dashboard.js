@@ -10,8 +10,8 @@ class Dashboard extends Component{
     }
     render() {
         return (
-            <div>
-                123456
+            <div className="dasboard">
+                <h1>Chào mừng trở lại</h1>
             </div>
         );
     }
