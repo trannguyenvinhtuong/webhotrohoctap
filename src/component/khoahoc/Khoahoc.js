@@ -5,6 +5,7 @@ import './../../SASS/detail.sass';
 import { connect } from 'react-redux';
 import * as action from './../../actions/index';
 import TaiLieu from './TaiLieu';
+import {Link} from 'react-router-dom';
 // firebase
 import db from './../../config/firebase.config';
 import { ref, child, get } from "firebase/database";
@@ -85,8 +86,8 @@ class Khoahoc extends Component {
                             <br />
                             <br />
                             <h2>Bài kiểm tra</h2>
-                            <a style={{ color: 'blue', textTransform: 'none' }} onClick={() => this.onToggleKiemTra()}>Xem đề kiểm tra <i className="fas fa-caret-down"></i></a>
-                          
+                            <Link style={{ color: 'blue', textTransform: 'none' }} to="/nguoidung/alldisplaydethi">Xem đề kiểm tra <i className="fas fa-caret-down"></i></Link>
+
                             <br />
                             <br />
                             <div className="detail-gioithieu" style={{ borderRadius: '3px' }}>

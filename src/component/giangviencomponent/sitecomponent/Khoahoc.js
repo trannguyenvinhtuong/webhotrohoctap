@@ -54,7 +54,6 @@ class Khoahoc extends Component{
             }    
         ];
         var khoahoc = this.props.getkhoahoctheogv;     
-           
         return (
             <div className="giangvien-khoahoc">
                 <a onClick={() => this.onClick(<Themkhoahoc />,0,khoahoc[0].MaGV)}>

@@ -31,6 +31,7 @@ import onfilterkt from './onFilterKT';
 import getketqua from './getketqua';
 import gethoadon from './gethoadon';
 import getgiangvien from './getgiangvien';
+import getkichhoatkhoahoc from './getkichhoatkhoahoc';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -64,7 +65,8 @@ const myReducer = combineReducers({
     onfilterkt,
     getketqua,
     gethoadon,
-    getgiangvien
+    getgiangvien,
+    getkichhoatkhoahoc
 });
 
 export default myReducer;

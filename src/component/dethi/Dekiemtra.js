@@ -67,8 +67,17 @@ class Dekiemtra extends Component{
     }
 
     render() {
-        var {dethi} = this.state;
-        console.log(dethi);
+        var de = this.state.dethi;
+        var dethi = [...de];
+        // dethi.map((d,index)=>{
+        //     if(d.bocauhoi.length < 10){
+        //         dethi.splice(index,1);
+        //     }
+        //     if(d.bocauhoi == '0'){
+        //         dethi.splice(index,1);
+        //     }
+        // })
+        // console.log(dethi);
         const columns = [
             {
                 title: '',

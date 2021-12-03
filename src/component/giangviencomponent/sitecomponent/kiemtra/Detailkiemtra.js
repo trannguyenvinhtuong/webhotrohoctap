@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 import db from './../../../../config/firebase.config';
 import { ref, child, get, set, remove } from "firebase/database";
 
-
 class Detailkiemtra extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +16,7 @@ class Detailkiemtra extends Component {
             ten: '',
             cautraloi: [],
             showThemCauHoi: false,
+            showSuaCauHoi: false,
             cauhoi: '',
             dapanA: '',
             dapanB: '',
@@ -48,33 +48,101 @@ class Detailkiemtra extends Component {
         var rs = null;
         if (data) {
             rs = data.map((da, index) => {
-                var ham = 'onChange' + index;
-                return (
-                    <div className="kiemtra">
-                        <h3>Câu {(index + 1)}: {da.cauhoi}</h3>
-                        <a>
-                            <button className="btn btn-primary">Sửa</button>
-                        </a>
-                        <a onClick={() => this.onDeleteQ(index)}>
-                            <button className="btn btn-danger" style={{ marginLeft: '15px' }}>Xoá</button>
-                        </a>
-                        <br />
-                        <br />
-                        <Radio.Group key={index} onChange={e => this.onChangeSelect(e.target.value, index)}>
-                            <Space direction="vertical" key={index}>
-                                <Radio value={1}>A  {da.A}</Radio>
-                                <Radio value={2}>B  {da.B}</Radio>
-                                <Radio value={3}>C  {da.C}</Radio>
-                                <Radio value={4}>D  {da.D}</Radio>
-                            </Space>
-                        </Radio.Group>
-                        <br />
-                    </div>
-
-                )
+                if (da.cauhoi != 'khongco') {
+                    return (
+                        <div className="kiemtra">
+                            <h3>Câu {(index + 1)}: {da.cauhoi}</h3>
+                            <a onClick={() => this.onEditQ(index)}>
+                                <button className="btn btn-primary">Sửa</button>
+                            </a>
+                            <a onClick={() => this.onDeleteQ(index)}>
+                                <button className="btn btn-danger" style={{ marginLeft: '15px' }}>Xoá</button>
+                            </a>
+                            <br />
+                            <br />
+                            <Radio.Group key={index} onChange={e => this.onChangeSelect(e.target.value, index)}>
+                                <Space direction="vertical" key={index}>
+                                    <Radio value={1}>A  {da.A}</Radio>
+                                    <Radio value={2}>B  {da.B}</Radio>
+                                    <Radio value={3}>C  {da.C}</Radio>
+                                    <Radio value={4}>D  {da.D}</Radio>
+                                </Space>
+                            </Radio.Group>
+                            <br />
+                            <br />
+                            <p style={{color: 'black'}}>Đáp án: {da.dapan}</p>                          
+                        </div>
+                    )
+                }
             })
         }
         return rs;
+    }
+
+    onEditQ = (idch) => {
+        var { getde } = this.props;
+        var de = getde[idch];
+        this.setState({
+            showSuaCauHoi: true,
+            cauhoi: de.cauhoi,
+            dapanA: de.A,
+            dapanB: de.B,
+            dapanC: de.C,
+            dapanD: de.D,
+            dapan: de.dapan
+        });
+        sessionStorage.removeItem('suach');
+        sessionStorage.setItem('suach', JSON.stringify({ 'ma': idch }));
+    }
+
+    handleCancelSua = () => {
+        this.setState({
+            showSuaCauHoi: false,
+            cauhoi: '',
+            dapanA: '',
+            dapanB: '',
+            dapanC: '',
+            dapanD: '',
+            dapan: ''
+        })
+    }
+
+    handleOkSua = () => {
+        var { getde } = this.props;
+        var { cauhoi, dapanA, dapanB, dapanC, dapanD, dapan } = this.state;
+        var suach = JSON.parse(sessionStorage.getItem('suach'));
+        var idch = suach.ma;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, change it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var madethi = JSON.parse(sessionStorage.getItem('madethi'));
+                var id = madethi.made;
+                const dbref = ref(db, "nganhangde");
+                const dbref2 = child(dbref, id.toString());
+                const dbref3 = child(dbref2, "bocauhoi");
+                set(child(dbref3, idch.toString()), {
+                    cauhoi: cauhoi,
+                    A: dapanA,
+                    B: dapanB,
+                    C: dapanC,
+                    D: dapanD,
+                    dapan: dapan
+                });
+                Swal.fire(
+                    'Thay đổi thành công!',
+                    'Câu hỏi của bạn đã được thay đổi.',
+                    'success'
+                );
+                this.onRefesh();
+            }
+        })
     }
 
     onDeleteQ = (idch) => {
@@ -90,22 +158,23 @@ class Detailkiemtra extends Component {
             if (result.isConfirmed) {
                 var madethi = JSON.parse(sessionStorage.getItem('madethi'));
                 var id = madethi.made;
-                var adaRef = ref(db, 'nganhangde/' + id.toString() + '/bocauhoi/' + idch.toString());
-
-                adaRef.remove()
-                    .then(function () {
-                        console.log("Remove succeeded.")
-                    })
-                    .catch(function (error) {
-                        console.log("Remove failed: " + error.message)
-                    });
+                const dbref = ref(db, "nganhangde");
+                const dbref2 = child(dbref, id.toString());
+                const dbref3 = child(dbref2, "bocauhoi");
+                set(child(dbref3, idch.toString()), {
+                    cauhoi: 'khongco'
+                });
+                
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
                     'success'
                 )
+
+                this.onRefesh();
             }
         })
+       
     }
 
     tooglePage = (page) => {
@@ -158,14 +227,32 @@ class Detailkiemtra extends Component {
             });
         }
         else {
-            set(child(dbref3, i.toString()), {
-                cauhoi: cauhoi,
-                A: dapanA,
-                B: dapanB,
-                C: dapanC,
-                D: dapanD,
-                dapan: dapan
-            });
+            var setda = false;
+            for (let j = 0; j < getde.length; j++) {
+                if (getde[j].cauhoi == 'khongco') {
+                    set(child(dbref3, j.toString()), {
+                        cauhoi: cauhoi,
+                        A: dapanA,
+                        B: dapanB,
+                        C: dapanC,
+                        D: dapanD,
+                        dapan: dapan
+                    });
+                    setda = true;
+                    break;
+                }
+
+            }
+            if (setda === false) {
+                set(child(dbref3, i.toString()), {
+                    cauhoi: cauhoi,
+                    A: dapanA,
+                    B: dapanB,
+                    C: dapanC,
+                    D: dapanD,
+                    dapan: dapan
+                });
+            }
         }
         Swal.fire({
             position: 'top-end',
@@ -202,13 +289,13 @@ class Detailkiemtra extends Component {
     }
 
     onRefesh = () => {
-        this.forceUpdate();
+        this.tooglePage(<Dethicuatoi />);
     }
 
     render() {
         var { cauhoi, dapanA, dapanB, dapanC, dapanD, dapan } = this.state;
         var { getde } = this.props;
-        var { ten, showThemCauHoi } = this.state;
+        var { ten, showThemCauHoi, showSuaCauHoi } = this.state;
         return (
             <div>
                 <br />
@@ -222,10 +309,7 @@ class Detailkiemtra extends Component {
                 <div>
                     <a style={{ float: 'left' }} onClick={() => this.tooglePage(<Dethicuatoi />)}>
                         <button className="btn-nopbai btn-primary">Quay lại</button>
-                    </a>
-                    <a style={{ float: 'left' }} onClick={this.onRefesh}>
-                        <button className="btn-nopbai btn-primary">Quay lại</button>
-                    </a>
+                    </a>                
                 </div>
                 <br />
                 <br />
@@ -285,6 +369,61 @@ class Detailkiemtra extends Component {
                         <br />
                     </div>
                 </Modal>
+
+                {/* modal sua  */}
+                <Modal title="Sửa câu hỏi" visible={showSuaCauHoi} onOk={this.handleOkSua} onCancel={this.handleCancelSua}>
+                    <div className="themkhoahoc container">
+                        <label>Câu hỏi</label>
+                        <input className="form-control"
+                            name="cauhoi"
+                            value={cauhoi}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="Câu hỏi ....." />
+                        <br />
+                        <label>Đáp án A:</label>
+                        <input className="form-control"
+                            name="dapanA"
+                            value={dapanA}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="Đáp án A ....." />
+                        <br />
+                        <label>Đáp án B:</label>
+                        <input className="form-control"
+                            name="dapanB"
+                            value={dapanB}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="Đáp án B ....." />
+                        <br />
+                        <label>Đáp án C:</label>
+                        <input className="form-control"
+                            name="dapanC"
+                            value={dapanC}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="Đáp án C ....." />
+                        <br />
+                        <label>Đáp án D:</label>
+                        <input className="form-control"
+                            name="dapanD"
+                            value={dapanD}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="Đáp án D ....." />
+                        <br />
+                        <label>Đáp án:</label>
+                        <input className="form-control"
+                            name="dapan"
+                            value={dapan}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="Đáp án ....." />
+                        <br />
+                    </div>
+                </Modal>
+
             </div>
         );
     }

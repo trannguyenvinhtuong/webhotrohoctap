@@ -5,6 +5,10 @@ import * as action from './../../../../actions/index';
 import Khoahoc from "../Khoahoc";
 import Swal from "sweetalert2";
 
+//firebase
+import db from './../../../../config/firebase.config';
+import { ref, child, get } from "firebase/database";
+
 const { Option } = Select;
 
 class Themkhoahoc extends Component {
@@ -115,7 +119,7 @@ class Themkhoahoc extends Component {
         var ngaydang = date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear();
         this.props.insertKhoaHoc(tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, ngaydang, magv,
             gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6);
-        // this.props.insertThongTinKhoaHoc("19",gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6);
+            
         Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -123,7 +127,7 @@ class Themkhoahoc extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        window.location.reload();
+        this.props.togglepagegiangvien(<Khoahoc />)
     }
 
     render() {

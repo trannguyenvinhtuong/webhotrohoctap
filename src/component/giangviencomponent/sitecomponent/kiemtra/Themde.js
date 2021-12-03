@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as action from './../../../../actions/index';
 import './../../../../SASS/quantritk.sass';
 import Swal from "sweetalert2";
+import Dethicuatoi from "../Dethicuatoi";
 
 import db from './../../../../config/firebase.config';
 import { ref, child, get, set } from "firebase/database";
@@ -98,11 +99,11 @@ class Themde extends Component {
         })
     }
 
-    onCancer = () =>{
+    onCancer = () => {
         window.location.reload();
     }
 
-    onClear = () =>{
+    onClear = () => {
         this.setState({
             tende: '',
             macd: '1',
@@ -116,13 +117,13 @@ class Themde extends Component {
         });
     }
 
-    onSubmit = () =>{
+    onSubmit = () => {
         var { tende, macd, macb, cauhoi, dapanA, dapanB, dapanC, dapanD, dapan, dethi } = this.state;
-     
-        var {giangvien} = this.props;
+
+        var { giangvien } = this.props;
         var magv = giangvien[0].MaGV;
         const dbref = ref(db, "nganhangde");
-        set(child(dbref, dethi.length.toString()),{
+        set(child(dbref, dethi.length.toString()), {
             ten: tende,
             macb: macb,
             macd: macd,
@@ -130,6 +131,14 @@ class Themde extends Component {
             magv: magv,
             bocauhoi: '0'
         });
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Thêm mới thành công',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        this.tooglePage(<Dethicuatoi />);
     }
 
     render() {

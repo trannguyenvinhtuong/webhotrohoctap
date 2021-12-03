@@ -2,6 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import * as action from './../../../actions/index';
 import './../../../SASS/giangvienpage.sass';
+import Chinhsua from "./hoso/Chinhsua";
 
 class Hoso extends Component{
     componentDidMount(){
@@ -24,16 +25,19 @@ class Hoso extends Component{
         return rs;
     }
 
+    togglepagegiangvien = (page) =>{
+        this.props.togglepagegiangvien(page);
+    }
+
     render() {
         var {giangvien} = this.props;
         var gv = giangvien[0];
-        console.log(giangvien);
         return (
             <div className="hosogv-gv">
                 <div className="container">
                     <h2>Hồ sơ giảng viên</h2>
                     <br />
-                    <a href="#">
+                    <a onClick={() => this.togglepagegiangvien(<Chinhsua />)}>
                         <button className="btn btn-info">Chỉnh sửa thông tin</button>
                     </a>
                     <br />
@@ -84,6 +88,9 @@ const mapDispatchToProps = (dispatch,props) =>{
     return{
         requestThongTinGV: (makh) =>{
             dispatch(action.requestThongTinGV(makh));
+        },
+        togglepagegiangvien: (page) => {
+            dispatch(action.togglePageGiangVien(page));
         }
     }
 }
