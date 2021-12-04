@@ -32,6 +32,7 @@ import getketqua from './getketqua';
 import gethoadon from './gethoadon';
 import getgiangvien from './getgiangvien';
 import getkichhoatkhoahoc from './getkichhoatkhoahoc';
+import getallkh from './getallkh';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -66,7 +67,8 @@ const myReducer = combineReducers({
     getketqua,
     gethoadon,
     getgiangvien,
-    getkichhoatkhoahoc
+    getkichhoatkhoahoc,
+    getallkh
 });
 
 export default myReducer;

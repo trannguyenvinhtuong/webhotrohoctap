@@ -15,48 +15,50 @@ class Dangnhap extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.requestAllKhachHang();
+    }
+
     onChange = (event) => {
         var target = event.target;
         var name = target.name;
         var value = target.value;
         this.setState({
             [name]: value
-        })
-        if (this.state.tendn !== '' && this.state.matkhau !== '') {
-            this.props.requestKhachHang(this.state.tendn);
-        }
+        });
     }
 
     onClick = (e) => {
         e.preventDefault();
-        if (this.state.matkhau !== '' && this.state.tendn !== null) {
+        if (this.state.tendn !== '' && this.state.matkhau !== '') {
             var { khachhang } = this.props;
-            if (khachhang) {
-                var kh = khachhang[0];
-                if ((khachhang.MatKhau === undefined ? kh.MatKhau : khachhang.MatKhau) === this.state.matkhau) {
+            var rs = false;
+            khachhang.map((kh) => {
+                if (kh.TaiKhoan == this.state.tendn && kh.MatKhau == this.state.matkhau) {
                     localStorage.setItem('user', JSON.stringify({
                         trangthai: 'logged',
                         makh: khachhang.MaKH === undefined ? kh.MaKH : khachhang.MaKH
                     }));
+                    rs = true;
                     window.location.reload();
                 }
-                else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Sai tên đăng nhập hoặc mật khẩu!'                        
-                    });                    
-                }
+            });
+            if (rs === false) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Sai tên đăng nhập hoặc mật khẩu!'
+                });
+
             }
         }
         else {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Vui lòng điền tên đăng nhập hoặc mật khẩu!'                        
-            });    
+                text: 'Vui lòng điền tên đăng nhập hoặc mật khẩu!'
+            });
         }
-
     }
 
     render() {
@@ -91,7 +93,7 @@ class Dangnhap extends Component {
                         <div className="link-dndk">
                             <span>Bạn chưa có tài khoản?</span>
                             <span>
-                                <Link to="/dangkytk">Đăng ký ngay!</Link>
+                                <Link to="/nguoidung/dangky">Đăng ký ngay!</Link>
                             </span>
                         </div>
                     </form>
@@ -104,7 +106,7 @@ class Dangnhap extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        khachhang: state.getkhachhang
+        khachhang: state.getallkh
     }
 }
 
@@ -115,6 +117,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         toogleTK: () => {
             dispatch(action.toogleTK());
+        },
+        requestAllKhachHang: () => {
+            dispatch(action.requestAllKhachHang());
         }
     }
 }

@@ -28,7 +28,7 @@ class Gvtieubieu extends Component {
 
     showSlide = (data) => {
         var rs = null;
-        if (data.length < 6) {
+        if (data < 5) {
             rs = (
                 <div className="carousel-inner" style={{ padding: '2rem' }}>
                     <div className="carousel-item active">
@@ -41,35 +41,52 @@ class Gvtieubieu extends Component {
                 </div>
             )
         }
-        if (data.length > 5 && data.length < 11) {
-            var datadau = [];
-            var datacuoi = [];
-            for (let i = 0; i < 5; i++) {
-                datadau.push(data[i]);
-            }
-            for (let i = 5; i < 9; i++) {
-                datacuoi.push(data[i]);
+        else{
+            var da = [];
+            for(let i =0; i<5; i++){
+                da.push(data[i]);
             }
             rs = (
                 <div className="carousel-inner" style={{ padding: '2rem' }}>
                     <div className="carousel-item active">
                         <div className="container">
                             <div className="row">
-                                {this.loadItemSlide(datadau)}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="carousel-item">
-                        <div className="container">
-                            <div className="row">
-                                {this.loadItemSlide(datacuoi)}
+                                {this.loadItemSlide(da)}
                             </div>
                         </div>
                     </div>
                 </div>
-
             )
         }
+        // if (data.length > 5 && data.length < 11) {
+        //     var datadau = [];
+        //     var datacuoi = [];
+        //     for (let i = 0; i < 5; i++) {
+        //         datadau.push(data[i]);
+        //     }
+        //     for (let i = 5; i < 9; i++) {
+        //         datacuoi.push(data[i]);
+        //     }
+        //     rs = (
+        //         <div className="carousel-inner" style={{ padding: '2rem' }}>
+        //             <div className="carousel-item active">
+        //                 <div className="container">
+        //                     <div className="row">
+        //                         {this.loadItemSlide(datadau)}
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //             <div className="carousel-item">
+        //                 <div className="container">
+        //                     <div className="row">
+        //                         {this.loadItemSlide(datacuoi)}
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+
+        //     )
+        // }
         return rs;
     }
 

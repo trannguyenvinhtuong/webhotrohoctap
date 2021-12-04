@@ -316,6 +316,27 @@ export const requestKhachHangByID = (idkh) => {
     }
 }
 
+export const requestAllKhachHang = () => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getkhachhang',
+            data: null
+        }).then(res => {
+            dispatch(getAllKhachHang(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getAllKhachHang = (khachhang) => {
+    return {
+        type: type.GET_ALLKH,
+        khachhang
+    }
+}
+
 export const toogleTK = () => {
     return {
         type: type.TOGGLE_TK
@@ -570,18 +591,18 @@ export const insertKhoaHoc = (tenkhoahoc, theloai, capbacst, mota, gia, anh, vid
         return axios({
             method: 'get',
             url: 'http://localhost/backendAPI/api/insertkhoahoc?tenkhoahoc=' + tenkhoahoc + '&theloai=' + theloai + '&capbac=' + capbacst +
-                '&mota=' + mota + '&gia=' + gia + '&anh=' + anh + '&video=' + videogioithieu + '&magv=' + magv + '&ngaydang=' + ngaydang +            
+                '&mota=' + mota + '&gia=' + gia + '&anh=' + anh + '&video=' + videogioithieu + '&magv=' + magv + '&ngaydang=' + ngaydang +
                 '&gioithieu=' + gioithieu + '&dieu2=' + dieu2 + '&dieu3=' + dieu3 +
                 '&dieu4=' + dieu4 + '&dieu5=' + dieu5 + '&dieu6=' + dieu6 + '&dieu1=' + dieu1,
             data: null
         }).then(res => {
             if (res.data) {
                 var makhoahoc = res.data;
-                
+
                 const dbref = ref(db, "khoahoc");
                 set(child(dbref, makhoahoc.toString()), {
                     '0': '0'
-                });         
+                });
             }
             else {
                 console.log("done");
@@ -875,14 +896,14 @@ export const updateGiangVien = (makh, noicongtac, trinhdo, kinhnghiem, gioithieu
     }
 }
 
-export const getKichHoatKhoaHoc = (khoahoc) =>{
-    return{
+export const getKichHoatKhoaHoc = (khoahoc) => {
+    return {
         type: type.GET_KHOAHOC_KICHHOAT,
         khoahoc
     }
 }
 
-export const requestKichHoatKhoaHoc = () =>{
+export const requestKichHoatKhoaHoc = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
@@ -896,14 +917,48 @@ export const requestKichHoatKhoaHoc = () =>{
     }
 }
 
-export const insertKichHoatKhoaHoc = (makh,makhoahoc,makichhoat) =>{
+export const insertKichHoatKhoaHoc = (makh, makhoahoc, makichhoat) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertkhoahockhachhang?makh='+makh+'&makhoahoc='+makhoahoc+'&makichhoat='+makichhoat,
+            url: 'http://localhost/backendAPI/api/insertkhoahockhachhang?makh=' + makh + '&makhoahoc=' + makhoahoc + '&makichhoat=' + makichhoat,
             data: null
         }).then(res => {
             console.log("ok");
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertKhachHang = (tenkh, sdt, diachi, email,
+    taikhoan, matkhau) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/insertkhachhang?TenKH=' + tenkh + '&SDT=' + sdt + '&DiaChi=' + diachi + '&Email=' + email + '&TaiKhoan=' + taikhoan + '&MatKhau=' + matkhau,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                console.log("ok");
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertGiangVien = (noicongtac, trinhdo, kinhnghiem, gioithieubanthan,
+    gioithieunghenghiep, gioithieukinhnghiem, makh, macb, chuyennganh) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/insertGiangVien?noicongtac='+noicongtac+'&trinhdo='+trinhdo+'&kinhnghiem='+kinhnghiem+'&gioithieubanthan='+gioithieubanthan+'&gioithieunghenghiep='+gioithieunghenghiep+'&gioithieukinhnghiem='+gioithieukinhnghiem+'&makh='+makh+'&macb='+macb+'&chuyennganh='+chuyennganh,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                console.log("ok");
+            }
         }).catch(error => {
             console.log(error);
         })

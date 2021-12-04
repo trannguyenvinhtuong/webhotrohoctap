@@ -20,6 +20,8 @@ import Thanhtoanthanhcong from '../component/thanhtoan/Thanhtoanthanhcong';
 import Dekiemtra from '../component/dethi/Dekiemtra';
 import Kiemtra from '../component/dethi/Kiemtra';
 import Hoanthanh from '../component/dethi/Hoanthanh';
+import Dangky from './../component/dangnhap/Dangky';
+import Dangkygiangvien from './../component/dangky/Dangkygiangvien';
 
 const routesND = [
     {
@@ -126,6 +128,16 @@ const routesND = [
         path: '/nguoidung/hoanthanhkiemtra',
         exact: false,
         main: () => <Hoanthanh />
+    },
+    {
+        path: '/nguoidung/dangky',
+        exact: false,
+        main: () => <Dangky />
+    },
+    {
+        path: '/nguoidung/dangkygiangvien',
+        exact: false,
+        main: () => <Dangkygiangvien />
     },
     {
         path: '',

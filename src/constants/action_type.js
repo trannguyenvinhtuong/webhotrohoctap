@@ -42,3 +42,4 @@ export const GET_KETQUA = 'GET_KETQUA';
 export const GET_HOADON = 'GET_HOADON';
 export const GET_GIANGVIEN = 'GET_GIANGVIEN';
 export const GET_KHOAHOC_KICHHOAT = 'GET_KHOAHOC_KICHHOAT';
+export const GET_ALLKH = 'GET_ALLKH';
