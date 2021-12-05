@@ -119,7 +119,7 @@ class Dekiemtra extends Component{
             }
         }
         return (           
-            <div style={{marginTop: '4.5rem'}} className="alldisplaydekiemtra">                
+            <div style={{marginTop: '4.7rem'}} className="alldisplaydekiemtra">                
                 <Tab />
                 <Row className="padding-element">
                     <Col span={toggledekt === true ? 6 : 0}>

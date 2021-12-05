@@ -5,31 +5,34 @@ import { Menu, Dropdown } from 'antd';
 import {connect} from 'react-redux';
 import * as action from './../../actions/index';
 
-const menu = (
-    <Menu>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                1st menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-                2nd menu item
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-                3rd menu item
-            </a>
-        </Menu.Item>
-    </Menu>
-);
-
 class Tab extends Component {
     onChose = () =>{
         this.props.toogleFilter();
     }
+
+    onClick = (data) =>{
+        var da = {
+            sort_kh_data: data
+        }
+        this.props.onSortKH(da);
+    }
+
     render() {
+        const menu = (
+            <Menu>
+                <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" onClick={()=>this.onClick('tang')}>
+                        Giá tăng dần
+                    </a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" onClick={()=>this.onClick('giam')}>
+                        Giá giảm dần
+                    </a>
+                </Menu.Item>
+            </Menu>
+        );
+        
         return (
             <div className="tab">
                 <div className="left-content">
@@ -43,7 +46,7 @@ class Tab extends Component {
                     </div>
                     <div>
                         <a href="#" className="icon-tab">                            
-                            <Dropdown overlay={menu} placement="topCenter" arrow>
+                            <Dropdown overlay={menu} placement="bottomCenter" arrow>
                                 <SortAscendingOutlined />
                             </Dropdown>
                         </a>
@@ -58,6 +61,9 @@ const mapDispatchToProps = (dispatch, props) =>{
     return{
         toogleFilter : () =>{
             dispatch(action.toogleFilter());
+        },
+        onSortKH: (sortdata) =>{
+            dispatch(action.onSortKH(sortdata));
         }
     }
 }

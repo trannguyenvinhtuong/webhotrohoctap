@@ -33,6 +33,9 @@ import gethoadon from './gethoadon';
 import getgiangvien from './getgiangvien';
 import getkichhoatkhoahoc from './getkichhoatkhoahoc';
 import getallkh from './getallkh';
+import sortkh from './sortkh';
+import sorttl from './sorttl';
+import togglepageadmin from './togglepageadmin';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -68,7 +71,10 @@ const myReducer = combineReducers({
     gethoadon,
     getgiangvien,
     getkichhoatkhoahoc,
-    getallkh
+    getallkh,
+    sortkh,
+    sorttl,
+    togglepageadmin
 });
 
 export default myReducer;

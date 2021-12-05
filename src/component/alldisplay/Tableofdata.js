@@ -4,6 +4,12 @@ import {connect} from 'react-redux';
 import './../../SASS/tab.sass';
 import {Link} from 'react-router-dom';
 
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'VND',
+    minimumFractionDigits: 0
+})
+
 const columns = [
     {
         title: '',
@@ -14,6 +20,10 @@ const columns = [
         title: 'Khóa học',
         key: 'MaKhoaHoc',
         render: (record) => <Link key={record.MaKhoaHoc} to={`/nguoidung/Detailkhoahoc/${record.MaKhoaHoc}`} className="name-kh">{record.TenKhoaHoc}</Link>
+    },
+    {
+        title: 'Gía',
+        render: (record) => <p key={record.MaKhoaHoc} className="name-kh">{formatter.format(record.GiaKH)}</p>
     },
     {
         title: 'Giảng viên',
@@ -34,7 +44,7 @@ const columns = [
 
 class Tableofdata extends Component{
     render() {
-        var {khoahoc,filter_data} = this.props;
+        var {khoahoc,filter_data,sort} = this.props;
         if(filter_data.keyword){
             if(khoahoc){
                 khoahoc = khoahoc.filter((kh)=>{
@@ -56,9 +66,28 @@ class Tableofdata extends Component{
                 })
             }
         }
+       
+        if(sort.sort_kh_data !== '' && sort.sort_kh_data == 'giam'){
+            if(khoahoc){
+                khoahoc.sort((a,b)=>{
+                    if(a.GiaKH > b.GiaKH) return -1;
+                    else if(a.GiaKH < b.GiaKH) return 1;
+                    else return 0;
+                })
+            }
+        }
+        if(sort.sort_kh_data !== '' && sort.sort_kh_data == 'tang'){
+            if(khoahoc){
+                khoahoc.sort((a,b)=>{
+                    if(a.GiaKH > b.GiaKH) return 1;
+                    else if(a.GiaKH < b.GiaKH) return -1;
+                    else return 0;
+                })                
+            }
+        }
         return (
-            <div>
-                <Table columns={columns} dataSource = {khoahoc} rowKey="MaKhoaHoc" />
+            <div>               
+                <Table columns={columns} dataSource = {[...khoahoc]} rowKey="MaKhoaHoc" />
             </div>
         );
     }
@@ -67,7 +96,8 @@ class Tableofdata extends Component{
 const mapStateToProps = (state) =>{
     return{
         khoahoc: state.getkhoahoc,
-        filter_data: state.filter
+        filter_data: state.filter,
+        sort: state.sortkh
     }
 }
 

@@ -43,3 +43,6 @@ export const GET_HOADON = 'GET_HOADON';
 export const GET_GIANGVIEN = 'GET_GIANGVIEN';
 export const GET_KHOAHOC_KICHHOAT = 'GET_KHOAHOC_KICHHOAT';
 export const GET_ALLKH = 'GET_ALLKH';
+export const SORT_KH_DATA = 'SORT_KH_DATA';
+export const SORT_TL_DATA = 'SORT_TL_DATA';
+export const TOGGLE_PAGE_ADMIN = 'TOGGLE_PAGE_ADMIN';

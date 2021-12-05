@@ -80,7 +80,7 @@ class Filter extends Component {
             keyword: '',
             machude: '',
             macapbac: ''
-        })
+        });
     }
 
     showChuDe = (data) => {

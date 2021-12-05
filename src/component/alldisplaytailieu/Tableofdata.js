@@ -39,7 +39,8 @@ class Tableofdata extends Component{
     }
 
     render() {
-        var {tailieu,filter_data} = this.props;
+        var {tailieu,filter_data,sort} = this.props;
+        console.log(sort);
         if(filter_data.keyword){
             if(tailieu){
                 tailieu = tailieu.filter((tl)=>{
@@ -62,9 +63,27 @@ class Tableofdata extends Component{
                 })
             }
         }
+        if(sort.sort_tl_data !== '' && sort.sort_tl_data == 'giam'){
+            if(tailieu){
+                tailieu.sort((a,b)=>{
+                    if(a.TenTL > b.TenTL) return 1;
+                    else if(a.TenTL < b.TenTL) return -1;
+                    else return 0;
+                })
+            }
+        }
+        if(sort.sort_tl_data !== '' && sort.sort_tl_data == 'tang'){
+            if(tailieu){
+                tailieu.sort((a,b)=>{
+                    if(a.TenTL > b.TenTL) return -1;
+                    else if(a.TenTL < b.TenTL) return 1;
+                    else return 0;
+                })                
+            }
+        }
         return (
             <div>
-                <Table columns={columns} dataSource = {tailieu} rowKey="name" />
+                <Table columns={columns} dataSource = {[...tailieu]} rowKey="name" />
             </div>
         );
     }
@@ -73,7 +92,8 @@ class Tableofdata extends Component{
 const mapStateToProps = (state) =>{
     return{
         tailieu: state.gettailieu,
-        filter_data: state.onfiltertl
+        filter_data: state.onfiltertl,
+        sort: state.sorttl
     }
 }
 

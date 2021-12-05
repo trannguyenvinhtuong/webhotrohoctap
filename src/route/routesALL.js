@@ -1,6 +1,7 @@
 import Nguoidung from './../pages/Nguoidung';
 import Notfault from './../component/Notfault';
 import Giangvien from './../pages/Giangvien';
+import Adminhome from './../pages/Adminhome';
 
 const routesALL = [
     {
@@ -12,6 +13,11 @@ const routesALL = [
         path: '/giangvienpage',
         exact: false,
         main: () => <Giangvien />
+    }, 
+    {
+        path: '/admin',
+        exact: false,
+        main: () => <Adminhome />
     }, 
     {
         path: '',

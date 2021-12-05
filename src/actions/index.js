@@ -964,3 +964,38 @@ export const insertGiangVien = (noicongtac, trinhdo, kinhnghiem, gioithieubantha
         })
     }
 }
+
+export const onSortKH = (sortdata) =>{
+    return{
+        type: type.SORT_KH_DATA,
+        sortdata
+    }
+}
+
+export const onSortTL = (sortdata) =>{
+    return{
+        type: type.SORT_TL_DATA,
+        sortdata
+    }
+}
+
+export const updateKhuyenMaiKH = (makhoahoc,tenkhuyenmai,phantramgiam,ngaybatdau,ngayhethan) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/updateKhuyenMaiKH?makhoahoc='+makhoahoc+'&phantramgiam='+phantramgiam+'&tenkhuyenmai='+tenkhuyenmai+'&ngaybatdau='+ngaybatdau+'&ngayhethan='+ngayhethan,
+            data: null
+        }).then(res => {
+            console.log("ok");
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const togglePageAdmin = (page) =>{
+    return{
+        type: type.TOGGLE_PAGE_ADMIN,
+        page
+    }
+}

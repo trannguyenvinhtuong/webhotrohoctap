@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import * as action from './../../../../actions/index';
-import { Row, Col, Select } from 'antd';
+import { Row, Col, Select, Modal } from 'antd';
 import Quanlybaigiang from "./Quanlybaigiang";
 import Swal from "sweetalert2";
 import Khoahoc from './../Khoahoc';
@@ -26,7 +26,12 @@ class Detailkhoahoc extends Component {
             dieu5: '',
             dieu6: '',
             macb: '1',
-            macd: '1'
+            macd: '1',
+            showkhuyenmai: false,
+            tenkhuyenmai: '',
+            phantramgiam: '',
+            ngaybatdau: '',
+            ngayhethan: ''
         }
     }
 
@@ -110,7 +115,7 @@ class Detailkhoahoc extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        var {makhoahoc, tenkhoahoc, mota, gia, anh, videogioithieu, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6, macb, macd } = this.state;
+        var { makhoahoc, tenkhoahoc, mota, gia, anh, videogioithieu, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6, macb, macd } = this.state;
         var date = new Date();
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         var idgv = JSON.parse(sessionStorage.getItem('magv'));
@@ -176,8 +181,52 @@ class Detailkhoahoc extends Component {
         })
     }
 
+    handleOk = () => {
+        var { makhoahoc, tenkhuyenmai, phantramgiam, ngaybatdau, ngayhethan } = this.state;
+        Swal.fire({
+            title: 'Bạn có chắc chắn?',
+            text: "Bạn không thể khôi phục dữ liệu cũ!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.props.updateKhuyenMaiKH(makhoahoc, tenkhuyenmai, phantramgiam, ngaybatdau, ngayhethan);
+                Swal.fire(
+                    'Đã lưu!',
+                    'Sửa khuyến mãi thành công.',
+                    'success'
+                );
+                this.props.togglepagegiangvien(<Khoahoc />);
+            }
+        })
+
+    }
+
+    handleCancel = () => {
+        this.setState({
+            showkhuyenmai: false
+        })
+    }
+
+    showKM = () => {
+        var { khoahoc } = this.props;
+        this.setState({
+            showkhuyenmai: true,
+            tenkhuyenmai: khoahoc[0].TenKhuyenMai,
+            phantramgiam: khoahoc[0].PhanTramGiam,
+            ngaybatdau: khoahoc[0].NgayBatDau,
+            ngayhethan: khoahoc[0].NgayHetHan
+        });
+    }
+
     render() {
-        var { tenkhoahoc, mota, gia, anh, videogioithieu, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6, macb, macd } = this.state;
+        var { showkhuyenmai, tenkhoahoc, mota, gia, anh,
+            videogioithieu, gioithieu, dieu1, dieu2, dieu3,
+            dieu4, dieu5, dieu6, macb, macd, tenkhuyenmai, phantramgiam,
+            ngaybatdau, ngayhethan } = this.state;
         var { chude, capbac } = this.props;
         return (
             <div className="themkhoahoc">
@@ -186,6 +235,9 @@ class Detailkhoahoc extends Component {
                 <div className="container">
                     <a onClick={() => this.onClick(<Quanlybaigiang />)} style={{ float: "right" }}>
                         <button className="btn btn-danger">Quản lý bài giảng</button>
+                    </a>
+                    <a onClick={this.showKM} style={{ float: "right" }}>
+                        <button className="btn btn-success">Khuyến mãi giảm giá</button>
                     </a>
                 </div>
                 <br />
@@ -327,6 +379,48 @@ class Detailkhoahoc extends Component {
                         </a>
                     </div>
                 </form>
+
+                {/* Modal  */}
+                <Modal title="Khuyến mãi khoá học" visible={showkhuyenmai} onOk={this.handleOk} onCancel={this.handleCancel}>
+                    <div className="themkhoahoc">
+                        <label>Tên khuyến mãi</label>
+                        <input className="form-control"
+                            name="tenkhuyenmai"
+                            value={tenkhuyenmai}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="VD: Khoá học làm giàu ..." />
+                        <br />
+                        <br />
+                        <label>Phần trăm giảm</label>
+                        <input className="form-control"
+                            name="phantramgiam"
+                            value={phantramgiam}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="VD: Khoá học làm giàu ..." />
+                        <br />
+                        <br />
+                        <label>Ngày bắt đầu</label>
+                        <input className="form-control"
+                            name="ngaybatdau"
+                            value={ngaybatdau}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="VD: Khoá học làm giàu ..." />
+                        <br />
+                        <br />
+                        <label>Ngày hết hạn</label>
+                        <input className="form-control"
+                            name="ngayhethan"
+                            value={ngayhethan}
+                            onChange={this.onChange}
+                            type="text"
+                            placeholder="VD: Khoá học làm giàu ..." />
+                        <br />
+                        <br />
+                    </div>
+                </Modal>
             </div>
         );
     }
@@ -369,6 +463,9 @@ const mapDispatchToProps = (dispatch, props) => {
                 macd, macb, anhkh, videogt, ngaydang,
                 sohs, mar1, mar2, mar3, mar4, mar5, mar6,
                 gtkh));
+        },
+        updateKhuyenMaiKH: (makhoahoc, tenkhuyenmai, phantramgiam, ngaybatdau, ngayhethan) => {
+            dispatch(action.updateKhuyenMaiKH(makhoahoc, tenkhuyenmai, phantramgiam, ngaybatdau, ngayhethan));
         }
     }
 }
