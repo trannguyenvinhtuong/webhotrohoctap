@@ -44,8 +44,9 @@ class Nguoidung extends Component {
           {logg === null ? <Redirect from='/nguoidung/quantritk' to='/nguoidung' /> : ''}
           {logg === null ? <Redirect from='/nguoidung/khoahoc' to='/nguoidung' /> : ''}
           {logg === null ? <Redirect from='/nguoidung/tailieu' to='/nguoidung' /> : ''}
-          {logg === null ? <Redirect from='/nguoidung/kichhoat' to='/dangnhap' /> : ''}
-          {logg === null ? <Redirect from='/nguoidung/giohang' to='/dangnhap' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/kichhoat' to='/nguoidung/dangnhap' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/giohang' to='/nguoidung/dangnhap' /> : ''}
+          {logg === null ? <Redirect from='/nguoidung/dangkygiangvien' to='/nguoidung/dangnhap' /> : ''}
           {this.showContentMenu(routesND)}
         </Switch>
         <Footer />

@@ -4,7 +4,8 @@ class Dashboard extends Component{
     render() {
         return (
             <div>
-                Hello
+                <br />
+                <h2 style={{textAlign: 'center'}}>Xin chào</h2>
             </div>
         );
     }

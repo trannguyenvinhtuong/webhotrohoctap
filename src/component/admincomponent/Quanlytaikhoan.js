@@ -1,13 +1,13 @@
 import { Component } from "react";
+import {Table,Modal,Select} from "antd";
+import * as action from "./../../actions/index";
 import { connect } from "react-redux";
-import * as action from './../../actions/index';
-import { Table, Modal, Select } from 'antd';
 import Swal from "sweetalert2";
 import Dashboard from "./Dashboard";
 
 const { Option } = Select;
 
-class Quanlygiangvien extends Component {
+class Quanlytaikhoan extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -16,8 +16,8 @@ class Quanlygiangvien extends Component {
         }
     }
 
-    componentDidMount() {
-        this.props.requestGiangVien();
+    componentDidMount(){
+        this.props.requestAllKhachHang();
     }
 
     showTrangThai = (data) => {
@@ -27,29 +27,27 @@ class Quanlygiangvien extends Component {
                 rs = <p className="table-p">Hoạt động</p>;
             }
             else if (data == '1') {
-                rs = <p className="table-p">Đang bị đình chỉ</p>
-            }
-            else if (data == '-1') {
-                rs = <p className="table-p">Đang chờ xác nhận</p>
+                rs = <p className="table-p">Đang bị khoá</p>
             }
         }
         return rs;
     }
 
-    onChangeTT = (magv, tt) => {
+    onChangeTT = (makh, tt) => {
         this.setState({
             showChangeForm: true,
             trangthai: tt
         });
-        sessionStorage.removeItem('updategv');
-        sessionStorage.setItem('updategv', JSON.stringify({ 'update': magv }));
+        sessionStorage.removeItem('updatekh');
+        sessionStorage.setItem('updatekh', JSON.stringify({ 'update': makh }));
     }
 
+    
     handleOk = () => {
         var { trangthai } = this.state;
-        var up = JSON.parse(sessionStorage.getItem('updategv'));
-        var magv = up.update;
-        if (magv) {
+        var up = JSON.parse(sessionStorage.getItem('updatekh'));
+        var makh = up.update;
+        if (makh) {
             Swal.fire({
                 title: 'Bạn có chắc chắn?',
                 text: "Bạn không thể phục hồi dữ liệu!",
@@ -60,7 +58,7 @@ class Quanlygiangvien extends Component {
                 confirmButtonText: 'Yes!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.props.updateTTGV(magv,trangthai);
+                    this.props.updateTTKH(makh,trangthai);
                     Swal.fire(
                         'Thành công!',
                         'Thông tin đã được cập nhật.',
@@ -86,14 +84,15 @@ class Quanlygiangvien extends Component {
     }
 
     render() {
-        var { giangvien } = this.props;
-        const column = [
+        var {khachhang} = this.props;
+        var {showChangeForm,trangthai} = this.state;
+        const columns = [
             {
-                title: 'Mã giảng viên',
-                render: (record) => <p className="table-p">{record.MaGV}</p>
+                title: 'Mã khách hàng',
+                render: (record) => <p className="table-p">{record.MaKH}</p>
             },
             {
-                title: 'Tên giảng viên',
+                title: 'Tên khách hàng',
                 render: (record) => <p className="table-p">{record.TenKH}</p>
             },
             {
@@ -101,26 +100,29 @@ class Quanlygiangvien extends Component {
                 render: (record) => <img className="img-table" src={record.AnhDaiDien} />
             },
             {
-                title: 'Trình độ',
-                render: (record) => <p className="table-p">{record.TrinhDo} {record.ChuyenNganh}</p>
+                title: 'SDT',
+                render: (record) => <p className="table-p">{record.SDT}</p>
             },
             {
-                title: 'Kinh nghiệm',
-                render: (record) => <p className="table-p">{record.KinhNghiem} năm</p>
+                title: 'Địa chỉ',
+                render: (record) => <p className="table-p">{record.DiaChi}</p>
+            },
+            {
+                title: 'Email',
+                render: (record) => <p className="table-p">{record.Email}</p>
             },
             {
                 title: 'Trạng thái',
-                render: (record) => this.showTrangThai(record.TrangThai)
+                render: (record) => this.showTrangThai(record.TrangThaiTK)
             },
             {
                 title: '',
-                render: (record) => <a onClick={() => this.onChangeTT(record.MaGV,record.TrangThai)}><button className="btn btn-danger">Chỉnh sửa</button></a>
+                render: (record) => <a onClick={() => this.onChangeTT(record.MaKH,record.TrangThaiTK)}><button className="btn btn-danger">Chỉnh sửa</button></a>
             }
         ]
-        var { showChangeForm, trangthai } = this.state;
         return (
             <div>
-                <Table dataSource={giangvien} columns={column} rowKey="MaGV" />
+                <Table dataSource={khachhang} columns={columns} rowKey="MaKH" />
                 {/* Modal  */}
                 <Modal title="Sửa trạng thái" visible={showChangeForm} onOk={this.handleOk} onCancel={this.handleCancel}>
                     <label>Trạng thái</label>
@@ -128,8 +130,7 @@ class Quanlygiangvien extends Component {
                     <br />
                     <Select defaultValue={trangthai} style={{ width: '100%' }} onChange={this.handleChange}>
                         <Option value="0">Hoạt động</Option>
-                        <Option value="1">Bị đình chỉ</Option>
-                        <Option value="-1">Chờ xét duyệt</Option>
+                        <Option value="1">Khoá tài khoản</Option>
                     </Select>
                 </Modal>
             </div>
@@ -137,19 +138,19 @@ class Quanlygiangvien extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        giangvien: state.getgiangvien
+const mapStateToProps = (state) =>{
+    return{
+        khachhang: state.getallkh
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        requestGiangVien: () => {
-            dispatch(action.requestGiangVien());
+const mapDispatchToProps = (dispatch,props) =>{
+    return{
+        requestAllKhachHang: () =>{
+            dispatch(action.requestAllKhachHang());
         },
-        updateTTGV: (magv,trangthai) =>{
-            dispatch(action.updateTTGV(magv,trangthai));
+        updateTTKH: (makh,trangthai) =>{
+            dispatch(action.updateTTKH(makh,trangthai));
         },
         togglePageAdmin: (page) =>{
             dispatch(action.togglePageAdmin(page));
@@ -157,5 +158,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Quanlygiangvien);
+export default connect(mapStateToProps,mapDispatchToProps)(Quanlytaikhoan);

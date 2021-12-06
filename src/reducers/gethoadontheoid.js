@@ -4,7 +4,7 @@ var initialState = [];
 
 var myReducer = (state = initialState, action) =>{
     switch(action.type){
-        case type.GET_HOADON:
+        case type.GET_HOADON_THEOID:
             state = action.hoadon;            
             return [...state];  
         default:

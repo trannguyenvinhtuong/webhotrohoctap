@@ -35,12 +35,22 @@ class Dangnhap extends Component {
             var rs = false;
             khachhang.map((kh) => {
                 if (kh.TaiKhoan == this.state.tendn && kh.MatKhau == this.state.matkhau) {
-                    localStorage.setItem('user', JSON.stringify({
-                        trangthai: 'logged',
-                        makh: khachhang.MaKH === undefined ? kh.MaKH : khachhang.MaKH
-                    }));
-                    rs = true;
-                    window.location.reload();
+                    if(kh.TrangThaiTK == '0'){
+                        localStorage.setItem('user', JSON.stringify({
+                            trangthai: 'logged',
+                            makh: khachhang.MaKH === undefined ? kh.MaKH : khachhang.MaKH
+                        }));
+                        rs = true;
+                        window.location.reload();
+                    }
+                    else if(kh.TrangThaiTK == '1'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Tài khoản của bạn đã bị khoá, liên hệ admin để biết thêm chi tiết!'
+                        });
+                        rs = true;
+                    }                    
                 }
             });
             if (rs === false) {
@@ -49,7 +59,6 @@ class Dangnhap extends Component {
                     title: 'Oops...',
                     text: 'Sai tên đăng nhập hoặc mật khẩu!'
                 });
-
             }
         }
         else {

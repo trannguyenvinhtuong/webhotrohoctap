@@ -4,6 +4,12 @@ import * as action from './../../../actions/index';
 import { connect } from "react-redux";
 import Dashboard from "../Dashboard";
 import Quanlygiangvien from './../Quanlygiangvien';
+import Quanlytaikhoan from "../Quanlytaikhoan";
+import Quanlykhoahoc from "../Quanlykhoahoc";
+import Quanlytailieu from "../Quanlytailieu";
+import Quanlydethi from "../Quanlydethi";
+import Quanlymakichhoat from "../Quanlymakichhoat";
+import Quanlyhoadon from "../Quanlyhoadon";
 
 class Sidenav extends Component {
     togglePageAdmin = (page) =>{
@@ -25,16 +31,34 @@ class Sidenav extends Component {
                         Quản lý giảng viên
                     </button>
                 </a>
-                <a href="#">
+                <a onClick={()=>this.togglePageAdmin(<Quanlytaikhoan />)}>
+                    <button>
+                        <i className="fas fa-users"></i>
+                        Quản lý tài khoản 
+                    </button>
+                </a>
+                <a onClick={()=>this.togglePageAdmin(<Quanlykhoahoc />)}>
                     <button>
                         <i className="fas fa-graduation-cap"></i>
                         Quản lý khoá học
                     </button>
                 </a>
-                <a href="#">
+                <a onClick={()=>this.togglePageAdmin(<Quanlymakichhoat />)}>
+                    <button>
+                        <i className="fas fa-chess-board"></i>
+                        Quản lý mã kích hoạt
+                    </button>
+                </a>       
+                <a onClick={()=>this.togglePageAdmin(<Quanlytailieu />)}>
                     <button>
                         <i className="fas fa-file-word"></i>
                         Quản lý tài liệu
+                    </button>
+                </a>
+                <a onClick={()=>this.togglePageAdmin(<Quanlydethi />)}>
+                    <button>
+                        <i className="fas fa-diagnoses"></i>
+                        Quản lý đề thi 
                     </button>
                 </a>
                 <a href="#">
@@ -42,7 +66,13 @@ class Sidenav extends Component {
                         <i className="fas fa-star"></i>
                         Quản lý điểm 
                     </button>
-                </a>
+                </a>    
+                <a onClick={()=>this.togglePageAdmin(<Quanlyhoadon />)}>
+                    <button>
+                        <i className="fas fa-shopping-cart"></i>
+                        Quản lý đơn hàng
+                    </button>
+                </a>                
             </div>
         );
     }

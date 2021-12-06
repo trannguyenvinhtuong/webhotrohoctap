@@ -809,6 +809,45 @@ export const requestHoaDon = (idkh) => {
     }
 }
 
+export const requestAllHoaDon = () => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/gethoadon',
+            data: null
+        }).then(res => {
+            if (res.data) {
+                dispatch(getHoaDon(res.data));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getHoaDonTheoID = (hoadon) => {
+    return {
+        type: type.GET_HOADON_THEOID,
+        hoadon
+    }
+}
+
+export const requestHoaDonTheoID = (idhd) => {
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/gethoadon?idhoadon='+idhd,
+            data: null
+        }).then(res => {
+            if (res.data) {
+                dispatch(getHoaDonTheoID(res.data));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
 export const updateKhachHang = (makh, tenkh, sdt, diachi, email) => {
     return (dispatch) => {
         return axios({
@@ -997,5 +1036,75 @@ export const togglePageAdmin = (page) =>{
     return{
         type: type.TOGGLE_PAGE_ADMIN,
         page
+    }
+}
+
+export const updateTTGV = (magv,trangthai) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/updatettgv?magv='+magv+'&trangthai='+trangthai,
+            data: null
+        }).then(res => {
+            console.log("ok");
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const updateTTKH = (makh,trangthai) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/updatettkh?makh='+makh+'&trangthai='+trangthai,
+            data: null
+        }).then(res => {
+            console.log("ok");
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const updateMaKichHoat = (id,trangthai) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/updatemakichhoat?id='+id+'&trangthai='+trangthai,
+            data: null
+        }).then(res => {
+            console.log("ok");
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const insertMaKichHoat = (makhoahoc,makichhoat) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/insertmakichhoat?makhoahoc='+makhoahoc+'&makichhoat='+makichhoat,
+            data: null
+        }).then(res => {
+            console.log("ok");
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const updateTTHD = (mahd,trangthai) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/updatetthd?mahd='+mahd+'&trangthai='+trangthai,
+            data: null
+        }).then(res => {
+            console.log("ok");
+        }).catch(error => {
+            console.log(error);
+        })
     }
 }

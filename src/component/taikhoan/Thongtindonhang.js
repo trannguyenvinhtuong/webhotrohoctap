@@ -16,6 +16,26 @@ class Thongtindonhang extends Component{
         var idkh = user.makh;
         this.props.requestHoaDon(idkh);
     }
+
+    showTrangThai = (data) => {
+        var rs = null;
+        if (data) {
+            if (data == '0') {
+                rs = <p className="table-p">Đang chờ xử lý</p>;
+            }
+            else if (data == '1') {
+                rs = <p className="table-p">Đang giao hàng</p>
+            }
+            else if (data == '2') {
+                rs = <p className="table-p">Giao thành công</p>
+            }
+            else if (data == '-1') {
+                rs = <p className="table-p">Đơn hàng đã huỷ</p>
+            }
+        }
+        return rs;
+    }
+
     render() {
         var {gethoadon} = this.props;
         console.log(gethoadon);
@@ -43,6 +63,10 @@ class Thongtindonhang extends Component{
             {
                 title: 'Ngày đặt',
                 render: (record) => <p>{record.NgayDat}</p>
+            },
+            {
+                title: 'Trạng thái',
+                render: (record) => this.showTrangThai(record.TrangThaiHD)
             }
         ]
         return (
