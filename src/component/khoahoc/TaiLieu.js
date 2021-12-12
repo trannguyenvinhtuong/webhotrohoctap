@@ -55,7 +55,7 @@ class TaiLieu extends Component{
 
     render() {
         var {toogletailieu, tentailieu} = this.props;
-        console.log(tentailieu);
+        
         return (
             <Row>
                 <Col span={toogletailieu === true ? 24 : "0"}>

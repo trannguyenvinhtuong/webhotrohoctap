@@ -15,7 +15,16 @@ class Khoahoc extends Component {
         this.props.requestALLKMKH();
     }
 
-    showContent = (data, km) => {
+    showContent = (datainput, km) => {
+        var data = [];
+        if(datainput.length < 7){
+            data = datainput;
+        }
+        else if(datainput > 6){
+            for(let i =0; i<6;i++){
+                data.push(datainput[i]);
+            }
+        }
         var rs = null;
         if (data) {
             rs = data.map((da, index) => {

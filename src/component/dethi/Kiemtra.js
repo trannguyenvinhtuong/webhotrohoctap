@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
 import * as action from './../../actions/index';
-import { Radio, Space } from 'antd';
+import { Radio, Space, Checkbox } from 'antd';
 import './../../SASS/khoahoc.sass';
 import Swal from "sweetalert2";
 import { withRouter } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { ref, child, get } from "firebase/database";
 class Kiemtra extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = {           
             cautraloi: [],
             dapan: [],
             socaudung: 0,
@@ -47,13 +47,45 @@ class Kiemtra extends Component {
     addDapAn = (de) => {
         var dapan = [];
         if (de) {
-            de.map((d) => {
-                dapan.push(d.dapan);
+            de.map((d,index) => {
+                if(d.dapan.length <= 1){
+                    dapan.push({'id':index,'dapan':d.dapan,'tong':'1'});                    
+                }
+                else if(d.dapan.length == 3){
+                    let da = [];
+                    let dapan1 = d.dapan.slice(0,1);
+                    let dapan2 = d.dapan.slice(2,3);
+                    da.push(dapan1);
+                    da.push(dapan2);
+                    dapan.push({'id':index,'dapan':da,'tong':'2'});                    
+                }
+                else if(d.dapan.length == 5){
+                    let da = [];
+                    let dapan1 = d.dapan.slice(0,1);
+                    let dapan2 = d.dapan.slice(2,3);
+                    let dapan3 = d.dapan.slice(4,5);
+                    da.push(dapan1);
+                    da.push(dapan2);
+                    da.push(dapan3);
+                    dapan.push({'id':index,'dapan':da,'tong':'3'});
+                }
+                else if(d.dapan.length == 7){
+                    let da = [];
+                    let dapan1 = d.dapan.slice(0,1);
+                    let dapan2 = d.dapan.slice(2,3);
+                    let dapan3 = d.dapan.slice(4,5);
+                    let dapan4 = d.dapan.slice(6,7);
+                    da.push(dapan1);
+                    da.push(dapan2);
+                    da.push(dapan3);
+                    da.push(dapan4);
+                    dapan.push({'id':index,'dapan':da,'tong':'4'});
+                }
             });
         }
         this.setState({
             dapan: dapan
-        })
+        });
     }
 
     onSubmit = () => {
@@ -69,9 +101,8 @@ class Kiemtra extends Component {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-            if (result.isConfirmed) {
-                var { dapan, cautraloi } = this.state;
-                this.kiemTraKetQua(dapan, cautraloi);
+            if (result.isConfirmed) {                
+                this.kiemTraKetQua();
                 Swal.fire(
                     'Nộp bài!',
                     'Bài của bạn đã nộp thành công.',
@@ -86,19 +117,23 @@ class Kiemtra extends Component {
     showCauHoi = (data) => {
         var rs = null;
         if (data) {
-            rs = data.map((da, index) => {
-                var ham = 'onChange' + index;
+            rs = data.map((da, index) => {              
                 return (
                     <div className="kiemtra">
                         <h3>Câu {(index + 1)}: {da.cauhoi}</h3>
-                        <Radio.Group key={index} onChange={e => this.onChange(e.target.value, index)}>
+                        {/* <Radio.Group key={index} onChange={e => this.onChange(e.target.value, index)}>
                             <Space direction="vertical">
                                 <Radio value={1}>A  {da.A}</Radio>
                                 <Radio value={2}>B  {da.B}</Radio>
                                 <Radio value={3}>C  {da.C}</Radio>
                                 <Radio value={4}>D  {da.D}</Radio>
                             </Space>
-                        </Radio.Group>
+                        </Radio.Group> */}
+                        {/* <Checkbox.Group options={plainOptions} onChange={e => this.onChange(e.target.checked,index)} /> */}
+                        <Checkbox onChange={e => this.onChange(e.target.checked, index, 'A')}>A  {da.A}</Checkbox>
+                        <Checkbox onChange={e => this.onChange(e.target.checked, index, 'B')}>B  {da.B}</Checkbox>
+                        <Checkbox onChange={e => this.onChange(e.target.checked, index, 'C')}>C  {da.C}</Checkbox>
+                        <Checkbox onChange={e => this.onChange(e.target.checked, index, 'D')}>D  {da.D}</Checkbox>
                     </div>
                 )
             })
@@ -106,55 +141,185 @@ class Kiemtra extends Component {
         return rs;
     }
 
-    onChange = (value, id) => {
+    onChange = (value, id, dapan) => {        
         var { cautraloi } = this.state;
-        if (value === 1) {
-            cautraloi.push({ 'id': id, 'dapan': 'A' });
-        }
-        else if (value === 2) {
-            cautraloi.push({ 'id': id, 'dapan': 'B' });
-        }
-        else if (value === 3) {
-            cautraloi.push({ 'id': id, 'dapan': 'C' });
-        }
-        else {
-            cautraloi.push({ 'id': id, 'dapan': 'D' });
+        if(value === true){
+            var res = false;
+            // push vo cai cu 
+            if(cautraloi.length > 0){
+                cautraloi.map((ctr,index)=>{
+                    if(ctr.id == id){
+                        cautraloi.splice(index,1);
+                        var da = ctr.dapan;
+                        var newda = [];
+                        if(da.length > 1){
+                            da.map((d)=>{
+                                newda.push(d);
+                            });
+                        }
+                        else{
+                            newda.push(da);
+                        }                    
+                        newda.push(dapan);
+                        cautraloi.push({ 'id': id, 'dapan': newda });
+                        res = true;
+                    }                
+                })
+            }
+            // push moi 
+            if(res == false){
+                var da = cautraloi;
+                da.push({ 'id': id, 'dapan': dapan.toString() });
+                
+            }
 
+        } 
+        else if(value ===  false){
+            cautraloi.map((ctl,index)=>{
+                if(ctl.id == id ){
+                    var cau = [];
+                    cau = ctl.dapan;
+                    if(cau.length > 1){
+                        var ct = cau.indexOf(dapan);
+                        cau.splice(ct,1);
+                    }
+                    //fix bug
+                    else{
+                        ctl.dapan = [];
+                    }                    
+                }
+            })
         }
         this.setState({
-            cautraloi: cautraloi
+            cautraloi : cautraloi
         })
     }
 
-    kiemTraKetQua = (dapan, cautraloi) => {
+
+    // onChange = (value, id) => {
+    //     var { cautraloi } = this.state;
+    //     if (value === 1) {
+    //         cautraloi.push({ 'id': id, 'dapan': 'A' });
+    //     }
+    //     else if (value === 2) {
+    //         cautraloi.push({ 'id': id, 'dapan': 'B' });
+    //     }
+    //     else if (value === 3) {
+    //         cautraloi.push({ 'id': id, 'dapan': 'C' });
+    //     }
+    //     else {
+    //         cautraloi.push({ 'id': id, 'dapan': 'D' });
+
+    //     }
+    //     this.setState({
+    //         cautraloi: cautraloi
+    //     })
+    // }
+
+    kiemTraKetQua = () => {
+        var { dapan, cautraloi } = this.state;
         var socaudung = 0;
         var socausai = 0;
+        
         for (let i = 0; i < 10; i++) {
             cautraloi.forEach(element => {
-                if (element.id == i) {
-                    if (element.dapan == dapan[i]) {
-                        socaudung++;
+                if (element.id == dapan[i].id) {
+                    if (element.dapan.length == dapan[i].tong) {
+                        if(dapan[i].dapan.length <= 1){
+                            if(element.dapan==dapan[i].dapan){
+                                socaudung++;
+                            }
+                            else{
+                                socausai++;
+                            }
+                        }
+                        else if(dapan[i].dapan.length == 2){
+                            let da = dapan[i].dapan;
+                            let ele =  element.dapan;
+                            let tt = dapan[i].tong;
+                            let dem = 0;
+                            if(da[0]==ele[0]){
+                                dem++;
+                            }
+                            if(da[1]==ele[1]){
+                                dem++;
+                            }
+                            if(dem == tt){
+                                socaudung++;
+                            }
+                            else{
+                                socausai++;
+                            }
+                        }
+                        else if(dapan[i].dapan.length == 3){
+                            let da = dapan[i].dapan;
+                            let ele =  element.dapan;
+                            let tt = dapan[i].tong;
+                            let dem = 0;
+                            if(da[0]==ele[0]){
+                                dem++;
+                            }
+                            if(da[1]==ele[1]){
+                                dem++;
+                            }
+                            if(da[2]==ele[2]){
+                                dem++;
+                            }
+                            if(dem == tt){
+                                socaudung++;
+                            }
+                            else{
+                                socausai++;
+                            }
+                        }
+                        else if(dapan[i].dapan.length == 4){
+                            let da = dapan[i].dapan;
+                            let ele =  element.dapan;
+                            let tt = dapan[i].tong;
+                            let dem = 0;
+                            if(da[0]==ele[0]){
+                                dem++;
+                            }
+                            if(da[1]==ele[1]){
+                                dem++;
+                            }
+                            if(da[2]==ele[2]){
+                                dem++;
+                            }
+                            if(da[3]==ele[3]){
+                                dem++;
+                            }
+                            if(dem == tt){
+                                socaudung++;
+                            }
+                            else{
+                                socausai++;
+                            }
+                        }
                     }
-                    else {
+                    else if(element.dapan.length != dapan[i].tong) {
                         socausai++;
+                        console.log("sai");
                     }
                 }
             });
         }
         this.setState({
-            socaudung: socaudung,
+            socaudung: socaudung,   
             socausai: socausai
         });
     }
 
     tinhDiem = () => {
-        var { socaudung,made,ten } = this.state;
+        var { socaudung, socausai, made, ten } = this.state;
         var iSocaudung = parseInt(socaudung);
         var diem = iSocaudung * 0.5;
-        sessionStorage.setItem('diem', JSON.stringify({ 'diem': diem }));
+        sessionStorage.setItem('diem', JSON.stringify({ 'diem': diem, 'socaudung': socaudung, 'socausai': socausai, 'made': made }));
         var user = JSON.parse(localStorage.getItem('user'));
         var makh = user.makh;
-        this.props.insertKetQua(makh,made,diem,ten);
+        var date = new Date();
+        var ngaylambai = date.getDate() + '-' + (date.getMonth()+1) + '-' + date.getFullYear();
+        this.props.insertKetQua(makh, made, diem, ten, ngaylambai);
         this.props.history.push('/nguoidung/hoanthanhkiemtra');
     }
 
@@ -238,8 +403,8 @@ const mapDispatchToProps = (dispatch, props) => {
         getdekiemtra: (dekt) => {
             dispatch(action.getDeKiemTra(dekt));
         },
-        insertKetQua: (makh,made,diem,tende) =>{
-            dispatch(action.insertKetQua(makh,made,diem,tende));
+        insertKetQua: (makh, made, diem, tende,ngaylambai) => {
+            dispatch(action.insertKetQua(makh, made, diem, tende,ngaylambai));
         }
     }
 }

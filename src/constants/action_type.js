@@ -47,3 +47,4 @@ export const SORT_KH_DATA = 'SORT_KH_DATA';
 export const SORT_TL_DATA = 'SORT_TL_DATA';
 export const TOGGLE_PAGE_ADMIN = 'TOGGLE_PAGE_ADMIN';
 export const GET_HOADON_THEOID = 'GET_HOADON_THEOID';
+export const GET_KETQUA_DE = 'GET_KETQUA_DE';

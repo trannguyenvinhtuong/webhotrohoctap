@@ -11,7 +11,7 @@ class Chude extends Component {
             rs = cd.map((c, index) => {
                 return (
                     <div className="col-4 p-cd" key={index}>
-                        <Link to={`/alldisplay/${c.MaCD}`}>
+                        <Link to={`/nguoidung/alldisplay/${c.MaCD}`}>
                             <div className="chude" style={{ backgroundImage: `url(${c.AnhCD})` }}>
                                 <h3>{c.TenCD}</h3>
                             </div>
@@ -37,7 +37,7 @@ class Chude extends Component {
                     <div className="row">
                         {this.showCD(chude)}
                     </div>
-                    <Link to="/danhmuc" className="xemthem">Xem thêm
+                    <Link to="/nguoidung/danhmuc" className="xemthem">Xem thêm
                         <i className="fas fa-angle-double-right" style={{ color: '#0d6efd' }}></i>
                     </Link>
                 </div>

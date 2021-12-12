@@ -747,11 +747,11 @@ export const onFilterKT = (filter_data) => {
     }
 }
 
-export const insertKetQua = (makh, made, diem, tende) => {
+export const insertKetQua = (makh, made, diem, tende,ngaylambai) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertketqua?makh=' + makh + '&made=' + made + '&diem=' + diem + '&tende=' + tende,
+            url: 'http://localhost/backendAPI/api/insertketqua?makh=' + makh + '&made=' + made + '&diem=' + diem + '&tende=' + tende + '&ngaylambai='+ngaylambai,
             data: null
         }).then(res => {
             if (res.data) {
@@ -1106,5 +1106,28 @@ export const updateTTHD = (mahd,trangthai) =>{
         }).catch(error => {
             console.log(error);
         })
+    }
+}
+
+export const requestKetQuaThi = (iddethi) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getketqua?iddethi=' + iddethi,
+            data: null
+        }).then(res => {
+            if(res.data){
+                dispatch(getKetQuaTheoDe(res.data));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
+export const getKetQuaTheoDe = (ketqua) =>{
+    return{
+        type: type.GET_KETQUA_DE,
+        ketqua
     }
 }

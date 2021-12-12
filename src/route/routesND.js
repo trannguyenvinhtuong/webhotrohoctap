@@ -22,6 +22,7 @@ import Kiemtra from '../component/dethi/Kiemtra';
 import Hoanthanh from '../component/dethi/Hoanthanh';
 import Dangky from './../component/dangnhap/Dangky';
 import Dangkygiangvien from './../component/dangky/Dangkygiangvien';
+import Xemdapan from '../component/dethi/Xemdapan';
 
 const routesND = [
     {
@@ -123,6 +124,11 @@ const routesND = [
         path: '/nguoidung/kiemtra/:idkt',
         exact: false,
         main: (match) => <Kiemtra match={match} />
+    },
+    {
+        path: '/nguoidung/xemdapan/:idkt',
+        exact: false,
+        main: (match) => <Xemdapan match={match} />
     },
     {
         path: '/nguoidung/hoanthanhkiemtra',

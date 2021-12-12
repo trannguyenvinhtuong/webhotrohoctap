@@ -10,6 +10,7 @@ import Quanlytailieu from "../Quanlytailieu";
 import Quanlydethi from "../Quanlydethi";
 import Quanlymakichhoat from "../Quanlymakichhoat";
 import Quanlyhoadon from "../Quanlyhoadon";
+import Quanlydiem from "../Quanlydiem";
 
 class Sidenav extends Component {
     togglePageAdmin = (page) =>{
@@ -61,7 +62,7 @@ class Sidenav extends Component {
                         Quản lý đề thi 
                     </button>
                 </a>
-                <a href="#">
+                <a onClick={()=>this.togglePageAdmin(<Quanlydiem />)}>
                     <button>
                         <i className="fas fa-star"></i>
                         Quản lý điểm 

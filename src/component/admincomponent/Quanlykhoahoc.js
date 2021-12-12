@@ -19,8 +19,8 @@ class Quanlykhoahoc extends Component{
         this.props.togglePageAdmin(page);
         sessionStorage.removeItem('idkhoahoc');
         sessionStorage.setItem('idkhoahoc',JSON.stringify({id: idkhoahoc}));
-        // sessionStorage.removeItem('magv');
-        // sessionStorage.setItem('magv',JSON.stringify({id: magv}));
+        sessionStorage.removeItem('magv');
+        sessionStorage.setItem('magv',JSON.stringify({id: magv}));
     }
 
     render() {

@@ -40,6 +40,7 @@ class Kichhoat extends Component {
     onCheckMa = () => {
         var { makichhoat } = this.state;
         var { khoahoc } = this.props;
+        console.log(khoahoc);
         var data = []
         khoahoc.map((kh, index) => {
             if (kh.MaKichHoat == makichhoat) {

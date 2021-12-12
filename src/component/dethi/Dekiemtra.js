@@ -118,6 +118,7 @@ class Dekiemtra extends Component{
                 })
             }
         }
+        console.log(dethi);
         return (           
             <div style={{marginTop: '4.7rem'}} className="alldisplaydekiemtra">                
                 <Tab />

@@ -80,6 +80,10 @@ class Detailhoadon extends Component{
         var {hoadon} = this.props;
         const columns = [
             {
+                title: 'Ảnh khoá học',
+                render: (record) => <img src={record.AnhKhoaHoc} />
+            },
+            {
                 title: 'Tên khoá học',
                 render: (record) => <p className="table-p">{record.TenKhoaHoc}</p>
             },
@@ -94,7 +98,7 @@ class Detailhoadon extends Component{
         ]
         var {showChangeForm,trangthai} = this.state;
         return (
-            <div>
+            <div className="giangvien-khoahoc">
                 <a onClick={this.showChangeForm}>
                     <button className="giangvien-khbtn">Thay đổi trạng thái đơn hàng</button>
                 </a>

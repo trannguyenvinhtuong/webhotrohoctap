@@ -4,11 +4,11 @@ import { ref, child, get, remove } from "firebase/database";
 import * as action from "./../../actions/index";
 import { connect } from "react-redux";
 import { Table } from 'antd';
-import Detaildethi from "./Detaildethi";
+import Detaildiem from "./Detaildiem";
 import Swal from "sweetalert2";
 import Dashboard from './Dashboard';
 
-class Quanlydethi extends Component {
+class Quanlydiem extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -110,7 +110,7 @@ class Quanlydethi extends Component {
             },
             {
                 title: 'Tên đề',
-                render: (record) => <a className="table-p" onClick={() => this.onClick(<Detaildethi />, record.ma)}>{record.ten}</a>
+                render: (record) => <a className="table-p" onClick={() => this.onClick(<Detaildiem />, record.ma)}>{record.ten}</a>
             },
             {
                 title: 'Chủ đề',
@@ -119,11 +119,7 @@ class Quanlydethi extends Component {
             {
                 title: 'Cấp bậc',
                 render: (record) => this.showCapBac(record.macb)
-            },
-            {
-                title: '',
-                render: (record) => <a className="table-p" onClick={() => this.onDeleteDe(record.ma)}><button className="btn btn-danger">Xoá</button></a>
-            }
+            }            
         ];
         return (
             <div className="giangvien-khoahoc">
@@ -158,4 +154,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quanlydethi);
+export default connect(mapStateToProps, mapDispatchToProps)(Quanlydiem);

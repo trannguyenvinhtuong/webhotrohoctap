@@ -58,7 +58,6 @@ class Khoahoc extends Component {
         });
     }
 
-
     render() {
         const columns = [
             {
@@ -87,8 +86,8 @@ class Khoahoc extends Component {
                             <br />
                             <h2>Bài kiểm tra</h2>
                             <Link style={{ color: 'blue', textTransform: 'none' }} to="/nguoidung/alldisplaydethi">Xem đề kiểm tra <i className="fas fa-caret-down"></i></Link>
-
                             <br />
+                            
                             <br />
                             <div className="detail-gioithieu" style={{ borderRadius: '3px' }}>
                                 <h1>{khoahoc.TenKhoaHoc === undefined ? kh.TenKhoaHoc : khoahoc.TenKhoaHoc}</h1>
