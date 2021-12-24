@@ -65,18 +65,20 @@ class Detaildiem extends Component {
                 })
             }
             else if (sort == 'moi') {
-                ketqua.sort((a, b) => {
-                    if (new Date(a.NgayLamBai) > new Date(b.NgayLamBai)) return -1;
-                    else if (new Date(a.NgayLamBai) < new Date(b.NgayLamBai)) return 1;
-                    else return 0;
-                })
+                // ketqua.sort((a, b) => {
+                //     if (new Date(a.NgayLamBai) < new Date(b.NgayLamBai)) return 1;
+                //     else if (new Date(a.NgayLamBai) > new Date(b.NgayLamBai)) return -1;
+                //     else return 0;
+                // })
+                ketqua.sort((a, b) => new Date(...a.NgayLamBai.split('-').reverse()) - new Date(...b.NgayLamBai.split('-').reverse())).reverse();
             }
             else if (sort == 'cu') {
-                ketqua.sort((a, b) => {
-                    if (new Date(a.NgayLamBai) > new Date(b.NgayLamBai)) return 1;
-                    else if (new Date(a.NgayLamBai) < new Date(b.NgayLamBai)) return -1;
-                    else return 0;
-                })
+                // ketqua.sort((a, b) => {
+                //     if (new Date(a.NgayLamBai) > new Date(b.NgayLamBai)) return 1;
+                //     else if (new Date(a.NgayLamBai) < new Date(b.NgayLamBai)) return -1;
+                //     else return 0;
+                // })
+                ketqua.sort((a, b) => new Date(...a.NgayLamBai.split('-').reverse()) - new Date(...b.NgayLamBai.split('-').reverse()));
             }
         }
         const columns = [

@@ -97,22 +97,39 @@ class Themtailieu extends Component {
         var { tentl, mota, macb, macd, anhtl, demo, sotrang, link, giatl } = this.state;
         var idgv = JSON.parse(sessionStorage.getItem('magv'));
         var magv = idgv.id;
-        var ngaydang = null;
         var date = new Date();
+        
+        if(anhtl){
+            anhtl = this.getId(anhtl);
+        }
+        console.log(anhtl.toString());
+        if(demo){
+            let id = this.getId(demo);
+            demo = "https://drive.google.com/file/d/"+id+"/preview";
+        }
+        if(link){
+            let id = this.getId(link);
+            link = "https://drive.google.com/file/d/"+id+"/preview";
+        }
+       
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         this.props.insertTaiLieu(tentl, mota, magv, macb, macd, anhtl, giatl, demo, sotrang, ngaydang, link)
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Lưu thành công',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        window.location.reload();
+        // Swal.fire({
+        //     position: 'top-end',
+        //     icon: 'success',
+        //     title: 'Lưu thành công',
+        //     showConfirmButton: false,
+        //     timer: 1500
+        // });
+        // window.location.reload();
     }
 
     onCancel = () =>{
         window.location.reload();
+    }
+
+    getId = (url) => {
+        return url.match(/[-\w]{25,}/);
     }
 
     render() {

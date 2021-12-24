@@ -23,6 +23,8 @@ import Hoanthanh from '../component/dethi/Hoanthanh';
 import Dangky from './../component/dangnhap/Dangky';
 import Dangkygiangvien from './../component/dangky/Dangkygiangvien';
 import Xemdapan from '../component/dethi/Xemdapan';
+import Searchpage from '../component/master/search/Searchpage';
+import Bangxephang from '../component/dethi/Bangxephang';
 
 const routesND = [
     {
@@ -144,6 +146,16 @@ const routesND = [
         path: '/nguoidung/dangkygiangvien',
         exact: false,
         main: () => <Dangkygiangvien />
+    },
+    {
+        path: '/nguoidung/searchpage/:keyword',
+        exact: false,
+        main: (match) => <Searchpage match={match} />
+    },
+    {
+        path: '/nguoidung/bangxephang/:iddethi',
+        exact: false,
+        main: (match) => <Bangxephang match={match} />
     },
     {
         path: '',

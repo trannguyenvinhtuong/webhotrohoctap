@@ -13,7 +13,7 @@ class Tailieu extends Component{
                 <Gioithieu idtl = {idtl} />
                 <Docpdf idtl = {idtl} />
                 <Tacgia idtl = {idtl} />
-                <Quangcao />
+                {/* <Quangcao /> */}
             </div>
         );
     }

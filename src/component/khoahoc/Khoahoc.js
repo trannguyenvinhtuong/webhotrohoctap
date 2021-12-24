@@ -45,7 +45,7 @@ class Khoahoc extends Component {
     componentDidMount() {
         var match = this.props.match;
         var idkh = match.match.params.idkhoahoc;
-        const dbRef = ref(db);
+        const dbRef = ref(db,"khoahoc");
         get(child(dbRef, idkh)).then((snapshot) => {
             if (snapshot.exists()) {
                 this.props.getVideoKH(snapshot.val());
@@ -76,7 +76,7 @@ class Khoahoc extends Component {
                 <div className="khoahocvideo">
                     <Row>
                         <Col span={18} className="video-kh">
-                            <iframe src={link} width="100%" height="615px" allow="autoplay"></iframe>
+                            <iframe src={link} width="100%" height="615px" allow="autoplay" allowfullscreen="allowfullscreen"></iframe>
                             <h3>{ten}</h3>
                             <br />
                             <h2>Nội dung bài học</h2>

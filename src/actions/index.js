@@ -705,34 +705,35 @@ export const insertTaiLieu = (tentl, mota, magv, macb, macd, anh, giatl, demo, s
         return axios({
             method: 'get',
             url: 'http://localhost/backendAPI/api/inserttailieu?tentl=' + tentl + '&mota=' + mota + '&magv=' + magv +
-                '&macb=' + macb + '&macd=' + macd + '&giatl=' + giatl + '&demo=' + demo + '&sotrang=' + sotrang + '&anh=' + anh + '&ngaydang=' + ngaydang,
+                '&macb=' + macb + '&macd=' + macd + '&giatl=' + giatl + '&demo=' + demo + '&sotrang=' + sotrang + '&anh=' + anh.toString() + '&ngaydang=' + ngaydang + '&link=' + link,
             data: null
         }).then(res => {
             if (res.data) {
-                var matl = res.data;
-                dispatch(insertLuuTruTaiLieu(matl, link));
+                console.log('done');
+                // dispatch(insertLuuTruTaiLieu(matl, link));
             }
         }).catch(error => {
             console.log(error);
         })
     }
+    
 }
 
-export const insertLuuTruTaiLieu = (matl, link) => {
-    return (dispatch) => {
-        return axios({
-            method: 'get',
-            url: 'http://localhost/backendAPI/api/insertluutrutl?matl=' + matl + '&link=' + link,
-            data: null
-        }).then(res => {
-            if (res.data) {
-                console.log("done");
-            }
-        }).catch(error => {
-            console.log(error);
-        })
-    }
-}
+// export const insertLuuTruTaiLieu = (matl, link) => {
+//     return (dispatch) => {
+//         return axios({
+//             method: 'get',
+//             url: 'http://localhost/backendAPI/api/insertluutrutl?matl=' + matl + ,
+//             data: null
+//         }).then(res => {
+//             if (res.data) {
+//                 console.log("done");
+//             }
+//         }).catch(error => {
+//             console.log(error);
+//         })
+//     }
+// }
 
 export const toggleDeKT = () => {
     return {

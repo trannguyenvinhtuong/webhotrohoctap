@@ -9,6 +9,8 @@ import Detailkhoahoc from "./Detailkhoahoc";
 //firebase
 import db from './../../../../config/firebase.config';
 import { ref, child, get, set, remove } from "firebase/database";
+import { ref as ref2, uploadBytes } from "firebase/storage";
+import storage from "../../../../config/firebaseFireStorage";
 
 class Quanlybaigiang extends Component {
     constructor(props) {
@@ -64,11 +66,24 @@ class Quanlybaigiang extends Component {
         });
     }
 
+    getId = (url) => {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
+    }
+
     handleOkThem = () => {
         var khoahoc = JSON.parse(sessionStorage.getItem('idkhoahoc'));
         var idkhoahoc = khoahoc.id;
         var { video } = this.props;
         var { tenbaigiang, luutru, tentailieu } = this.state;
+        if (luutru) {
+            let videoid = this.getId(luutru);
+            luutru = "https://www.youtube.com/embed/" + videoid;
+        }
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -82,24 +97,31 @@ class Quanlybaigiang extends Component {
                 const dbref = ref(db, "khoahoc");
                 const dbref2 = child(dbref, idkhoahoc.toString());
                 var setthem = false;
+
+               
+                const storageRef = ref2(storage, "NoiDungKhoaHoc/"+tentailieu.name);
                 
+                uploadBytes(storageRef, tentailieu).then((snapshot) => {
+                    console.log('Uploaded a blob or file!');
+                });
+
                 for (let i = 0; i < video.length; i++) {
                     if (video[i] == "0") {
                         set(child(dbref2, '0'), {
                             key: i.toString(),
                             link: luutru,
                             ten: tenbaigiang,
-                            tentailieu: tentailieu
+                            tentailieu: tentailieu.name
                         });
                         setthem = true;
                         break;
                     }
-                    if(video[i].ten == 'khongco'){
+                    if (video[i].ten == 'khongco') {
                         set(child(dbref2, i.toString()), {
                             key: i.toString(),
                             link: luutru,
                             ten: tenbaigiang,
-                            tentailieu: tentailieu
+                            tentailieu: tentailieu.name
                         });
                         setthem = true;
                         break;
@@ -110,9 +132,9 @@ class Quanlybaigiang extends Component {
                         key: (video.length).toString(),
                         link: luutru,
                         ten: tenbaigiang,
-                        tentailieu: tentailieu
+                        tentailieu: tentailieu.name
                     });
-                    
+
                 }
                 Swal.fire(
                     'Thêm thành công!',
@@ -132,6 +154,10 @@ class Quanlybaigiang extends Component {
         var idkhoahoc = khoahoc.id;
         var { video } = this.props;
         var { tenbaigiang, luutru, tentailieu } = this.state;
+        if (luutru) {
+            let videoid = this.getId(luutru);
+            luutru = "https://www.youtube.com/embed/" + videoid;
+        }
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -212,17 +238,17 @@ class Quanlybaigiang extends Component {
         var video = this.props.video;
         var hienthi = [];
         hienthi = [...video];
-        hienthi.map((vi,index)=>{
-            if(vi == undefined){
-                hienthi.splice(index,1);
+        hienthi.map((vi, index) => {
+            if (vi == undefined) {
+                hienthi.splice(index, 1);
             }
-            if(vi.ten != undefined){
-                if(vi.ten == 'khongco'){
-                    hienthi.splice(index,1);
+            if (vi.ten != undefined) {
+                if (vi.ten == 'khongco') {
+                    hienthi.splice(index, 1);
                 }
             }
         });
-        
+
         const column = [
             {
                 title: 'Key',
@@ -246,7 +272,7 @@ class Quanlybaigiang extends Component {
             },
             {
                 title: '',
-                render: (record) => <a className="btn btn-danger" onClick={()=>this.onDeleteBG(record.key)}>Xoá</a>
+                render: (record) => <a className="btn btn-danger" onClick={() => this.onDeleteBG(record.key)}>Xoá</a>
             }
         ]
         var { showSua, showThem, tenbaigiang, luutru } = this.state;
@@ -278,7 +304,7 @@ class Quanlybaigiang extends Component {
                             value={luutru}
                             onChange={this.onChange}
                             name="luutru"
-                            placeholder="VD: Tài liệu ..." />
+                            placeholder="VD: Link ..." />
                         <br />
                     </div>
                 </Modal>
@@ -300,7 +326,11 @@ class Quanlybaigiang extends Component {
                             value={luutru}
                             onChange={this.onChange}
                             name="luutru"
-                            placeholder="VD: Tài liệu ..." />
+                            placeholder="VD: Link ..." />
+                        <br />
+                        <label>Tài liệu bài giảng</label>
+                        <br />
+                        <input type="file" onChange={(e) => { this.setState({ tentailieu: e.target.files[0] }) }} />
                         <br />
                     </div>
                 </Modal>

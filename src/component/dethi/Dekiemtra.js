@@ -118,6 +118,13 @@ class Dekiemtra extends Component{
                 })
             }
         }
+
+        dethi.filter((de,index)=>{
+            if(de == "0"){
+                dethi.splice(index,1);
+            }
+        })
+        
         console.log(dethi);
         return (           
             <div style={{marginTop: '4.7rem'}} className="alldisplaydekiemtra">                

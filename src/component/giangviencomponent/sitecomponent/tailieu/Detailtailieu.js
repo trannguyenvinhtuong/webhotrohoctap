@@ -87,6 +87,17 @@ class Detailtailieu extends Component {
             gia, anhtl, filedemo, sotrang,
             link, macb, macd } = this.state;
         var date = new Date();
+        if(anhtl){
+            anhtl = this.getId(anhtl);
+        }
+        if(filedemo){
+            let id = this.getId(filedemo);
+            filedemo = "https://drive.google.com/file/d/"+id+"/preview";
+        }
+        if(link){
+            let id = this.getId(link);
+            link = "https://drive.google.com/file/d/"+id+"/preview";
+        }
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         var { giangvien } = this.props;
         var magv = giangvien[0].MaGV;

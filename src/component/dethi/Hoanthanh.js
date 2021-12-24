@@ -27,7 +27,7 @@ class Hoanthanh extends Component{
                 <Link to="/nguoidung" onClick={this.onClick}>
                     <button className="can-giua hoanthanh-btn btn-primary">Về trang chủ</button>
                 </Link>  
-                <Link to={`/nguoidung/xemdapan/`+ made} onClick={this.onClick}>
+                <Link to="/nguoidung" onClick={this.onClick}>
                     <button className="can-giua hoanthanh-btn btn-success">Xem đáp án</button>
                 </Link> 
                 <br />

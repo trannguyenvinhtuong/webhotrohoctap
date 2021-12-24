@@ -313,7 +313,7 @@ class Kiemtra extends Component {
     tinhDiem = () => {
         var { socaudung, socausai, made, ten } = this.state;
         var iSocaudung = parseInt(socaudung);
-        var diem = iSocaudung * 0.5;
+        var diem = iSocaudung * 1;
         sessionStorage.setItem('diem', JSON.stringify({ 'diem': diem, 'socaudung': socaudung, 'socausai': socausai, 'made': made }));
         var user = JSON.parse(localStorage.getItem('user'));
         var makh = user.makh;

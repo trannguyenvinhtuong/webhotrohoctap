@@ -41,7 +41,7 @@ class Tailieu extends Component {
                                     <div className="col">
                                         <p className="giacu">{formatter.format(da.GiaTL)}</p>
                                         <p className="giamoi">
-                                            {formatter.format((da.GiaTL * (100 - da.PhanTramGiam)) / 100)}
+                                            Miễn phí
                                         </p>
                                     </div>
                                 </div>

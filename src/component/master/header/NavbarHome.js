@@ -2,7 +2,7 @@ import { Component } from "react";
 import './../../../stylecss/Style.css';
 import Logo from './../../../imgs/LOGO_OF_LOGO.svg'
 import Bg from './../../../imgs/background10.jpg'
-import { Route, NavLink, Link } from "react-router-dom";
+import { Route, NavLink, Link, withRouter } from "react-router-dom";
 import './../../../stylecss/userstyle.css';
 
 const menus = [
@@ -39,6 +39,12 @@ const Menulink = ({ label, to, activeOnlyWhenExact }) => {
 
 
 class NavbarHome extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            keytimkiem: ''
+        }
+    }
 
     Showmenu = (menus) => {
         var rs = null;
@@ -56,16 +62,45 @@ class NavbarHome extends Component {
         }
         return rs;
     }
+
+    onChange = (event) => {
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    onSubmitSearch = (e) =>{
+        e.preventDefault();
+        var {keytimkiem} = this.state;
+        if(keytimkiem != ''){
+            this.props.history.push('/nguoidung/searchpage/'+keytimkiem);
+        }
+        else{
+            this.props.history.push('/nguoidung/searchpage/0');
+        }
+        
+    }
+
     render() {
         var logg = localStorage.getItem('user');
+        var {keytimkiem} = this.state;
         return (
             <header style={{ backgroundImage: `url(${Bg})` }}>
                 <Link to='/nguoidung' exact='true'>
                     <img src={Logo} />
                 </Link>
                 <div className="search">
-                    <input type="text" placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
-                    <a href="#"><i className="fas fa-search"></i></a>
+                    <form onSubmit={this.onSubmitSearch}>
+                        <input type="text"
+                                onChange={this.onChange}
+                                name="keytimkiem"
+                                value={keytimkiem}
+                                placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
+                        <a onClick={this.onSubmitSearch}><i className="fas fa-search"></i></a>
+                    </form>                                     
                 </div>
                 <nav>
                     {this.Showmenu(menus)}
@@ -125,4 +160,4 @@ class NavbarHome extends Component {
     }
 }
 
-export default NavbarHome;
+export default withRouter(NavbarHome);

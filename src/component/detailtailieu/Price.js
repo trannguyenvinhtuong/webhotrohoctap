@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import * as action from './../../actions/index';
+import {Link} from 'react-router-dom';
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -69,11 +70,12 @@ class Price extends Component {
                 </div>
                 <br />
                 <br />
-                {this.showTimeKM(ngaybd, ngaykt, today)}
-                <button className="themvaogio">
-                    <i className="fas fa-cart-plus"></i>
-                    Thêm vào giỏ
-                </button>
+                <Link to={`/nguoidung/tailieu/${tailieu.MaTL === undefined ? tl.MaTL : tailieu.MaTL}`}>
+                    <button className="themvaogio">
+                        <i className="fas fa-cart-plus"></i>
+                        Xem miễn phí
+                    </button>
+                </Link>                
                 <br />
                 <br />
                 <p className="thongtin">
