@@ -12,7 +12,8 @@ class Chinhsuathongtin extends Component {
             tenkh: '',
             sdt: '',
             diachi: '',
-            email: ''
+            email: '',
+            anhdaidien: ''
         }
     }
     componentDidMount() {
@@ -22,7 +23,8 @@ class Chinhsuathongtin extends Component {
             tenkh: khachhang.TenKH,
             sdt: khachhang.SDT,
             diachi: khachhang.DiaChi,
-            email: khachhang.Email
+            email: khachhang.Email,
+            anhdaidien: khachhang.AnhDaiDien
         });
     }
 
@@ -55,9 +57,14 @@ class Chinhsuathongtin extends Component {
         window.location.reload();
     }
 
+    getId = (url) => {
+        return url.match(/[-\w]{25,}/);
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
-        var { makh, tenkh, sdt, diachi, email } = this.state;
+        var { makh, tenkh, sdt, diachi, email, anhdaidien } = this.state;
+        var anhdaidienNew = this.getId(anhdaidien);
         Swal.fire({
             title: 'Bạn có muốn thay đổi?',
             text: "Bạn không thể quay về dữ liệu cũ",
@@ -68,19 +75,29 @@ class Chinhsuathongtin extends Component {
             confirmButtonText: 'Yes!'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.props.updateKhachHang(makh, tenkh, sdt, diachi, email);
-                Swal.fire(
-                    'Thay đổi thành công!',
-                    'Thông tin của bạn đã được thay đổi.',
-                    'success'
-                );
-                this.onChangePage(<Thongtintk />);
+                if (makh == '' || tenkh == '' || sdt == '' || diachi == '' || email == '' || anhdaidien == '') {
+                    Swal.fire(
+                        'Warning!',
+                        'Vui lòng không để trống!',
+                        'warning'
+                    );
+                }
+                else {
+                    this.props.updateKhachHang(makh, tenkh, sdt, diachi, email, anhdaidienNew);
+                    Swal.fire(
+                        'Thay đổi thành công!',
+                        'Thông tin của bạn đã được thay đổi.',
+                        'success'
+                    );
+                    this.onChangePage(<Thongtintk />);
+                }
+
             }
         })
     }
 
     render() {
-        var { tenkh, sdt, diachi, email } = this.state;
+        var { tenkh, sdt, diachi, email, anhdaidien } = this.state;
         return (
             <div className="themkhoahoc">
                 <h3>Chỉnh sửa thông tin</h3>
@@ -117,6 +134,14 @@ class Chinhsuathongtin extends Component {
                         type="text"
                     />
                     <br />
+                    <label>Ảnh đại diện</label>
+                    <input className="form-control"
+                        name="anhdaidien"
+                        value={anhdaidien}
+                        onChange={this.onChange}
+                        type="text"
+                    />
+                    <br />
                     <br />
                     <br />
                     <div className="bottom-btn">
@@ -141,8 +166,8 @@ const mapDispatchToProps = (dispatch, props) => {
         onChangePage: (page) => {
             dispatch(action.changePageTK(page));
         },
-        updateKhachHang: (makh, tenkh, sdt, diachi, email) => {
-            dispatch(action.updateKhachHang(makh, tenkh, sdt, diachi, email));
+        updateKhachHang: (makh, tenkh, sdt, diachi, email, anhdaidien) => {
+            dispatch(action.updateKhachHang(makh, tenkh, sdt, diachi, email, anhdaidien));
         }
     }
 }

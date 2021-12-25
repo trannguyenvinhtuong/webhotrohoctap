@@ -849,11 +849,11 @@ export const requestHoaDonTheoID = (idhd) => {
     }
 }
 
-export const updateKhachHang = (makh, tenkh, sdt, diachi, email) => {
+export const updateKhachHang = (makh, tenkh, sdt, diachi, email,anhdaidien) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatekhachhang?makh=' + makh + '&tenkh=' + tenkh + '&sdt=' + sdt + '&diachi=' + diachi + '&email=' + email,
+            url: 'http://localhost/backendAPI/api/updatekhachhang?makh=' + makh + '&tenkh=' + tenkh + '&sdt=' + sdt + '&diachi=' + diachi + '&email=' + email + '&anhdaidien=' + anhdaidien,
             data: null
         }).then(res => {
             if (res.data) {

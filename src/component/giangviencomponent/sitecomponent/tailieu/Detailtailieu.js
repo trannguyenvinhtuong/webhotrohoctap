@@ -81,6 +81,10 @@ class Detailtailieu extends Component {
         })
     }
 
+    getId = (url) => {
+        return url.match(/[-\w]{25,}/);
+    }
+
     onSubmit = (event) => {
         event.preventDefault();
         var { matl, tentl, mota,

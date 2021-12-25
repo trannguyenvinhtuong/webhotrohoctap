@@ -57,11 +57,19 @@ class Dangkygiangvien extends Component {
         return rs;
     }
 
-    onClick = () => {
+    onClick = (e) => {
+        e.preventDefault();
         var { noicongtac, trinhdo, kinhnghiem, gioithieubanthan, gioithieunghenghiep, gioithieukinhnghiem, macb, chuyennganh } = this.state;
         var user = JSON.parse(localStorage.getItem('user'));
         var makh = user.makh;
-        if (noicongtac || trinhdo || kinhnghiem || gioithieubanthan || gioithieunghenghiep || gioithieukinhnghiem || chuyennganh) {
+        if (noicongtac == '' || trinhdo=='' || kinhnghiem=='' || gioithieubanthan=='' || gioithieunghenghiep=='' || gioithieukinhnghiem=='' || chuyennganh=='') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng không để trống!'
+            });
+        }
+        else {            
             this.props.insertGiangVien(noicongtac, trinhdo, kinhnghiem, gioithieubanthan,
                 gioithieunghenghiep, gioithieukinhnghiem, makh, macb, chuyennganh);
             Swal.fire({
@@ -77,13 +85,6 @@ class Dangkygiangvien extends Component {
                     `
             });
             this.props.history.push('/nguoidung');
-        }
-        else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Vui lòng không để trống!'
-            })
         }
     }
 
