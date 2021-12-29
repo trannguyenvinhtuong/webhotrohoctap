@@ -9,7 +9,7 @@ import { ref, child, get } from "firebase/database";
 class Noidung extends Component{
     componentDidMount() {
         var {idkh} = this.props;
-        const dbRef = ref(db);
+        const dbRef = ref(db,"khoahoc");
         get(child(dbRef, idkh)).then((snapshot) => {
             if (snapshot.exists()) {
                 this.props.getVideoKH(snapshot.val());

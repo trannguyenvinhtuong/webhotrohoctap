@@ -8,6 +8,7 @@ import Chinhphuc from './Chinhphuc.js';
 import Gvtieubieu from './Gvtieubieu';
 import Dkgiangvien from './Dkgiangvien.js';
 import Backg from './../../imgs/background10.jpg';
+import Timgiangvien from "./Timgiangvien";
 
 class Index extends Component {
     render() {
@@ -34,6 +35,9 @@ class Index extends Component {
                 <br />
                 <br />
                 <Chinhphuc />
+                <br />
+                <br />
+                <Timgiangvien />
                 <br />
                 <br />
                 <br />

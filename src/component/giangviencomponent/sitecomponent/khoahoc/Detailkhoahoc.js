@@ -117,10 +117,13 @@ class Detailkhoahoc extends Component {
         event.preventDefault();
         var { makhoahoc, tenkhoahoc, mota, gia, anh, videogioithieu, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6, macb, macd } = this.state;
         var date = new Date();
+        anh = this.getId(anh);
+        videogioithieu = this.getIdYouTube(videogioithieu);
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         var idgv = JSON.parse(sessionStorage.getItem('magv'));
         var magv = idgv.id;
         var sohs = '0';
+        
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -220,6 +223,19 @@ class Detailkhoahoc extends Component {
             ngaybatdau: khoahoc[0].NgayBatDau,
             ngayhethan: khoahoc[0].NgayHetHan
         });
+    }
+
+    getId = (url) => {
+        return url.match(/[-\w]{25,}/);
+    }
+
+    getIdYouTube = (url) => {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
     }
 
     render() {

@@ -20,7 +20,8 @@ class Quanlybaigiang extends Component {
             showThem: false,
             tenbaigiang: '',
             luutru: '',
-            tentailieu: '123'
+            tentailieu: '123',
+            dekiemtra: ''
         }
     }
     componentDidMount() {
@@ -79,7 +80,7 @@ class Quanlybaigiang extends Component {
         var khoahoc = JSON.parse(sessionStorage.getItem('idkhoahoc'));
         var idkhoahoc = khoahoc.id;
         var { video } = this.props;
-        var { tenbaigiang, luutru, tentailieu } = this.state;
+        var { tenbaigiang, luutru, tentailieu, dekiemtra } = this.state;
         if (luutru) {
             let videoid = this.getId(luutru);
             luutru = "https://www.youtube.com/embed/" + videoid;
@@ -97,51 +98,101 @@ class Quanlybaigiang extends Component {
                 const dbref = ref(db, "khoahoc");
                 const dbref2 = child(dbref, idkhoahoc.toString());
                 var setthem = false;
-
-               
-                const storageRef = ref2(storage, "NoiDungKhoaHoc/"+tentailieu.name);
                 
-                uploadBytes(storageRef, tentailieu).then((snapshot) => {
-                    console.log('Uploaded a blob or file!');
-                });
+                if (tentailieu != "123") {
+                    const storageRef = ref2(storage, "NoiDungKhoaHoc/" + tentailieu.name);
 
-                for (let i = 0; i < video.length; i++) {
-                    if (video[i] == "0") {
-                        set(child(dbref2, '0'), {
-                            key: i.toString(),
-                            link: luutru,
-                            ten: tenbaigiang,
-                            tentailieu: tentailieu.name
-                        });
-                        setthem = true;
-                        break;
-                    }
-                    if (video[i].ten == 'khongco') {
-                        set(child(dbref2, i.toString()), {
-                            key: i.toString(),
-                            link: luutru,
-                            ten: tenbaigiang,
-                            tentailieu: tentailieu.name
-                        });
-                        setthem = true;
-                        break;
-                    }
-                }
-                if (setthem === false) {
-                    set(child(dbref2, (video.length).toString()), {
-                        key: (video.length).toString(),
-                        link: luutru,
-                        ten: tenbaigiang,
-                        tentailieu: tentailieu.name
+                    uploadBytes(storageRef, tentailieu).then((snapshot) => {
+                        console.log('Uploaded a blob or file!');
                     });
 
+                    if(!dekiemtra){
+                        dekiemtra="khongco";
+                    }
+
+                    for (let i = 0; i < video.length; i++) {
+                        if (video[i] == "0") {
+                            set(child(dbref2, '0'), {
+                                key: i.toString(),
+                                link: luutru,
+                                ten: tenbaigiang,
+                                tentailieu: tentailieu.name,
+                                dekiemtra: dekiemtra
+                            });
+                            setthem = true;
+                            break;
+                        }
+                        if (video[i].ten == 'khongco') {
+                            set(child(dbref2, i.toString()), {
+                                key: i.toString(),
+                                link: luutru,
+                                ten: tenbaigiang,
+                                tentailieu: tentailieu.name,
+                                dekiemtra: dekiemtra
+                            });
+                            setthem = true;
+                            break;
+                        }
+                    }
+                    if (setthem === false) {
+                        set(child(dbref2, (video.length).toString()), {
+                            key: (video.length).toString(),
+                            link: luutru,
+                            ten: tenbaigiang,
+                            tentailieu: tentailieu.name,
+                            dekiemtra: dekiemtra
+                        });
+
+                    }
+                    Swal.fire(
+                        'Thêm thành công!',
+                        'Dữ liệu đã được thêm.',
+                        'success'
+                    );
+                    this.props.togglepagegiangvien(<Detailkhoahoc />);
                 }
-                Swal.fire(
-                    'Thêm thành công!',
-                    'Dữ liệu đã được thêm.',
-                    'success'
-                );
-                this.props.togglepagegiangvien(<Detailkhoahoc />)
+                else{
+                    for (let i = 0; i < video.length; i++) {
+                        if (video[i] == "0") {
+                            set(child(dbref2, '0'), {
+                                key: i.toString(),
+                                link: luutru,
+                                ten: tenbaigiang,
+                                tentailieu: tentailieu,
+                                dekiemtra: dekiemtra
+                            });
+                            setthem = true;
+                            break;
+                        }
+                        if (video[i].ten == 'khongco') {
+                            set(child(dbref2, i.toString()), {
+                                key: i.toString(),
+                                link: luutru,
+                                ten: tenbaigiang,
+                                tentailieu: tentailieu,
+                                dekiemtra: dekiemtra
+                            });
+                            setthem = true;
+                            break;
+                        }
+                    }
+                    if (setthem === false) {
+                        set(child(dbref2, (video.length).toString()), {
+                            key: (video.length).toString(),
+                            link: luutru,
+                            ten: tenbaigiang,
+                            tentailieu: tentailieu,
+                            dekiemtra: dekiemtra
+                        });
+
+                    }
+                    Swal.fire(
+                        'Thêm thành công!',
+                        'Dữ liệu đã được thêm.',
+                        'success'
+                    );
+                    this.props.togglepagegiangvien(<Detailkhoahoc />);
+                }
             }
         })
     }
@@ -153,7 +204,7 @@ class Quanlybaigiang extends Component {
         var khoahoc = JSON.parse(sessionStorage.getItem('idkhoahoc'));
         var idkhoahoc = khoahoc.id;
         var { video } = this.props;
-        var { tenbaigiang, luutru, tentailieu } = this.state;
+        var { tenbaigiang, luutru, tentailieu, dekiemtra } = this.state;
         if (luutru) {
             let videoid = this.getId(luutru);
             luutru = "https://www.youtube.com/embed/" + videoid;
@@ -174,7 +225,8 @@ class Quanlybaigiang extends Component {
                     key: key.toString(),
                     link: luutru,
                     ten: tenbaigiang,
-                    tentailieu: tentailieu
+                    tentailieu: tentailieu,
+                    dekiemtra: dekiemtra
                 });
                 Swal.fire(
                     'Sửa thành công!',
@@ -267,15 +319,19 @@ class Quanlybaigiang extends Component {
                 render: (record) => <p className="notCap">{record.tentailieu != undefined ? record.tentailieu : ''}</p>
             },
             {
+                title: 'Mã đề kiểm tra',
+                render: (record) => <p className="notCap">{record.dekiemtra != undefined ? record.dekiemtra : ''}</p>
+            },
+            {
                 title: '',
                 render: (record) => <a onClick={() => this.showDialogSua(record.key, record.tentailieu)} className="btn btn-warning">Chỉnh sửa</a>
             },
             {
                 title: '',
                 render: (record) => <a className="btn btn-danger" onClick={() => this.onDeleteBG(record.key)}>Xoá</a>
-            }
+            }           
         ]
-        var { showSua, showThem, tenbaigiang, luutru } = this.state;
+        var { showSua, showThem, tenbaigiang, luutru, dekiemtra } = this.state;
         return (
             <div className="themkhoahoc">
                 <div className="container">
@@ -306,6 +362,15 @@ class Quanlybaigiang extends Component {
                             name="luutru"
                             placeholder="VD: Link ..." />
                         <br />
+                        <label>Mã đề kiểm tra</label>
+                        <input className="form-control"
+                            type="text"
+                            value={dekiemtra}
+                            onChange={this.onChange}
+                            name="dekiemtra"
+                            placeholder="VD: 01"
+                        />
+                        <br />
                     </div>
                 </Modal>
 
@@ -331,6 +396,16 @@ class Quanlybaigiang extends Component {
                         <label>Tài liệu bài giảng</label>
                         <br />
                         <input type="file" onChange={(e) => { this.setState({ tentailieu: e.target.files[0] }) }} />
+                        <br />
+                        <br />
+                        <label>Mã đề kiểm tra</label>
+                        <input className="form-control"
+                            type="text"
+                            value={dekiemtra}
+                            onChange={this.onChange}
+                            name="dekiemtra"
+                            placeholder="VD: 01"
+                        />
                         <br />
                     </div>
                 </Modal>

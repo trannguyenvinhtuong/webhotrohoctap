@@ -26,6 +26,8 @@ class Themtailieu extends Component {
     componentDidMount() {
         this.props.requestChuDe();
         this.props.requestCapBac();
+        var user = JSON.parse(localStorage.getItem('user'));
+        this.props.requestCheckGV(user.makh);
     }
 
 
@@ -95,14 +97,15 @@ class Themtailieu extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         var { tentl, mota, macb, macd, anhtl, demo, sotrang, link, giatl } = this.state;
-        var idgv = JSON.parse(sessionStorage.getItem('magv'));
-        var magv = idgv.id;
+        var {giangvien} = this.props;
+        // var idgv = JSON.parse(sessionStorage.getItem('magv'));
+        // var magv = idgv.id;
+        var magv = giangvien[0].MaGV;
         var date = new Date();
         
         if(anhtl){
             anhtl = this.getId(anhtl);
         }
-        console.log(anhtl.toString());
         if(demo){
             let id = this.getId(demo);
             demo = "https://drive.google.com/file/d/"+id+"/preview";
@@ -114,14 +117,14 @@ class Themtailieu extends Component {
        
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         this.props.insertTaiLieu(tentl, mota, magv, macb, macd, anhtl, giatl, demo, sotrang, ngaydang, link)
-        // Swal.fire({
-        //     position: 'top-end',
-        //     icon: 'success',
-        //     title: 'Lưu thành công',
-        //     showConfirmButton: false,
-        //     timer: 1500
-        // });
-        // window.location.reload();
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Lưu thành công',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        window.location.reload();
     }
 
     onCancel = () =>{
@@ -242,7 +245,8 @@ class Themtailieu extends Component {
 const mapStateToProps = (state) => {
     return {
         chude: state.getchude,
-        capbac: state.getcapbac
+        capbac: state.getcapbac,
+        giangvien: state.checkgv
     }
 }
 
@@ -259,6 +263,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         insertTaiLieu: (tentl, mota, magv, macb, macd, anh, giatl, demo, sotrang, ngaydang, link) => {
             dispatch(action.insertTaiLieu(tentl, mota, magv, macb, macd, anh, giatl, demo, sotrang, ngaydang, link));
+        },
+        requestCheckGV: (idkh) =>{
+            dispatch(action.requestCheckGV(idkh));
         }
     }
 }

@@ -38,6 +38,7 @@ import sorttl from './sorttl';
 import togglepageadmin from './togglepageadmin';
 import gethoadontheoid from './gethoadontheoid';
 import getketquathi from './getketquathi';
+import getanhkh from './getanhkh';
 
 const myReducer = combineReducers({
     getkhoahoc,
@@ -78,7 +79,8 @@ const myReducer = combineReducers({
     sorttl,
     togglepageadmin,
     gethoadontheoid,
-    getketquathi
+    getketquathi,
+    getanhkh
 });
 
 export default myReducer;

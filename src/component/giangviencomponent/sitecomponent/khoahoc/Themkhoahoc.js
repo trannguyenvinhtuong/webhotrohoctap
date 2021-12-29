@@ -43,13 +43,13 @@ class Themkhoahoc extends Component {
 
     handleChangeCD = (value) => {
         this.setState({
-            chude: value
+            theloai: value
         })
     }
 
     handleChangeCB = (value) => {
         this.setState({
-            capbac: value
+            capbacst: value
         })
     }
 
@@ -112,10 +112,13 @@ class Themkhoahoc extends Component {
     onSubmit = (e) =>{
         e.preventDefault();
         var { tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu,gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6 } = this.state;
+        
         var idgv = JSON.parse(sessionStorage.getItem('magv'));
         var magv = idgv.id;
         var ngaydang = null;
         var date = new Date();
+        anh = this.getId(anh);
+        videogioithieu = this.getIdYouTube(videogioithieu);
         var ngaydang = date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear();
         this.props.insertKhoaHoc(tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, ngaydang, magv,
             gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6);
@@ -127,12 +130,26 @@ class Themkhoahoc extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        this.props.togglepagegiangvien(<Khoahoc />)
+        this.props.togglepagegiangvien(<Khoahoc />);
+    }
+
+    getId = (url) => {
+        return url.match(/[-\w]{25,}/);
+    }
+
+    getIdYouTube = (url) => {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
     }
 
     render() {
         var { chude, capbac } = this.props;
         var { tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6 } = this.state;
+        // console.log(dieu6);
         return (
             <div className="themkhoahoc">
                 <div className="container">

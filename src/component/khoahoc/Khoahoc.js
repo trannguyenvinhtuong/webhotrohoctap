@@ -18,16 +18,18 @@ class Khoahoc extends Component {
             ten: '',
             tailieu: false,
             tentailieu: '',
-            idbh: ''
+            idbh: '',
+            dekiemtra: ''
         }
     }
 
-    clickShow = (da, ten, tentl, idbh) => {
+    clickShow = (da, ten, tentl, idbh, dekiemtra) => {
         this.setState({
             link: da,
             ten: ten,
             tentailieu: tentl,
-            idbh: idbh
+            idbh: idbh,
+            dekiemtra: dekiemtra
         });
     }
 
@@ -58,25 +60,39 @@ class Khoahoc extends Component {
         });
     }
 
+    checkDeKiemTra = (data) =>{
+        var rs = null;
+        if(data){
+            if(data != "khongco"){
+                rs = <Link style={{ color: 'blue', textTransform: 'none' }} to={`/nguoidung/kiemtra/${data}`}>Xem đề kiểm tra <i className="fas fa-caret-down"></i></Link>
+            }
+        }
+        else{
+            rs = <p style={{color: '#fff'}}>Bài học không có đề kiểm tra</p>
+        }
+        return rs;
+    }
+
     render() {
         const columns = [
             {
                 title: 'Bài học',
                 key: 'key',
-                render: (record) => <a onClick={() => this.clickShow(record.link, record.ten, record.tentailieu, record.key)} className="namekh">
+                render: (record) => <a onClick={() => this.clickShow(record.link, record.ten, record.tentailieu, record.key, record.dekiemtra)} className="namekh">
                     {record.ten === undefined ? '' : record.ten}
                 </a>
             }
         ]
-        var { link, ten, tentailieu, idbh } = this.state;
+        var { link, ten, tentailieu, idbh, dekiemtra } = this.state;
         var { video, khoahoc } = this.props;
         var kh = khoahoc[0];
+        
         return (
             <div style={{ marginTop: '4.7rem' }}>
                 <div className="khoahocvideo">
                     <Row>
                         <Col span={18} className="video-kh">
-                            <iframe src={link} width="100%" height="615px" allow="autoplay" allowfullscreen="allowfullscreen"></iframe>
+                            <iframe src={link} width="100%" height="615px" allow="autoplay" allowFullScreen="allowfullscreen"></iframe>
                             <h3>{ten}</h3>
                             <br />
                             <h2>Nội dung bài học</h2>
@@ -85,7 +101,8 @@ class Khoahoc extends Component {
                             <br />
                             <br />
                             <h2>Bài kiểm tra</h2>
-                            <Link style={{ color: 'blue', textTransform: 'none' }} to="/nguoidung/alldisplaydethi">Xem đề kiểm tra <i className="fas fa-caret-down"></i></Link>
+                            {this.checkDeKiemTra(dekiemtra)}
+
                             <br />
                             
                             <br />

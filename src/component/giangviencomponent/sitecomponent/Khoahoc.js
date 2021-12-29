@@ -18,6 +18,7 @@ class Khoahoc extends Component{
         var logg = localStorage.getItem('user');
         var jslog = JSON.parse(logg);
         this.props.requestKhoaHocTheoGV(jslog.makh);
+        this.props.requestCheckGV(jslog.makh);
     }
 
     onClick = (page,idkhoahoc,magv) =>{
@@ -33,7 +34,7 @@ class Khoahoc extends Component{
             {
                 title: '',
                 key: 'MaKhoaHoc',
-                render: (record) => <img src={record.AnhKhoaHoc} key={record.MaKhoaHoc}/>
+                render: (record) => <img className="anhkhoahoc-img" src={record.AnhKhoaHoc} key={record.MaKhoaHoc} />
             },
             {
                 title: 'Tên khoá học',
@@ -53,10 +54,11 @@ class Khoahoc extends Component{
                 render: (record) => <p>{record.SoHS}</p>
             }    
         ];
-        var khoahoc = this.props.getkhoahoctheogv;     
+        var khoahoc = this.props.getkhoahoctheogv;    
+        var {giangvien} = this.props; 
         return (
             <div className="giangvien-khoahoc">
-                <a onClick={() => this.onClick(<Themkhoahoc />,0,khoahoc[0].MaGV)}>
+                <a onClick={() => this.onClick(<Themkhoahoc />,0,giangvien[0].MaGV)}>
                     <button className="giangvien-khbtn">Thêm khoá học</button>
                 </a>
                 <Table dataSource={khoahoc} className="table-khgv" columns={columns} rowKey="MaKhoaHoc"/>
@@ -67,7 +69,8 @@ class Khoahoc extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-        getkhoahoctheogv: state.getkhoahoctheogv
+        getkhoahoctheogv: state.getkhoahoctheogv,
+        giangvien: state.checkgv
     }
 }
 
@@ -78,6 +81,9 @@ const mapDispatchToProps = (dispatch,props) =>{
         },
         togglepagegiangvien: (page) =>{
             dispatch(action.togglePageGiangVien(page));
+        },
+        requestCheckGV: (idkh) =>{
+            dispatch(action.requestCheckGV(idkh));
         }
     }
 }

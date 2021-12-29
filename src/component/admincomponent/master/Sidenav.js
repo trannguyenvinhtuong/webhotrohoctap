@@ -11,6 +11,7 @@ import Quanlydethi from "../Quanlydethi";
 import Quanlymakichhoat from "../Quanlymakichhoat";
 import Quanlyhoadon from "../Quanlyhoadon";
 import Quanlydiem from "../Quanlydiem";
+import Quanlynhandien from "../Quanlynhandien";
 
 class Sidenav extends Component {
     togglePageAdmin = (page) =>{
@@ -73,7 +74,13 @@ class Sidenav extends Component {
                         <i className="fas fa-shopping-cart"></i>
                         Quản lý đơn hàng
                     </button>
-                </a>                
+                </a>    
+                {/* <a onClick={()=>this.togglePageAdmin(<Quanlynhandien />)}>
+                    <button>
+                        <i className="far fa-smile-beam"></i>
+                        Quản lý nhận diện
+                    </button>
+                </a>               */}
             </div>
         );
     }

@@ -91,7 +91,7 @@ class Price extends Component {
                 </a>
                 <br />
                 <br />
-                <p className="thongtin">
+                {/* <p className="thongtin">
                     <i className="far fa-clock"></i>
                     Thời lượng:
                     <span>06 giờ 36 phút</span>
@@ -100,7 +100,7 @@ class Price extends Component {
                     <i className="fas fa-play"></i>
                     Giáo trình:
                     <span>63 bài giảng</span>
-                </p>
+                </p> */}
                 <p className="thongtin">
                     <i className="fas fa-history"></i>
                     Sở hữu khóa học trọn đời

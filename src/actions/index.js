@@ -1132,3 +1132,26 @@ export const getKetQuaTheoDe = (ketqua) =>{
         ketqua
     }
 }
+
+export const getAnhKH = (khachhang) =>{
+    return{
+        type: type.GET_ANHKH,
+        khachhang
+    }
+}
+
+export const requestAnhKH = () =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: 'http://localhost/backendAPI/api/getanhkh',
+            data: null
+        }).then(res => {
+            if(res.data){
+                dispatch(getAnhKH(res.data));
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}

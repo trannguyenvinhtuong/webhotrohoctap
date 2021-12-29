@@ -1,13 +1,13 @@
 import { Component } from "react";
 import storage from '../../config/firebaseFireStorage';
 import { getDownloadURL } from "firebase/storage";
-import * as str  from "firebase/storage";
+import * as str from "firebase/storage";
 import { connect } from "react-redux";
-import {Row, Col} from 'antd';
+import { Row, Col } from 'antd';
 
 var mammoth = require("mammoth");
 
-class TaiLieu extends Component{
+class TaiLieu extends Component {
     readFileInputEventAsArrayBuffer = (files, callback) => {
         var request = new XMLHttpRequest();
         request.open('GET', files, true);
@@ -29,37 +29,43 @@ class TaiLieu extends Component{
         this.readFileInputEventAsArrayBuffer(file, function (arrayBuffer) {
             mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
                 .then(function (result) {
-                    document.getElementById('word').innerHTML = (result.value);
+                    document.getElementById('word').innerHTML = (result.value);    
+                    
                 })
                 .done();
         });
-    }
-    
-    getFireStorage = () => {
-        var {tentailieu} = this.props;
-     
-        // if(tentailieu !== '' && tentailieu !== undefined){
-            getDownloadURL(str.ref(storage, 'NoiDungKhoaHoc/test.docx'))
-                .then((url)=>{
-                    this.parseWord(url);         
-                })
-                .catch((error)=>{
-                    console.log(error);
-                });
-        // }
+
     }
 
-    componentDidMount(){
+    getFireStorage = () => {
+        var { tentailieu } = this.props;
+        
+        if (tentailieu != "123" && tentailieu != "") {
+            getDownloadURL(str.ref(storage, "NoiDungKhoaHoc/" + tentailieu))
+                .then((url) => {
+                    this.parseWord(url);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        else {
+            document.getElementById('word').innerHTML = "Bài học này không có tài liệu";
+        }
+    }
+
+    componentWillReceiveProps() {
         this.getFireStorage();
     }
 
     render() {
-        var {toogletailieu, tentailieu} = this.props;
-        
+        var { toogletailieu, tentailieu } = this.props;
+
         return (
             <Row>
                 <Col span={toogletailieu === true ? 24 : "0"}>
-                    {tentailieu === undefined ? <div>Bài học này không có tài liệu</div> : <div id="word"></div>}  
+                    {tentailieu === undefined || tentailieu == "123" ? <div>Bài học này không có tài liệu</div> : ""}
+                    <div id="word"></div>
                 </Col>
                 <Col span={toogletailieu === false ? 24 : "0"}>
                     <div></div>
@@ -69,10 +75,10 @@ class TaiLieu extends Component{
     }
 }
 
-const mapStateToProps = (state) =>{
-    return{
+const mapStateToProps = (state) => {
+    return {
         toogletailieu: state.toogletailieu
     }
 }
 
-export default connect(mapStateToProps,null)(TaiLieu);
+export default connect(mapStateToProps, null)(TaiLieu);

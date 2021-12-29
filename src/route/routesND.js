@@ -25,6 +25,8 @@ import Dangkygiangvien from './../component/dangky/Dangkygiangvien';
 import Xemdapan from '../component/dethi/Xemdapan';
 import Searchpage from '../component/master/search/Searchpage';
 import Bangxephang from '../component/dethi/Bangxephang';
+import Nhandien from '../component/ai/Nhandien';
+import Alldisplay from '../component/alldisplaykhoahoctheogv/Alldisplay';
 
 const routesND = [
     {
@@ -156,6 +158,16 @@ const routesND = [
         path: '/nguoidung/bangxephang/:iddethi',
         exact: false,
         main: (match) => <Bangxephang match={match} />
+    },
+    {
+        path: '/nguoidung/nhandien',
+        exact: false,
+        main: () => <Nhandien />
+    },
+    {
+        path: '/nguoidung/khoahoctheogv/:idkh',
+        exact: false,
+        main: (match) => <Alldisplay match={match} />
     },
     {
         path: '',

@@ -17,15 +17,16 @@ class Khoahoc extends Component {
 
     showContent = (datainput, km) => {
         var data = [];
-        if(datainput.length < 7){
+        if(datainput.length < 8){
             data = datainput;
         }
-        else if(datainput > 6){
-            for(let i =0; i<6;i++){
+        else if(datainput.length > 7){
+            for(let i =0; i<8;i++){
                 data.push(datainput[i]);
             }
         }
         var rs = null;
+        console.log(data);
         if (data) {
             rs = data.map((da, index) => {
                 return (

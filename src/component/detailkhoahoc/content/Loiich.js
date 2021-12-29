@@ -28,21 +28,21 @@ class Loiich extends Component {
                         </p>
                         <p>
                             <i className="fas fa-check"></i>
-                            {thongtin.Marketing3 === undefined ? tt.Marketing1 : thongtin.Marketing3}
+                            {thongtin.Marketing3 === undefined ? tt.Marketing3 : thongtin.Marketing3}
                         </p>
                     </Col>
                     <Col span={12}>
                         <p>
                             <i className="fas fa-check"></i>
-                            {thongtin.Marketing4 === undefined ? tt.Marketing1 : thongtin.Marketing4}
+                            {thongtin.Marketing4 === undefined ? tt.Marketing4 : thongtin.Marketing4}
                         </p>
                         <p>
                             <i className="fas fa-check"></i>
-                            {thongtin.Marketing5 === undefined ? tt.Marketing1 : thongtin.Marketing5}
+                            {thongtin.Marketing5 === undefined ? tt.Marketing5 : thongtin.Marketing5}
                         </p>
                         <p>
                             <i className="fas fa-check"></i>
-                            {thongtin.Marketing6 === undefined ? tt.Marketing1 : thongtin.Marketing6}
+                            {thongtin.Marketing6 === undefined ? tt.Marketing6 : thongtin.Marketing6}
                         </p>
                     </Col>
                 </Row>

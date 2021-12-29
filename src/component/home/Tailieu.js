@@ -17,10 +17,10 @@ class Tailieu extends Component {
 
     showContent = (datainput) => {
         var data = [];
-        if(datainput.length < 7){
+        if(datainput.length < 9){
             data = datainput;
         }
-        else if(datainput > 6){
+        else if(datainput.length > 8){
             for(let i =0; i<6;i++){
                 data.push(datainput[i]);
             }
