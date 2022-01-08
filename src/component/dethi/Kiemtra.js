@@ -365,7 +365,7 @@ class Kiemtra extends Component {
         var { getde } = this.props;
         var { ten } = this.state;
         return (
-            <div className="container" style={{ marginTop: '6rem' }}>
+            <div className="container" style={{marginTop:'4.3rem'}} >
                 <br />
                 <h2 style={{ textAlign: 'center' }}>{ten}</h2>
                 <br />

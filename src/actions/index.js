@@ -4,6 +4,8 @@ import axios from 'axios';
 import db from './../config/firebase.config';
 import { ref, child, set } from "firebase/database";
 
+const host = "https://tnvinhtuong0299.xyz";
+
 export const getKhoaHoc = (khoahoc) => {
     return {
         type: type.GET_KHOAHOC,
@@ -21,7 +23,7 @@ export const requestKhoaHoc = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahoc',
+            url: host+'/backendAPI/api/getkhoahoc',
             data: null
         }).then(res => {
             dispatch(getKhoaHoc(res.data));
@@ -68,7 +70,7 @@ export const requestMotKhoaHoc = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh,
+            url: host+'/backendAPI/api/getkhoahoc?id=' + idkh,
             data: null
         }).then(res => {
             dispatch(getOneKhoaHoc(res.data));
@@ -89,7 +91,7 @@ export const requestKhoaHocTheoGH = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh,
+            url: host+'/backendAPI/api/getkhoahoc?id=' + idkh,
             data: null
         }).then(res => {
             dispatch(getKhoaHocTheoGH(res.data));
@@ -110,7 +112,7 @@ export const requestChuDe = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getchude',
+            url: host+'/backendAPI/api/getchude',
             data: null
         }).then(res => {
             dispatch(getChuDe(res.data));
@@ -131,7 +133,7 @@ export const requestChuDeLimit = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getchudelimit',
+            url: host+'/backendAPI/api/getchudelimit',
             data: null
         }).then(res => {
             dispatch(getChuDeLimit(res.data));
@@ -152,7 +154,7 @@ export const requestTTKH = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getthongtinkhoahoc?id=' + idkh,
+            url: host+'/backendAPI/api/getthongtinkhoahoc?id=' + idkh,
             data: null
         }).then(res => {
             dispatch(getTTKH(res.data));
@@ -173,7 +175,7 @@ export const requestKMKH = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhuyenmaikh?id=' + idkh,
+            url: host+'/backendAPI/api/getkhuyenmaikh?id=' + idkh,
             data: null
         }).then(res => {
             dispatch(getKMKH(res.data));
@@ -194,7 +196,7 @@ export const requestALLKMKH = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getallkmkh',
+            url: host+'/backendAPI/api/getallkmkh',
             data: null
         }).then(res => {
             dispatch(getALLKMKH(res.data));
@@ -215,7 +217,7 @@ export const requestTaiLieu = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/gettailieu',
+            url: host+'/backendAPI/api/gettailieu',
             data: null
         }).then(res => {
             dispatch(getTaiLieu(res.data));
@@ -236,7 +238,7 @@ export const requestMotTaiLieu = (idtl) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/gettailieu?idtl=' + idtl,
+            url: host+'/backendAPI/api/gettailieu?idtl=' + idtl,
             data: null
         }).then(res => {
             dispatch(getMotTaiLieu(res.data));
@@ -264,7 +266,7 @@ export const requestCapBac = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getcapbac',
+            url: host+'/backendAPI/api/getcapbac',
             data: null
         }).then(res => {
             dispatch(getCapBac(res.data));
@@ -285,7 +287,7 @@ export const requestKhachHang = (tendn) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhachhang?tendn=' + tendn,
+            url: host+'/backendAPI/api/getkhachhang?tendn=' + tendn,
             data: null
         }).then(res => {
             dispatch(getKhachHang(res.data));
@@ -306,7 +308,7 @@ export const requestKhachHangByID = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhachhang?idkh=' + idkh,
+            url: host+'/backendAPI/api/getkhachhang?idkh=' + idkh,
             data: null
         }).then(res => {
             dispatch(getKhachHangByID(res.data));
@@ -320,7 +322,7 @@ export const requestAllKhachHang = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhachhang',
+            url: host+'/backendAPI/api/getkhachhang',
             data: null
         }).then(res => {
             dispatch(getAllKhachHang(res.data));
@@ -360,7 +362,7 @@ export const requestKhoaHocKH = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahockh?idkh=' + idkh,
+            url: host+'/backendAPI/api/getkhoahockh?idkh=' + idkh,
             data: null
         }).then(res => {
             dispatch(getKhoaHocKH(res.data));
@@ -388,7 +390,7 @@ export const requestTaiLieuKH = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/gettailieukh?idkh=' + idkh,
+            url: host+'/backendAPI/api/gettailieukh?idkh=' + idkh,
             data: null
         }).then(res => {
             dispatch(getTaiLieuKH(res.data));
@@ -409,7 +411,7 @@ export const requestKMTL = (idtl) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhuyenmaitl?id=' + idtl,
+            url: host+'/backendAPI/api/getkhuyenmaitl?id=' + idtl,
             data: null
         }).then(res => {
             dispatch(getKMTL(res.data));
@@ -430,7 +432,7 @@ export const requestUpdateMK = (idkh, mkm) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatemk?mkmoi=' + mkm + '&idkh=' + idkh,
+            url: host+'/backendAPI/api/updatemk?mkmoi=' + mkm + '&idkh=' + idkh,
             data: null
         }).then(res => {
             dispatch(updateMK(res.data));
@@ -451,7 +453,7 @@ export const requestNhieuKhoaHoc = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahoc?id=' + idkh,
+            url: host+'/backendAPI/api/getkhoahoc?id=' + idkh,
             data: null
         }).then(res => {
             dispatch(getNhieuKhoaHoc(res.data));
@@ -504,7 +506,7 @@ export const requestCheckGV = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/checkgiangvien?idkh=' + idkh,
+            url: host+'/backendAPI/api/checkgiangvien?idkh=' + idkh,
             data: null
         }).then(res => {
             dispatch(checkGV(res.data));
@@ -526,7 +528,7 @@ export const requestKhoaHocTheoGV = (makh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getkhoahoctheogv?makh=' + makh,
+            url: host+'/backendAPI/api/getkhoahoctheogv?makh=' + makh,
             data: null
         }).then(res => {
             dispatch(getKhoaHocTheoGV(res.data));
@@ -554,7 +556,7 @@ export const requestTaiLieuTheoGV = (makh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/gettailieutheogv?idkh=' + makh,
+            url: host+'/backendAPI/api/gettailieutheogv?idkh=' + makh,
             data: null
         }).then(res => {
             dispatch(getTaiLieuTheoGV(res.data));
@@ -575,7 +577,7 @@ export const requestThongTinGV = (makh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getthongtingv?idkh=' + makh,
+            url: host+'/backendAPI/api/getthongtingv?idkh=' + makh,
             data: null
         }).then(res => {
             dispatch(getThongTinGV(res.data));
@@ -590,7 +592,7 @@ export const insertKhoaHoc = (tenkhoahoc, theloai, capbacst, mota, gia, anh, vid
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertkhoahoc?tenkhoahoc=' + tenkhoahoc + '&theloai=' + theloai + '&capbac=' + capbacst +
+            url: host+'/backendAPI/api/insertkhoahoc?tenkhoahoc=' + tenkhoahoc + '&theloai=' + theloai + '&capbac=' + capbacst +
                 '&mota=' + mota + '&gia=' + gia + '&anh=' + anh + '&video=' + videogioithieu + '&magv=' + magv + '&ngaydang=' + ngaydang +
                 '&gioithieu=' + gioithieu + '&dieu2=' + dieu2 + '&dieu3=' + dieu3 +
                 '&dieu4=' + dieu4 + '&dieu5=' + dieu5 + '&dieu6=' + dieu6 + '&dieu1=' + dieu1,
@@ -617,7 +619,7 @@ export const insertThongTinKhoaHoc = (makhoahoc, gioithieu, dieu1, dieu2, dieu3,
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertthongtinkhoahoc?makhoahoc=' + makhoahoc +
+            url: host+'/backendAPI/api/insertthongtinkhoahoc?makhoahoc=' + makhoahoc +
                 '&gioithieu=' + gioithieu + '&dieu2=' + dieu2 + '&dieu3=' + dieu3 +
                 '&dieu4=' + dieu4 + '&dieu5=' + dieu5 + '&dieu6=' + dieu6 + '&dieu1=' + dieu1,
             data: null
@@ -635,7 +637,7 @@ export const insertHoaDon = (makh, ghichu, tongtien, ngaydat) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/inserthoadon?makh=' + makh + '&ghichu=' + ghichu + '&tongtien=' + tongtien + '&ngaydat=' + ngaydat,
+            url: host+'/backendAPI/api/inserthoadon?makh=' + makh + '&ghichu=' + ghichu + '&tongtien=' + tongtien + '&ngaydat=' + ngaydat,
             data: null
         }).then(res => {
             if (res.data) {
@@ -661,7 +663,7 @@ export const insertCTHD = (mahd, makhoahoc, matl, soluong) => {
         if (makhoahoc === null) {
             return axios({
                 method: 'get',
-                url: 'http://localhost/backendAPI/api/insertcthd?mahd=' + mahd + '&matl=' + matl + '&soluong=' + soluong,
+                url: host+'/backendAPI/api/insertcthd?mahd=' + mahd + '&matl=' + matl + '&soluong=' + soluong,
                 data: null
             }).then(res => {
                 if (res.data) {
@@ -674,7 +676,7 @@ export const insertCTHD = (mahd, makhoahoc, matl, soluong) => {
         else if (matl === null) {
             return axios({
                 method: 'get',
-                url: 'http://localhost/backendAPI/api/insertcthd?mahd=' + mahd + '&makhoahoc=' + makhoahoc + '&soluong=' + soluong,
+                url: host+'/backendAPI/api/insertcthd?mahd=' + mahd + '&makhoahoc=' + makhoahoc + '&soluong=' + soluong,
                 data: null
             }).then(res => {
                 if (res.data) {
@@ -687,7 +689,7 @@ export const insertCTHD = (mahd, makhoahoc, matl, soluong) => {
         else {
             return axios({
                 method: 'get',
-                url: 'http://localhost/backendAPI/api/insertcthd?mahd=' + mahd + '&makhoahoc=' + makhoahoc + '&soluong=' + soluong + '&matl=' + matl,
+                url: host+'/backendAPI/api/insertcthd?mahd=' + mahd + '&makhoahoc=' + makhoahoc + '&soluong=' + soluong + '&matl=' + matl,
                 data: null
             }).then(res => {
                 if (res.data) {
@@ -704,7 +706,7 @@ export const insertTaiLieu = (tentl, mota, magv, macb, macd, anh, giatl, demo, s
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/inserttailieu?tentl=' + tentl + '&mota=' + mota + '&magv=' + magv +
+            url: host+'/backendAPI/api/inserttailieu?tentl=' + tentl + '&mota=' + mota + '&magv=' + magv +
                 '&macb=' + macb + '&macd=' + macd + '&giatl=' + giatl + '&demo=' + demo + '&sotrang=' + sotrang + '&anh=' + anh.toString() + '&ngaydang=' + ngaydang + '&link=' + link,
             data: null
         }).then(res => {
@@ -723,7 +725,7 @@ export const insertTaiLieu = (tentl, mota, magv, macb, macd, anh, giatl, demo, s
 //     return (dispatch) => {
 //         return axios({
 //             method: 'get',
-//             url: 'http://localhost/backendAPI/api/insertluutrutl?matl=' + matl + ,
+//             url: host+'/backendAPI/api/insertluutrutl?matl=' + matl + ,
 //             data: null
 //         }).then(res => {
 //             if (res.data) {
@@ -752,7 +754,7 @@ export const insertKetQua = (makh, made, diem, tende,ngaylambai) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertketqua?makh=' + makh + '&made=' + made + '&diem=' + diem + '&tende=' + tende + '&ngaylambai='+ngaylambai,
+            url: host+'/backendAPI/api/insertketqua?makh=' + makh + '&made=' + made + '&diem=' + diem + '&tende=' + tende + '&ngaylambai='+ngaylambai,
             data: null
         }).then(res => {
             if (res.data) {
@@ -775,7 +777,7 @@ export const requestKetQua = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getdiem?idkh=' + idkh,
+            url: host+'/backendAPI/api/getdiem?idkh=' + idkh,
             data: null
         }).then(res => {
             if (res.data) {
@@ -798,7 +800,7 @@ export const requestHoaDon = (idkh) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/gethoadon?id=' + idkh,
+            url: host+'/backendAPI/api/gethoadon?id=' + idkh,
             data: null
         }).then(res => {
             if (res.data) {
@@ -814,7 +816,7 @@ export const requestAllHoaDon = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/gethoadon',
+            url: host+'/backendAPI/api/gethoadon',
             data: null
         }).then(res => {
             if (res.data) {
@@ -837,7 +839,7 @@ export const requestHoaDonTheoID = (idhd) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/gethoadon?idhoadon='+idhd,
+            url: host+'/backendAPI/api/gethoadon?idhoadon='+idhd,
             data: null
         }).then(res => {
             if (res.data) {
@@ -853,7 +855,7 @@ export const updateKhachHang = (makh, tenkh, sdt, diachi, email,anhdaidien) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatekhachhang?makh=' + makh + '&tenkh=' + tenkh + '&sdt=' + sdt + '&diachi=' + diachi + '&email=' + email + '&anhdaidien=' + anhdaidien,
+            url: host+'/backendAPI/api/updatekhachhang?makh=' + makh + '&tenkh=' + tenkh + '&sdt=' + sdt + '&diachi=' + diachi + '&email=' + email + '&anhdaidien=' + anhdaidien,
             data: null
         }).then(res => {
             if (res.data) {
@@ -876,7 +878,7 @@ export const requestGiangVien = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getgiangvien',
+            url: host+'/backendAPI/api/getgiangvien',
             data: null
         }).then(res => {
             if (res.data) {
@@ -894,7 +896,7 @@ export const updateTaiLieu = (matl, tentl, mota,
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatetailieu?matl=' + matl + '&tentl=' + tentl + '&mota=' + mota + '&magv=' + magv + '&macb=' + macb + '&macd=' + macd + '&giatl=' + giatl + '&demo=' + demo + '&sotrang=' + sotrang + '&ngaydang=' + ngaydang + '&link=' + link + '&anhtl=' + anhtl,
+            url: host+'/backendAPI/api/updatetailieu?matl=' + matl + '&tentl=' + tentl + '&mota=' + mota + '&magv=' + magv + '&macb=' + macb + '&macd=' + macd + '&giatl=' + giatl + '&demo=' + demo + '&sotrang=' + sotrang + '&ngaydang=' + ngaydang + '&link=' + link + '&anhtl=' + anhtl,
             data: null
         }).then(res => {
             console.log('done');
@@ -911,7 +913,7 @@ export const updateKhoaHoc = (makh, tenkh, mota, giakh, magv,
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatekhoahoc?makh=' + makh + '&tenkh=' + tenkh + '&mota=' + mota + '&giakh=' + giakh + '&magv=' + magv + '&macd=' + macd + '&macb=' + macb + '&anhkh=' + anhkh + '&videogt=' + videogt + '&ngaydang=' + ngaydang + '&sohs=' + sohs + '&mar1=' + mar1 + '&mar2=' + mar2 + '&mar3=' + mar3 + '&mar4=' + mar4 + '&mar5=' + mar5 + '&mar6=' + mar6 + '&gtkh=' + gtkh,
+            url: host+'/backendAPI/api/updatekhoahoc?makh=' + makh + '&tenkh=' + tenkh + '&mota=' + mota + '&giakh=' + giakh + '&magv=' + magv + '&macd=' + macd + '&macb=' + macb + '&anhkh=' + anhkh + '&videogt=' + videogt + '&ngaydang=' + ngaydang + '&sohs=' + sohs + '&mar1=' + mar1 + '&mar2=' + mar2 + '&mar3=' + mar3 + '&mar4=' + mar4 + '&mar5=' + mar5 + '&mar6=' + mar6 + '&gtkh=' + gtkh,
             data: null
         }).then(res => {
             console.log('done');
@@ -926,7 +928,7 @@ export const updateGiangVien = (makh, noicongtac, trinhdo, kinhnghiem, gioithieu
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updategiangvien?makh=' + makh + '&noicongtac=' + noicongtac + '&trinhdo=' + trinhdo + '&kinhnghiem=' + kinhnghiem + '&gioithieubanthan=' + gioithieubanthan + '&gioithieunghenghiep=' + gioithieunghenghiep + '&gioithieukinhnghiem=' + gioithieukinhnghiem + '&macb=' + macb + '&chuyennganh=' + chuyennganh,
+            url: host+'/backendAPI/api/updategiangvien?makh=' + makh + '&noicongtac=' + noicongtac + '&trinhdo=' + trinhdo + '&kinhnghiem=' + kinhnghiem + '&gioithieubanthan=' + gioithieubanthan + '&gioithieunghenghiep=' + gioithieunghenghiep + '&gioithieukinhnghiem=' + gioithieukinhnghiem + '&macb=' + macb + '&chuyennganh=' + chuyennganh,
             data: null
         }).then(res => {
             console.log('done');
@@ -947,7 +949,7 @@ export const requestKichHoatKhoaHoc = () => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getmakichhoat',
+            url: host+'/backendAPI/api/getmakichhoat',
             data: null
         }).then(res => {
             dispatch(getKichHoatKhoaHoc(res.data));
@@ -961,7 +963,7 @@ export const insertKichHoatKhoaHoc = (makh, makhoahoc, makichhoat) => {
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertkhoahockhachhang?makh=' + makh + '&makhoahoc=' + makhoahoc + '&makichhoat=' + makichhoat,
+            url: host+'/backendAPI/api/insertkhoahockhachhang?makh=' + makh + '&makhoahoc=' + makhoahoc + '&makichhoat=' + makichhoat,
             data: null
         }).then(res => {
             console.log("ok");
@@ -976,7 +978,7 @@ export const insertKhachHang = (tenkh, sdt, diachi, email,
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertkhachhang?TenKH=' + tenkh + '&SDT=' + sdt + '&DiaChi=' + diachi + '&Email=' + email + '&TaiKhoan=' + taikhoan + '&MatKhau=' + matkhau,
+            url: host+'/backendAPI/api/insertkhachhang?TenKH=' + tenkh + '&SDT=' + sdt + '&DiaChi=' + diachi + '&Email=' + email + '&TaiKhoan=' + taikhoan + '&MatKhau=' + matkhau,
             data: null
         }).then(res => {
             if (res.data) {
@@ -993,7 +995,7 @@ export const insertGiangVien = (noicongtac, trinhdo, kinhnghiem, gioithieubantha
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertGiangVien?noicongtac='+noicongtac+'&trinhdo='+trinhdo+'&kinhnghiem='+kinhnghiem+'&gioithieubanthan='+gioithieubanthan+'&gioithieunghenghiep='+gioithieunghenghiep+'&gioithieukinhnghiem='+gioithieukinhnghiem+'&makh='+makh+'&macb='+macb+'&chuyennganh='+chuyennganh,
+            url: host+'/backendAPI/api/insertGiangVien?noicongtac='+noicongtac+'&trinhdo='+trinhdo+'&kinhnghiem='+kinhnghiem+'&gioithieubanthan='+gioithieubanthan+'&gioithieunghenghiep='+gioithieunghenghiep+'&gioithieukinhnghiem='+gioithieukinhnghiem+'&makh='+makh+'&macb='+macb+'&chuyennganh='+chuyennganh,
             data: null
         }).then(res => {
             if (res.data) {
@@ -1023,7 +1025,7 @@ export const updateKhuyenMaiKH = (makhoahoc,tenkhuyenmai,phantramgiam,ngaybatdau
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updateKhuyenMaiKH?makhoahoc='+makhoahoc+'&phantramgiam='+phantramgiam+'&tenkhuyenmai='+tenkhuyenmai+'&ngaybatdau='+ngaybatdau+'&ngayhethan='+ngayhethan,
+            url: host+'/backendAPI/api/updateKhuyenMaiKH?makhoahoc='+makhoahoc+'&phantramgiam='+phantramgiam+'&tenkhuyenmai='+tenkhuyenmai+'&ngaybatdau='+ngaybatdau+'&ngayhethan='+ngayhethan,
             data: null
         }).then(res => {
             console.log("ok");
@@ -1044,7 +1046,7 @@ export const updateTTGV = (magv,trangthai) =>{
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatettgv?magv='+magv+'&trangthai='+trangthai,
+            url: host+'/backendAPI/api/updatettgv?magv='+magv+'&trangthai='+trangthai,
             data: null
         }).then(res => {
             console.log("ok");
@@ -1058,7 +1060,7 @@ export const updateTTKH = (makh,trangthai) =>{
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatettkh?makh='+makh+'&trangthai='+trangthai,
+            url: host+'/backendAPI/api/updatettkh?makh='+makh+'&trangthai='+trangthai,
             data: null
         }).then(res => {
             console.log("ok");
@@ -1072,7 +1074,7 @@ export const updateMaKichHoat = (id,trangthai) =>{
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatemakichhoat?id='+id+'&trangthai='+trangthai,
+            url: host+'/backendAPI/api/updatemakichhoat?id='+id+'&trangthai='+trangthai,
             data: null
         }).then(res => {
             console.log("ok");
@@ -1086,7 +1088,7 @@ export const insertMaKichHoat = (makhoahoc,makichhoat) =>{
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/insertmakichhoat?makhoahoc='+makhoahoc+'&makichhoat='+makichhoat,
+            url: host+'/backendAPI/api/insertmakichhoat?makhoahoc='+makhoahoc+'&makichhoat='+makichhoat,
             data: null
         }).then(res => {
             console.log("ok");
@@ -1100,7 +1102,7 @@ export const updateTTHD = (mahd,trangthai) =>{
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/updatetthd?mahd='+mahd+'&trangthai='+trangthai,
+            url: host+'/backendAPI/api/updatetthd?mahd='+mahd+'&trangthai='+trangthai,
             data: null
         }).then(res => {
             console.log("ok");
@@ -1114,7 +1116,7 @@ export const requestKetQuaThi = (iddethi) =>{
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getketqua?iddethi=' + iddethi,
+            url: host+'/backendAPI/api/getketqua?iddethi=' + iddethi,
             data: null
         }).then(res => {
             if(res.data){
@@ -1144,7 +1146,7 @@ export const requestAnhKH = () =>{
     return (dispatch) => {
         return axios({
             method: 'get',
-            url: 'http://localhost/backendAPI/api/getanhkh',
+            url: host+'/backendAPI/api/getanhkh',
             data: null
         }).then(res => {
             if(res.data){

@@ -88,8 +88,8 @@ class Khoahoc extends Component {
         var kh = khoahoc[0];
         
         return (
-            <div style={{ marginTop: '4.7rem' }}>
-                <div className="khoahocvideo">
+            <div>
+                <div className="khoahocvideo" style={{marginTop:'4.3rem'}} >
                     <Row>
                         <Col span={18} className="video-kh">
                             <iframe src={link} width="100%" height="615px" allow="autoplay" allowFullScreen="allowfullscreen"></iframe>

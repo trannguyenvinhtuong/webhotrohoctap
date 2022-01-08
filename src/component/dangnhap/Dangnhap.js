@@ -74,7 +74,7 @@ class Dangnhap extends Component {
         var { tendn, matkhau } = this.state;
 
         return (
-            <div className="dangnhap" style={{ marginTop: '5rem' }}>
+            <div className="dangnhap" style={{marginTop:'4.3rem'}} >
                 <div className="wrap">
                     <form>
                         <div className="header-dn">
@@ -89,9 +89,9 @@ class Dangnhap extends Component {
                         <br />
                         <Input placeholder="Password" className="inputdn" type="password" name="matkhau" value={matkhau} onChange={this.onChange} />
                         <br />
-                        <div className="item-forgot">
+                        {/* <div className="item-forgot">
                             <a href="#">Quên mật khẩu</a>
-                        </div>
+                        </div> */}
                         <br />
                         <a onClick={this.onClick}>
                             <button>

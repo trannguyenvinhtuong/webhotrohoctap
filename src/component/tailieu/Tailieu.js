@@ -9,7 +9,7 @@ class Tailieu extends Component{
         var {match} = this.props;
         var idtl = match.match.params.idtailieu;
         return (
-            <div style={{marginTop:'5.5rem'}}>       
+            <div style={{marginTop:'4.3rem'}} >       
                 <Gioithieu idtl = {idtl} />
                 <Docpdf idtl = {idtl} />
                 <Tacgia idtl = {idtl} />

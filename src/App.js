@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import routesALL from './route/routesALL';
 
 class App extends Component {
+  componentDidMount(){
+    document.title = "Web hỗ trợ học tập";
+  }
+
   showContentMenu = (routes) => {
     var rs = null;
     if (routes.length > 0) {
@@ -27,13 +31,13 @@ class App extends Component {
       <Router>        
         <Switch>
           {pathn === "/" ? <Redirect from='/' to='/nguoidung' /> : ''}
+          {/* <Redirect from='/#/nguoidung' to='/nguoidung' /> */}
           {logg !== null ? <Redirect from='/nguoidung/dangnhap' to='/nguoidung' /> : ''}
           {logg === null ? <Redirect from='/nguoidung/quantritk' to='/nguoidung' /> : ''}
           {logg === null ? <Redirect from='/nguoidung/khoahoc' to='/nguoidung' /> : ''}
           {logg === null ? <Redirect from='/nguoidung/tailieu' to='/nguoidung' /> : ''}
           {logg === null ? <Redirect from='/nguoidung/kichhoat' to='/dangnhap' /> : ''}
-          {this.showContentMenu(routesALL)}
-          
+          {this.showContentMenu(routesALL)}          
         </Switch>
       </Router>
     );

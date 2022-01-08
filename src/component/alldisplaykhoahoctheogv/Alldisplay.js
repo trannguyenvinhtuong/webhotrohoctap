@@ -53,7 +53,7 @@ class Alldisplay extends Component{
         var {khoahoc} = this.props;
         // console.log(khoahoc);
         return (
-            <div style={{marginTop: '5.5rem'}} className="container">
+            <div style={{marginTop:'4.3rem'}} className="container">
                 <Table columns={columns} dataSource = {khoahoc} rowKey="MaKhoaHoc" />
             </div>
         );

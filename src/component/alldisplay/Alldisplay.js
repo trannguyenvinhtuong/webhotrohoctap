@@ -18,7 +18,7 @@ class Alldislay extends Component{
         var iddm = match.match.params.iddm;
         
         return (
-            <div style={{marginTop:'4.7rem'}} >
+            <div style={{marginTop:'4.3rem'}} >
                 <Tab />
                 <Row className="padding-element">
                     <Col span={tooglefilter === true ? 6 : 0}>

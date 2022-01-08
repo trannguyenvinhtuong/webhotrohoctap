@@ -9,7 +9,7 @@ class Quantritk extends Component{
     render() {
         var {pagequanlytk} = this.props;
         return (            
-            <div className="quantritk" style={{marginTop:'5rem'}}>
+            <div className="quantritk" style={{marginTop:'4.3rem'}}>
                 <Row>
                     <Col span={6}>
                         <Control />

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import db from './../../../config/firebase.config';
-import { ref, child, get, remove } from "firebase/database";
+import { ref, child, get, remove, set } from "firebase/database";
 import * as action from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Table } from 'antd';
@@ -53,6 +53,7 @@ class Dethicuatoi extends Component {
 
     showCapBac = (makt) => {
         var rs = null;
+        console.log(makt);
         var { capbac } = this.props;
         if (capbac) {
             rs = capbac.map((cb) => {
@@ -87,14 +88,18 @@ class Dethicuatoi extends Component {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                var adaRef = ref(db, 'nganhangde/' + idde.toString());
-                remove(adaRef)
-                    .then(function () {
-                        console.log("Remove succeeded.")
-                    })
-                    .catch(function (error) {
-                        console.log("Remove failed: " + error.message)
-                    });
+                // var adaRef = ref(db, 'nganhangde/' + idde.toString());
+                // remove(adaRef)
+                //     .then(function () {
+                //         console.log("Remove succeeded.")
+                //     })
+                //     .catch(function (error) {
+                //         console.log("Remove failed: " + error.message)
+                //     });
+                const dbref = ref(db, "nganhangde");
+                set(child(dbref,idde.toString()),{
+                    0:"0"
+                });
                 Swal.fire(
                     'Thành công!',
                     'Đề thi của bạn đã xoá.',

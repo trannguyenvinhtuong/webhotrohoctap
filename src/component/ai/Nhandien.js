@@ -16,7 +16,7 @@ async function loadTrainingdata() {
     for (const label of labels) {
         const decriptors = [];
         for (let i = 1; i <= 4; i++) {
-            const image = await faceapi.fetchImage(`/data/${label}/${i}.jpeg`);
+            const image = await faceapi.fetchImage(`/data/${label}/${i}.jpg`);
             const dectection = await faceapi.detectSingleFace(image).withFaceLandmarks().withFaceDescriptor();
             decriptors.push(dectection.descriptor);
         }
@@ -80,13 +80,16 @@ class Nhandien extends Component {
             drawbox.draw(canvas);
         }
         const rs = facematcher.findBestMatch(detect.descriptor).label.toString();
-       
-        this.props.requestCheckGV(rs);
+        if(rs!='unknown'){
+            this.props.requestCheckGV(rs);
+        }
+        
     }
 
     render() {
-        var {khachhang,giangvien} = this.props;
- 
+        // var {khachhang,giangvien} = this.props;
+        var giangvien = [];
+        giangvien = this.props.giangvien;
         const columns = [
             {
                 title: 'Tên giảng viên',
@@ -113,7 +116,7 @@ class Nhandien extends Component {
                 <br />
                 <div id="container-anh" className="container-anh"></div>
                 <br />
-                {giangvien != undefined ? <Table dataSource={giangvien} columns={columns} /> : ''}
+                {giangvien != undefined ? <Table dataSource={[...giangvien]} columns={columns} /> : ''}
             </div>
         );
     }

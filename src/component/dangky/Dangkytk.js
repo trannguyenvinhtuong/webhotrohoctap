@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 class Dangkytk extends Component {
     render() {
         return (
-            <div style={{ marginTop: '5rem' }}>
-                <div className="dangnhap" style={{ marginTop: '5rem' }}>
+            <div>
+                <div className="dangnhap">
                     <div className="wrap">
                         <form>
                             <div className="header-dn">

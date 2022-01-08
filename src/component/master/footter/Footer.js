@@ -18,10 +18,14 @@ class Footer extends Component{
                         <div className="col">
                             <h3>Mã số sinh viên</h3>
                             <p>2001170228</p>
+                            <p>2001170132</p>
+                            <p>2001181102</p>
                         </div>
                         <div className="col">
                             <h3>Liên hệ</h3>
                             <p>vinhtuong.doubleshit@gmail.com</p>
+                            <p>phucsinnet113@gmail.com</p>
+                            <p>bennumber186@gmail.com</p>
                         </div>
                     </div>
                 </div>

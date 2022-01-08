@@ -55,13 +55,13 @@ class Themde extends Component {
 
     handleChangeCD = (value) => {
         this.setState({
-            chude: value
+            macd: value
         })
     }
 
     handleChangeCB = (value) => {
         this.setState({
-            capbac: value
+            macb: value
         })
     }
 
@@ -119,7 +119,7 @@ class Themde extends Component {
 
     onSubmit = () => {
         var { tende, macd, macb, cauhoi, dapanA, dapanB, dapanC, dapanD, dapan, dethi } = this.state;
-
+        
         var { giangvien } = this.props;
         var magv = giangvien[0].MaGV;
         const dbref = ref(db, "nganhangde");

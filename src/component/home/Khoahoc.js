@@ -26,7 +26,6 @@ class Khoahoc extends Component {
             }
         }
         var rs = null;
-        console.log(data);
         if (data) {
             rs = data.map((da, index) => {
                 return (
@@ -72,6 +71,7 @@ class Khoahoc extends Component {
     render() {
         var { khoahoc } = this.props;
         var { khuyenmai } = this.props;
+        console.log(khuyenmai);
         return (
             <div className="container khoahoc">
                 <h3>KHÓA HỌC</h3>

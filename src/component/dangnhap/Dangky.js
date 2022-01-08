@@ -67,7 +67,7 @@ class Dangky extends Component {
     render() {
         var { tenkh, sdt, diachi, email, taikhoan, matkhau, xnmatkhau } = this.state;
         return (
-            <div style={{ marginTop: '5.5rem' }} className="dangnhap">
+            <div className="dangnhap" style={{marginTop:'4.3rem'}} >
                 <div className="wrap">
                     <form>
                         <div className="header-dn">

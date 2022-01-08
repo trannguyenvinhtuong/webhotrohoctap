@@ -180,7 +180,7 @@ class Dangkygiangvien extends Component {
         var { giangvien, capbac } = this.props;
         var { noicongtac, trinhdo, kinhnghiem, gioithieubanthan, gioithieunghenghiep, gioithieukinhnghiem, macb, chuyennganh } = this.state;
         return (
-            <div className="dangnhap" style={{ marginTop: '5rem' }}>
+            <div className="dangnhap" style={{marginTop:'4.3rem'}}>
                 <div className="wrap">
                     {giangvien.length<1 ? this.showForm() : <h2 className="h2-warning">Bạn đã đăng ký rồi ! Vui lòng kiểm tra trong mục tài khoản</h2>}
                 </div>

@@ -21,22 +21,20 @@
     box-sizing: border-box;
     text-decoration: none;   
 }
-header{
-    width: 100%;
-    position: fixed;
-    display: flex;
-    padding: .8rem 3%;
-    justify-content: space-between;
-    align-items: center; 
-    top:0; left: 0; right: 0; /* align trai giua phai */
-    background-color: none;
-    font-size: 1rem;
-    background-size: cover;
-    /* background-position: top; */
-    background-repeat: no-repeat;
-    z-index: 1000;
+.img-nav{
+    width: 4.5rem;
+    height: auto;
 }
-header .search input{
+.link-style{
+    color: #fff !important;
+    padding: .5rem 1rem !important;
+    font-weight: 900;
+    transition: 0.5s;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.search input{
     width: 23rem ;
     border: none;
     box-shadow: 0px 15px 15px rgba(0,0,0,0.2);
@@ -49,37 +47,21 @@ header .search input{
     z-index: 1000;
     text-transform: none;
 }
-header .search i{
+.search i{
     font-size: 1.5rem;
     transition: .5s;
     color: white;
+    padding-left: .5rem;
 }
-header .search i:hover{
+.search i:hover{
     color: var(--hovercolor);
     transition: .5s;
 }
-header .search input:focus{
+.search input:focus{
     border-bottom: 3px solid var(--boderbottom);
 }
-header a{
-    padding: .5rem 1rem;
-    font-weight: 900;
-    color: white;
-    transition: 0.5s;
-    text-decoration: none;
-    font-size: 17px;
-    font-family: 'Times New Roman', Times, serif;
-}
-header a:hover{
-    color: var(--hovercolor);
-    transition: 0.5s;
-}
-header img{
-    width: 4.5rem;
-    height: auto;
-}
 .active-nav{
-    color: chocolate;
+    color: chocolate !important;
 }
 .home{
     height: 45rem;

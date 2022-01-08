@@ -144,8 +144,14 @@ class Showgiohang extends Component {
             if (result.isConfirmed) {
                 var data = JSON.parse(localStorage.getItem("cart"));
                 var ide = this.findIndex(id);
-                data.splice(ide, 1);
-                localStorage.setItem("cart", JSON.stringify(data));
+                if(data.length>1){
+                    data.splice(ide, 1);
+                    localStorage.setItem("cart", JSON.stringify(data));
+                }
+                else{
+                    localStorage.removeItem("cart");
+                }
+                
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
@@ -159,11 +165,13 @@ class Showgiohang extends Component {
     findIndex = (id) => {
         var data = JSON.parse(localStorage.getItem("cart"));
         var rs = -1;
-        data.map((da, index) => {
-            if (da.id === id) {
-                rs = index;
-            }
-        })
+        if(data.length > 1){
+            data.map((da, index) => {
+                if (da.id === id) {
+                    rs = index;
+                }
+            });
+        }        
         return rs;
     }
 

@@ -36,7 +36,7 @@ class Giangvien extends Component {
                 <div className="tk_giangvien" style={{ paddingTop: '2rem', textAlign: 'left' }}>
                     <h2>Truy cập trang quản trị dành cho giảng viên</h2>
                     <br />
-                    <a href="http://tnvinhtuong0299.xyz:3000/giangvienpage">
+                    <a href="https://tnvinhtuong0299.xyz/giangvienpage">
                         {window.location.reload}
                         <button>Truy cập</button>
                     </a>

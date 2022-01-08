@@ -11,7 +11,7 @@ class Detailtailieu extends Component{
         var {match} = this.props;
         var idtailieu = match.match.params.idtailieu;
         return (
-            <div style={{marginTop: '5rem'}}>
+            <div style={{marginTop:'4.3rem'}} >
                 <Row>
                     <Col span={17}>
                         <Gioithieu idtailieu = {idtailieu} />

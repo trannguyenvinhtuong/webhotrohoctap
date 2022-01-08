@@ -9,7 +9,7 @@ class Detailkhoahoc extends Component{
         var {match} = this.props;
         var idkh = match.match.params.idkhoahoc;
         return (
-            <div style={{marginTop:'5.5rem'}}>
+            <div style={{marginTop:'4.3rem'}} >
                 <Row>
                     <Col span={17}>
                         <Gioithieu idkh = {idkh} />

@@ -12,7 +12,7 @@ class Navbar extends Component{
                 <a href="#">
                     <h3>Teacher Dashboard</h3>
                 </a>
-                <a className="backtotk" href="http://tnvinhtuong0299.xyz:3000/nguoidung/quantritk">X</a>
+                <a className="backtotk" href="https://tnvinhtuong0299.xyz/nguoidung/quantritk">X</a>
             </div>
         );
     }

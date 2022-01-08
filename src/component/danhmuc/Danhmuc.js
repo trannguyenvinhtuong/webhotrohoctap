@@ -27,8 +27,8 @@ class Danhmuc extends Component {
     render() {
         var { chude } = this.props;
         return (
-            <div className="container" style={{ marginTop: '5rem' }}>
-                <div className="container khoahoc">
+            <div className="container">
+                <div className="container khoahoc" style={{marginTop:'4.3rem'}}>
                     <div className="row">
                         {this.showDanhMuc(chude)}
                     </div>

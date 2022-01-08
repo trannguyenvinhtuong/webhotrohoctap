@@ -62,7 +62,7 @@ class Bangxephang extends Component {
         ];
 
         return (
-            <div style={{ marginTop: '5.5rem' }} className="container">
+            <div className="container" style={{marginTop:'4.3rem'}} >
                 <Table dataSource={ketqua} columns={columns} rowKey="ID" />
             </div>
         );

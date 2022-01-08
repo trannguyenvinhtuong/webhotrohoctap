@@ -28,9 +28,9 @@ const Menulink = ({ label, to, activeOnlyWhenExact }) => {
             var active = match ? 'active-nav' : '';
             return (
                 // <li class="nav-item">
-                    <NavLink to={to} className={`${active}`}>
-                        {label}
-                    </NavLink>
+                <NavLink to={to} className={`${active} nav-link link-style`}>
+                    {label}
+                </NavLink>
                 // </li>
             )
         }} />
@@ -39,9 +39,9 @@ const Menulink = ({ label, to, activeOnlyWhenExact }) => {
 
 
 class NavbarHome extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             keytimkiem: ''
         }
     }
@@ -51,12 +51,14 @@ class NavbarHome extends Component {
         if (menus.length > 0) {
             rs = menus.map((menu, index) => {
                 return (
-                    <Menulink
-                        key={index}
-                        label={menu.name}
-                        to={menu.to}
-                        activeOnlyWhenExact={menu.exact}
-                    />
+                    <li className="nav-item">
+                        <Menulink
+                            key={index}
+                            label={menu.name}
+                            to={menu.to}
+                            activeOnlyWhenExact={menu.exact}
+                        />
+                    </li>
                 );
             });
         }
@@ -72,90 +74,97 @@ class NavbarHome extends Component {
         })
     }
 
-    onSubmitSearch = (e) =>{
+    onSubmitSearch = (e) => {
         e.preventDefault();
-        var {keytimkiem} = this.state;
-        if(keytimkiem != ''){
-            this.props.history.push('/nguoidung/searchpage/'+keytimkiem);
+        var { keytimkiem } = this.state;
+        if (keytimkiem != '') {
+            this.props.history.push('/nguoidung/searchpage/' + keytimkiem);
         }
-        else{
+        else {
             this.props.history.push('/nguoidung/searchpage/0');
         }
-        
+
     }
 
     render() {
         var logg = localStorage.getItem('user');
-        var {keytimkiem} = this.state;
+        var { keytimkiem } = this.state;
         return (
-            <header style={{ backgroundImage: `url(${Bg})` }}>
-                <Link to='/nguoidung' exact='true'>
-                    <img src={Logo} />
-                </Link>
-                <div className="search">
-                    <form onSubmit={this.onSubmitSearch}>
-                        <input type="text"
-                                onChange={this.onChange}
-                                name="keytimkiem"
-                                value={keytimkiem}
-                                placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
-                        <a onClick={this.onSubmitSearch}><i className="fas fa-search"></i></a>
-                    </form>                                     
-                </div>
-                <nav>
-                    {this.Showmenu(menus)}
-                    {logg !== null ?
-                        <Route path="/giohang" children={({ match }) => {
-                            var active = match ? 'active-nav' : '';
-                            return (
-                                <NavLink to="/nguoidung/giohang" className={`${active}`}>
-                                    <i className="fas fa-shopping-cart"></i> Giỏ hàng
-                                </NavLink>
-                            )
-                        }} />
-                    : ''
-                    }
-                    {logg === null
-                        ? <Menulink to="/nguoidung/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
-                        : <Menulink to="/nguoidung/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
-
-                </nav>
-            </header>
-            // <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            //     <div class="container-fluid">
-            //         <Link class="navbar-brand" to='/nguoidung'>
-            //             <img src={Logo} />
-            //         </Link>
-            //         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            //             <span class="navbar-toggler-icon"></span>
-            //         </button>
-            //         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            //             <div className="search">
-            //                 <input type="text" placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
-            //                 <a href="#"><i className="fas fa-search"></i></a>
-            //             </div>
-            //             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            //                 {this.Showmenu(menus)}
-            //                 {logg !== null ?
-            //                     <Route path="/giohang" children={({ match }) => {
-            //                         var active = match ? 'active-nav' : '';
-            //                         return (
-            //                             <li class="nav-item">
-            //                                 <NavLink to="/nguoidung/giohang" className={`${active}`}>
-            //                                     <i className="fas fa-shopping-cart"></i> Giỏ hàng
-            //                                 </NavLink>
-            //                             </li>
-            //                         )
-            //                     }} />
-            //                     : ''
-            //                 }
-            //                 {logg === null
-            //                     ? <Menulink to="/nguoidung/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
-            //                     : <Menulink to="/nguoidung/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
-            //             </ul>
-            //         </div>
+            // <header style={{ backgroundImage: `url(${Bg})` }}>
+            //     <Link to='/nguoidung' exact='true'>
+            //         <img src={Logo} />
+            //     </Link>
+            //     <div className="search">
+            //         <form onSubmit={this.onSubmitSearch}>
+            //             <input type="text"
+            //                     onChange={this.onChange}
+            //                     name="keytimkiem"
+            //                     value={keytimkiem}
+            //                     placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
+            //             <a onClick={this.onSubmitSearch}><i className="fas fa-search"></i></a>
+            //         </form>                                     
             //     </div>
-            // </nav>
+            //     <nav>
+            //         {this.Showmenu(menus)}
+            //         {logg !== null ?
+            //             <Route path="/giohang" children={({ match }) => {
+            //                 var active = match ? 'active-nav' : '';
+            //                 return (
+            //                     <NavLink to="/nguoidung/giohang" className={`${active}`}>
+            //                         <i className="fas fa-shopping-cart"></i> Giỏ hàng
+            //                     </NavLink>
+            //                 )
+            //             }} />
+            //         : ''
+            //         }
+            //         {logg === null
+            //             ? <Menulink to="/nguoidung/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
+            //             : <Menulink to="/nguoidung/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
+
+            //     </nav>
+            // </header>
+            <nav style={{ backgroundImage: `url(${Bg})`, padding: '.8rem 3%' }} class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+                <div class="container-fluid">
+                    <Link class="navbar-brand" to='/nguoidung'>
+                        <img className="img-nav" src={Logo} />
+                    </Link>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div className="search ms-auto search">
+                            <form onSubmit={this.onSubmitSearch}>
+                                <input type="text"
+                                    onChange={this.onChange}
+                                    name="keytimkiem"
+                                    value={keytimkiem}
+                                    placeholder="Tìm khóa học, chủ đề, giảng viên ...." />
+                                <a onClick={this.onSubmitSearch}><i className="fas fa-search"></i></a>
+                            </form>
+                        </div>
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            {this.Showmenu(menus)}
+                            {logg !== null ?
+                                <Route path="/giohang" children={({ match }) => {
+                                    var active = match ? 'active-nav' : '';
+                                    return (
+                                        <li class="nav-item">
+                                            <NavLink to="/nguoidung/giohang" className={`${active} nav-link link-style`}>
+                                                <i className="fas fa-shopping-cart"></i> Giỏ hàng
+                                            </NavLink>
+                                        </li>
+                                    )
+                                }} />
+                                : ''
+                            }
+                            {logg === null
+                                ? <Menulink to="/nguoidung/dangnhap" label="Đăng nhập" activeOnlyWhenExact={false} />
+                                : <Menulink to="/nguoidung/quantritk" label="Xin chào" activeOnlyWhenExact={false} />}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
         );
     }
 }

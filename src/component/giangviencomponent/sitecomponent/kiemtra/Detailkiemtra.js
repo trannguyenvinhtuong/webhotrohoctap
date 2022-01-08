@@ -3,7 +3,7 @@ import { Radio, Space } from 'antd';
 import { connect } from "react-redux";
 import * as action from './../../../../actions/index';
 import Dethicuatoi from "../Dethicuatoi";
-import { Modal } from "antd";
+import { Modal, Checkbox } from "antd";
 import Swal from "sweetalert2";
 
 import db from './../../../../config/firebase.config';
@@ -60,17 +60,17 @@ class Detailkiemtra extends Component {
                             </a>
                             <br />
                             <br />
-                            <Radio.Group key={index} onChange={e => this.onChangeSelect(e.target.value, index)}>
-                                <Space direction="vertical" key={index}>
-                                    <Radio value={1}>A  {da.A}</Radio>
-                                    <Radio value={2}>B  {da.B}</Radio>
-                                    <Radio value={3}>C  {da.C}</Radio>
-                                    <Radio value={4}>D  {da.D}</Radio>
-                                </Space>
-                            </Radio.Group>
+                            <Checkbox onChange={e => this.onChangeSelect(e.target.checked, index, 'A')}>A  {da.A}</Checkbox>
+                            <br />
+                            <Checkbox onChange={e => this.onChangeSelect(e.target.checked, index, 'B')}>B  {da.B}</Checkbox>
+                            <br />
+                            <Checkbox onChange={e => this.onChangeSelect(e.target.checked, index, 'C')}>C  {da.C}</Checkbox>
+                            <br />
+                            <Checkbox onChange={e => this.onChangeSelect(e.target.checked, index, 'D')}>D  {da.D}</Checkbox>
+                            
                             <br />
                             <br />
-                            <p style={{color: 'black'}}>Đáp án: {da.dapan}</p>                          
+                            <p style={{ color: 'black' }}>Đáp án: {da.dapan}</p>
                         </div>
                     )
                 }
@@ -164,7 +164,7 @@ class Detailkiemtra extends Component {
                 set(child(dbref3, idch.toString()), {
                     cauhoi: 'khongco'
                 });
-                
+
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
@@ -174,30 +174,83 @@ class Detailkiemtra extends Component {
                 this.onRefesh();
             }
         })
-       
+
     }
 
     tooglePage = (page) => {
         this.props.togglepagegiangvien(page);
     }
 
-    onChangeSelect = (value, id) => {
-        var { cautraloi } = this.state;
-        if (value === 1) {
-            cautraloi.push({ 'id': id, 'dapan': 'A' });
-        }
-        else if (value === 2) {
-            cautraloi.push({ 'id': id, 'dapan': 'B' });
-        }
-        else if (value === 3) {
-            cautraloi.push({ 'id': id, 'dapan': 'C' });
-        }
-        else {
-            cautraloi.push({ 'id': id, 'dapan': 'D' });
+    // onChangeSelect = (value, id) => {
+    //     var { cautraloi } = this.state;
+    //     if (value === 1) {
+    //         cautraloi.push({ 'id': id, 'dapan': 'A' });
+    //     }
+    //     else if (value === 2) {
+    //         cautraloi.push({ 'id': id, 'dapan': 'B' });
+    //     }
+    //     else if (value === 3) {
+    //         cautraloi.push({ 'id': id, 'dapan': 'C' });
+    //     }
+    //     else {
+    //         cautraloi.push({ 'id': id, 'dapan': 'D' });
 
+    //     }
+    //     this.setState({
+    //         cautraloi: cautraloi
+    //     })
+    // }
+    onChangeSelect = (value, id, dapan) => {        
+        var { cautraloi } = this.state;
+        if(value === true){
+            var res = false;
+            // push vo cai cu 
+            if(cautraloi.length > 0){
+                cautraloi.map((ctr,index)=>{
+                    if(ctr.id == id){
+                        cautraloi.splice(index,1);
+                        var da = ctr.dapan;
+                        var newda = [];
+                        if(da.length > 1){
+                            da.map((d)=>{
+                                newda.push(d);
+                            });
+                        }
+                        else{
+                            newda.push(da);
+                        }                    
+                        newda.push(dapan);
+                        cautraloi.push({ 'id': id, 'dapan': newda });
+                        res = true;
+                    }                
+                })
+            }
+            // push moi 
+            if(res == false){
+                var da = cautraloi;
+                da.push({ 'id': id, 'dapan': dapan.toString() });
+                
+            }
+
+        } 
+        else if(value ===  false){
+            cautraloi.map((ctl,index)=>{
+                if(ctl.id == id ){
+                    var cau = [];
+                    cau = ctl.dapan;
+                    if(cau.length > 1){
+                        var ct = cau.indexOf(dapan);
+                        cau.splice(ct,1);
+                    }
+                    //fix bug
+                    else{
+                        ctl.dapan = [];
+                    }                    
+                }
+            })
         }
         this.setState({
-            cautraloi: cautraloi
+            cautraloi : cautraloi
         })
     }
 
@@ -309,7 +362,7 @@ class Detailkiemtra extends Component {
                 <div>
                     <a style={{ float: 'left' }} onClick={() => this.tooglePage(<Dethicuatoi />)}>
                         <button className="btn-nopbai btn-primary">Quay lại</button>
-                    </a>                
+                    </a>
                 </div>
                 <br />
                 <br />

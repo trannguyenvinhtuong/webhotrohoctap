@@ -20,7 +20,7 @@ class Thongtinthanhtoan extends Component {
         var {khachhang} = this.props;
         var kh = khachhang[0];
         return (
-            <div className="thanhtoan container">
+            <div className="thanhtoan container" style={{marginTop:'4.3rem'}} >
                 <h1>Thanh toán</h1>
                 <div className="containerprogress">
                     <ul className="progressbar">
@@ -32,8 +32,7 @@ class Thongtinthanhtoan extends Component {
                 <br />
                 <br />
                 <br />
-                <br />
-            
+                <br />            
                 <div className="themkhoahoc">
                     <label>Tên khách hàng</label>
                     <input className="form-control"

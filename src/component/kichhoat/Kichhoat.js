@@ -136,7 +136,7 @@ class Kichhoat extends Component {
     render() {
         var { makichhoat, data } = this.state;
         return (
-            <div className="container kichhoatkhoahoc" style={{ marginTop: '6rem' }}>
+            <div className="container kichhoatkhoahoc" style={{marginTop:'4.3rem'}}>
                 <input type="text"
                     name="makichhoat"
                     value={makichhoat}

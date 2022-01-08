@@ -90,7 +90,7 @@ class Thanhtoanbuoc2 extends Component {
         ];
 
         return (
-            <div className="thanhtoan container">
+            <div className="thanhtoan container" style={{marginTop:'4.3rem'}} >
                 <h1>Thanh toán</h1>
                 <div className="containerprogress">
                     <ul className="progressbar">
