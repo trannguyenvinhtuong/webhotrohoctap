@@ -4,7 +4,7 @@ import axios from 'axios';
 import db from './../config/firebase.config';
 import { ref, child, set } from "firebase/database";
 
-const host = "https://tnvinhtuong0299.xyz";
+const host = "http://localhost";
 
 export const getKhoaHoc = (khoahoc) => {
     return {
