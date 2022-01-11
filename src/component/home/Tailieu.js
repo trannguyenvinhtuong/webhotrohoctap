@@ -21,7 +21,7 @@ class Tailieu extends Component {
             data = datainput;
         }
         else if(datainput.length > 8){
-            for(let i =0; i<6;i++){
+            for(let i =0; i<8;i++){
                 data.push(datainput[i]);
             }
         }
