@@ -12,11 +12,6 @@ const menus = [
         exact: true
     },
     {
-        name: 'Danh mục',
-        to: '/nguoidung/danhmuc',
-        exact: false
-    },
-    {
         name: 'Kích hoạt khóa học',
         to: '/nguoidung/kichhoat',
         exact: false
@@ -144,6 +139,19 @@ class NavbarHome extends Component {
                         </div>
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             {this.Showmenu(menus)}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle link-style" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Danh mục
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><Link className="dropdown-item" to="/nguoidung/alldisplay/1">Toán học</Link></li>
+                                    <li><Link className="dropdown-item" to="/nguoidung/alldisplay/2">Văn học</Link></li>
+                                    <li><Link className="dropdown-item" to="/nguoidung/alldisplay/3">Vật lý</Link></li>
+                                    <li><Link className="dropdown-item" to="/nguoidung/alldisplay/11">Ngoại ngữ</Link></li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><Link className="dropdown-item" to="/nguoidung/danhmuc">Xem tất cả</Link></li>
+                                </ul>
+                            </li>
                             {logg !== null ?
                                 <Route path="/giohang" children={({ match }) => {
                                     var active = match ? 'active-nav' : '';

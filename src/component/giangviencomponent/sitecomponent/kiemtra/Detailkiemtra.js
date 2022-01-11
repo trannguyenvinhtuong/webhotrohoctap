@@ -113,13 +113,14 @@ class Detailkiemtra extends Component {
         var suach = JSON.parse(sessionStorage.getItem('suach'));
         var idch = suach.ma;
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Xác nhận',
+            text: "Bạn có muốn sửa?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, change it!'
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
         }).then((result) => {
             if (result.isConfirmed) {
                 var madethi = JSON.parse(sessionStorage.getItem('madethi'));
@@ -310,7 +311,7 @@ class Detailkiemtra extends Component {
         Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Your work has been saved',
+            title: 'Thêm thành công',
             showConfirmButton: false,
             timer: 1500
         });

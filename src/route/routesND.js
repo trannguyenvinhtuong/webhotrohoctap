@@ -27,6 +27,8 @@ import Searchpage from '../component/master/search/Searchpage';
 import Bangxephang from '../component/dethi/Bangxephang';
 import Nhandien from '../component/ai/Nhandien';
 import Alldisplay from '../component/alldisplaykhoahoctheogv/Alldisplay';
+import Doimatkhau from './../component/quenmatkhau/Doimatkhau';
+import Nhapthongtin from '../component/quenmatkhau/Nhapthongtin';
 
 const routesND = [
     {
@@ -168,6 +170,16 @@ const routesND = [
         path: '/nguoidung/khoahoctheogv/:idkh',
         exact: false,
         main: (match) => <Alldisplay match={match} />
+    },
+    {
+        path: '/nguoidung/doimatkhau/:idkh',
+        exact: false,
+        main: (match) => <Doimatkhau match={match} />
+    },
+    {
+        path: '/nguoidung/nhapemail',
+        exact: false,
+        main: (match) => <Nhapthongtin />
     },
     {
         path: '',

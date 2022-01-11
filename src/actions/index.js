@@ -283,6 +283,20 @@ export const getKhachHang = (khachhang) => {
     }
 }
 
+export const requestKhachHangByEmail = (email) =>{
+    return (dispatch) => {
+        return axios({
+            method: 'get',
+            url: host+'/backendAPI/api/getkhachhang?email=' + email,
+            data: null
+        }).then(res => {
+            dispatch(getKhachHang(res.data));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+}
+
 export const requestKhachHang = (tendn) => {
     return (dispatch) => {
         return axios({

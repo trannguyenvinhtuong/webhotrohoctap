@@ -34,9 +34,11 @@ class Quanlyhoadon extends Component{
         return rs;
     }
 
-    showDetail = (id) =>{
+    showDetail = (id,idkh) =>{
         sessionStorage.removeItem('detailhoadon');
         sessionStorage.setItem('detailhoadon',JSON.stringify({'mahd':id}));
+        sessionStorage.removeItem('thongtinhoadon');
+        sessionStorage.setItem('thongtinhoadon',JSON.stringify({'makh':idkh}));
         this.props.togglePageAdmin(<Detailhoadon />);
     }
 
@@ -45,7 +47,7 @@ class Quanlyhoadon extends Component{
         const columns = [
             {
                 title: 'Mã hoá đơn',
-                render: (record) => <a className="table-p" onClick={()=>this.showDetail(record.MaHD)}>{record.MaHD}</a>
+                render: (record) => <a className="table-p" onClick={()=>this.showDetail(record.MaHD,record.MaKH)}>{record.MaHD}</a>
             },
             {
                 title: 'Tên khách hàng',

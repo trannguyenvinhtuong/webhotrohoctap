@@ -28,7 +28,7 @@ class Quanlykhoahoc extends Component{
             {
                 title: '',
                 key: 'MaKhoaHoc',
-                render: (record) => <img src={record.AnhKhoaHoc} key={record.MaKhoaHoc}/>
+                render: (record) => <img style={{width: '150px'}} src={record.AnhKhoaHoc} key={record.MaKhoaHoc}/>
             },
             {
                 title: 'Tên khoá học',

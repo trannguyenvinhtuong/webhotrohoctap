@@ -1,10 +1,12 @@
 import { Component } from "react";
 import './../../SASS/thanhtoan.sass';
 import './../../stylecss/progressbar.css';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as action from "./../../actions/index";
 import { connect } from "react-redux";
-import {Table} from 'antd';
+import { Table } from 'antd';
+import emailjs from 'emailjs-com';
+import Swal from 'sweetalert2';
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -15,33 +17,61 @@ const formatter = new Intl.NumberFormat('en-US', {
 class Thanhtoanbuoc2 extends Component {
     componentDidMount() {
         var cartdachon = JSON.parse(sessionStorage.getItem('cartdachon'));
-        if (cartdachon.length == undefined) {           
+        var logg = JSON.parse(localStorage.getItem('user'));
+        var makh = logg.makh;
+        this.props.requestKhachHangByID(makh);
+        if (cartdachon.length == undefined) {
             this.props.requestKhoaHocTheoGH(cartdachon.id);
-          
+
         }
         else {
             this.props.resetNhieuKhoaHoc();
-            for (let i = 0; i < cartdachon.length; i++) {                
-                this.props.requestNhieuKhoaHoc(cartdachon[i].id);         
+            for (let i = 0; i < cartdachon.length; i++) {
+                this.props.requestNhieuKhoaHoc(cartdachon[i].id);
             }
         }
     }
 
-    onClickReturn = () =>{
+    onClickReturn = () => {
         this.props.history.push('/nguoidung/thongtinthanhtoan');
     }
 
-    onClick = () =>{
-        var logg = JSON.parse(localStorage.getItem('user'));
-        var makh = logg.makh;
-        var ghichu = "abc";
-        var tongtien = JSON.parse(sessionStorage.getItem('tongtien'));
-        var tong = tongtien.tongtien;
-        var date = new Date();
-        var ngaydat = date.getDate() + '-' + (date.getMonth()+1) + '-' + date.getFullYear();
-        var cartdachon = JSON.parse(sessionStorage.getItem('cartdachon'));
-        this.props.insertHoaDon(makh,ghichu,tong,ngaydat,cartdachon);
-        this.props.history.push('/nguoidung/thanhtoanthanhcong');
+    onClick = () => {
+        var { khachhang } = this.props;
+        
+        if (khachhang.length > 0) {
+            var logg = JSON.parse(localStorage.getItem('user'));
+            var makh = logg.makh;
+            var ghichu = "abc";
+            var tongtien = JSON.parse(sessionStorage.getItem('tongtien'));
+            var tong = tongtien.tongtien;
+            var date = new Date();
+            var ngaydat = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+            var cartdachon = JSON.parse(sessionStorage.getItem('cartdachon'));
+            this.props.insertHoaDon(makh, ghichu, tong, ngaydat, cartdachon);
+
+            //mail
+            var templateParams = {
+                name: khachhang[0].TenKH,
+                email: khachhang[0].Email,
+                message: formatter.format(tong) + ' VND'
+            }
+            emailjs.send('service_4zxxb3m', 'template_5e5jwjb', templateParams, 'user_iVOGiqr6x0VSnscIiUPdR')
+                .then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }, function (error) {
+                    console.log('FAILED...', error);
+                });
+            this.props.history.push('/nguoidung/thanhtoanthanhcong');
+        }
     }
 
     showSoLuong = (id) => {
@@ -56,7 +86,7 @@ class Thanhtoanbuoc2 extends Component {
     }
 
     render() {
-        var {getnhieukhoahoc} = this.props;
+        var { getnhieukhoahoc } = this.props;
         var tong = JSON.parse(sessionStorage.getItem("tongtien"));
 
         const column = [
@@ -83,14 +113,14 @@ class Thanhtoanbuoc2 extends Component {
                 title: 'Giá',
                 key: 'MaKH',
                 render: (record) => <div>
-                    <p className="text-giohang giacu">{formatter.format(record.GiaKH)}</p>
-                    <p className="text-giohang giamoi">{formatter.format(record.GiaKH - (record.GiaKH * record.PhanTramGiam) / 100)}</p>
+                    <p className="text-giohang giacu">{formatter.format(record.GiaKH * this.showSoLuong(record.MaKhoaHoc))}</p>
+                    <p className="text-giohang giamoi">{formatter.format((record.GiaKH - (record.GiaKH * record.PhanTramGiam) / 100) * this.showSoLuong(record.MaKhoaHoc))}</p>
                 </div>
             }
         ];
 
         return (
-            <div className="thanhtoan container" style={{marginTop:'4.3rem'}} >
+            <div className="thanhtoan container" style={{ marginTop: '4.3rem' }} >
                 <h1>Thanh toán</h1>
                 <div className="containerprogress">
                     <ul className="progressbar">
@@ -108,12 +138,12 @@ class Thanhtoanbuoc2 extends Component {
                     rowKey="MaKhoaHoc"
                 />
                 <br />
-                <p style={{float: 'right', color: 'red'}}>Tổng tiền: <span>{formatter.format(tong.tongtien)}</span></p>
+                <p style={{ float: 'right', color: 'red' }}>Tổng tiền: <span>{formatter.format(tong.tongtien)}</span></p>
                 <br />
                 <br />
                 <div>
                     <a onClick={this.onClickReturn}>
-                        <button style={{float: 'left'}}>Bước trước đó</button>
+                        <button style={{ float: 'left' }}>Bước trước đó</button>
                     </a>
                     <a onClick={this.onClick}>
                         <button>Đặt hàng</button>
@@ -129,7 +159,8 @@ class Thanhtoanbuoc2 extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        getnhieukhoahoc: state.getnhieukhoahoc
+        getnhieukhoahoc: state.getnhieukhoahoc,
+        khachhang: state.getkhachhang
     }
 }
 
@@ -141,13 +172,16 @@ const mapDispatchToProps = (dispatch, props) => {
         resetNhieuKhoaHoc: () => {
             dispatch(action.resetNhieuKhoaHoc());
         },
-        insertHoaDon: (makh, ghichu, tongtien, ngaydat) =>{
+        insertHoaDon: (makh, ghichu, tongtien, ngaydat) => {
             dispatch(action.insertHoaDon(makh, ghichu, tongtien, ngaydat));
         },
         insertCTHD: (mahd, makhoahoc, matl, soluong) => {
             dispatch(action.insertCTHD(mahd, makhoahoc, matl, soluong));
+        },
+        requestKhachHangByID: (idkh) => {
+            dispatch(action.requestKhachHangByID(idkh));
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Thanhtoanbuoc2));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Thanhtoanbuoc2));

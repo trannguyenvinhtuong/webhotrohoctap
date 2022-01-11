@@ -3,8 +3,10 @@ import { Table } from 'antd';
 import * as action from './../../actions/index';
 import { connect } from "react-redux";
 import { Menu, Dropdown } from 'antd';
-import { SortAscendingOutlined, BarChartOutlined } from '@ant-design/icons';
+import { SortAscendingOutlined, BarChartOutlined, FileExcelOutlined } from '@ant-design/icons';
 import Chart from "./Chart";
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 class Detaildiem extends Component {
     constructor(props) {
@@ -44,6 +46,23 @@ class Detaildiem extends Component {
 
     onChart = (data) =>{
         this.props.togglePageAdmin(<Chart data={data} />)
+    }
+
+    exportData = (csvData, fileName) => {
+        const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        const fileExtension = '.xlsx';
+        const ws = XLSX.utils.json_to_sheet(csvData);
+        const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const data = new Blob([excelBuffer], { type: fileType });
+        FileSaver.saveAs(data, fileName + fileExtension);
+    }
+
+    onExport = () => {
+        var { ketqua } = this.props;
+        if (ketqua.length > 0){
+            this.exportData(ketqua, "Ket_qua");
+        }
     }
 
     render() {
@@ -158,6 +177,11 @@ class Detaildiem extends Component {
                                 <Dropdown overlay={menu} placement="bottomCenter" arrow>
                                     <SortAscendingOutlined />
                                 </Dropdown>
+                            </a>
+                        </div>
+                        <div>
+                            <a className="icon-tab" onClick={this.onExport}>
+                                <FileExcelOutlined />
                             </a>
                         </div>
                     </div>

@@ -42,9 +42,9 @@ class Detailkhoahoc extends Component {
         this.props.requestTTKH(makhoahoc.id);
         this.props.requestChuDe();
         this.props.requestCapBac();
-        var user = JSON.parse(localStorage.getItem('user'));
-        var idkh = user.makh;
-        this.props.requestCheckGV(idkh);
+        // var user = JSON.parse(localStorage.getItem('user'));
+        // var idkh = user.makh;
+        // this.props.requestCheckGV(idkh);
     }
 
     componentWillReceiveProps() {

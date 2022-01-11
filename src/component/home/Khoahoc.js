@@ -39,6 +39,7 @@ class Khoahoc extends Component {
                                         <h1>{da.TenKH}</h1>
                                     </div>
                                     <div className="col">
+                                        <p className="giacu" style={{textDecoration: 'none'}}>{this.loadPhanTramGiam(km,da.MaKhoaHoc)} %</p>
                                         <p className="giacu">{formatter.format(da.GiaKH)}</p>
                                         <p className="giamoi">
                                             {
@@ -52,6 +53,18 @@ class Khoahoc extends Component {
                     </div>
                 )
             });
+        }
+        return rs;
+    }
+
+    loadPhanTramGiam = (km,idkh) =>{
+        var rs = null;
+        if (km) {
+            km.map((k, index) => {
+                if (k.MaKhoaHoc === idkh) {
+                    rs = k.PhanTramGiam
+                }
+            })
         }
         return rs;
     }
@@ -71,7 +84,6 @@ class Khoahoc extends Component {
     render() {
         var { khoahoc } = this.props;
         var { khuyenmai } = this.props;
-        console.log(khuyenmai);
         return (
             <div className="container khoahoc">
                 <h3>KHÓA HỌC</h3>

@@ -78,7 +78,7 @@ class Showgiohang extends Component {
         if (data.length > 1) {
             var tong = 0;
             data.map((da, index) => {
-                tong = tong + Number(da.GiaKH - (da.GiaKH * da.PhanTramGiam) / 100);
+                tong = tong + Number((da.GiaKH - (da.GiaKH * da.PhanTramGiam) / 100)*this.showSoLuong(da.MaKhoaHoc));
                 this.setState({
                     tongtien: tong
                 });
@@ -87,7 +87,7 @@ class Showgiohang extends Component {
         }
         else if (data.length == 1) {
             var tong = 0;
-            tong = data[0].GiaKH - (data[0].GiaKH * data[0].PhanTramGiam) / 100;
+            tong = (data[0].GiaKH - (data[0].GiaKH * data[0].PhanTramGiam) / 100)*this.showSoLuong(data[0].MaKhoaHoc);
             this.setState({
                 tongtien: tong
             });
@@ -105,12 +105,13 @@ class Showgiohang extends Component {
         if(cart.length>1){
             cart.map((ca) => {
                 if (ca.id === id) {
-                    rs = ca.soluong;
+                    rs = ca.soluong.toString();
+                    
                 }
             });
         }
         else{
-            rs = cart.soluong;
+            rs = cart.soluong == undefined ? cart[0].soluong : cart.soluong;
         }
         
         return rs;
@@ -133,13 +134,14 @@ class Showgiohang extends Component {
 
     onDeleteItem = (id) => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Xác nhận',
+            text: "Bạn có muốn xoá?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
         }).then((result) => {
             if (result.isConfirmed) {
                 var data = JSON.parse(localStorage.getItem("cart"));
@@ -153,8 +155,8 @@ class Showgiohang extends Component {
                 }
                 
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'Thành công!',
+                    'Đã xoá sản phẩm khỏi giở.',
                     'success'
                 )
                 window.location.reload();
@@ -235,14 +237,14 @@ class Showgiohang extends Component {
             },
             {
                 title: 'Số lượng',
-                render: (record) => <InputNumber min={1} max={10} defaultValue={this.showSoLuong(record.MaKhoaHoc)} onChange={this.onChangeSoLuong} />
+                render: (record) => <p className="text-giohang">{this.showSoLuong(record.MaKhoaHoc)}</p>
             },
             {
                 title: 'Giá',
                 key: 'MaKH',
                 render: (record) => <div>
-                    <p className="text-giohang giacu">{formatter.format(record.GiaKH)}</p>
-                    <p className="text-giohang giamoi">{formatter.format(record.GiaKH - (record.GiaKH * record.PhanTramGiam) / 100)}</p>
+                    <p className="text-giohang giacu">{formatter.format(record.GiaKH*this.showSoLuong(record.MaKhoaHoc))}</p>
+                    <p className="text-giohang giamoi">{formatter.format((record.GiaKH - (record.GiaKH * record.PhanTramGiam) / 100)*this.showSoLuong(record.MaKhoaHoc))}</p>
                 </div>
             },
             {

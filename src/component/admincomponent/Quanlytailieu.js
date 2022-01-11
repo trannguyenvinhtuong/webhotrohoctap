@@ -27,7 +27,7 @@ class Quanlytailieu extends Component{
             {
                 title: '',
                 key: 'MaTL',
-                render: (record) => <img src={record.AnhTL} key={record.MaTL}/>
+                render: (record) => <img style={{width: '150px'}} src={record.AnhTL} key={record.MaTL}/>
             },
             {
                 title: 'Tên tài liệu',

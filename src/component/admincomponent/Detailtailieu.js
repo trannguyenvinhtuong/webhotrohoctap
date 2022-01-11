@@ -31,9 +31,9 @@ class Detailtailieu extends Component {
         this.props.requestMotTaiLieu(matailieu.id);
         this.props.requestChuDe();
         this.props.requestCapBac();
-        var user = JSON.parse(localStorage.getItem('user'));
-        var idkh = user.makh;
-        this.props.requestCheckGV(idkh);
+        // var user = JSON.parse(localStorage.getItem('user'));
+        // var idkh = user.makh;
+        // this.props.requestCheckGV(idkh);
         this.setState({
             up: true
         })    

@@ -89,9 +89,9 @@ class Dangnhap extends Component {
                         <br />
                         <Input placeholder="Password" className="inputdn" type="password" name="matkhau" value={matkhau} onChange={this.onChange} />
                         <br />
-                        {/* <div className="item-forgot">
-                            <a href="#">Quên mật khẩu</a>
-                        </div> */}
+                        <div className="item-forgot">
+                            <Link to="/nguoidung/nhapemail">Quên mật khẩu</Link>
+                        </div>
                         <br />
                         <a onClick={this.onClick}>
                             <button>
