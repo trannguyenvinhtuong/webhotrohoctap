@@ -64,36 +64,70 @@ class Chinhsuathongtin extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         var { makh, tenkh, sdt, diachi, email, anhdaidien } = this.state;
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var anhdaidienNew = this.getId(anhdaidien);
-        Swal.fire({
-            title: 'Bạn có muốn thay đổi?',
-            text: "Bạn không thể quay về dữ liệu cũ",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                if (makh == '' || tenkh == '' || sdt == '' || diachi == '' || email == '' || anhdaidien == '') {
-                    Swal.fire(
-                        'Warning!',
-                        'Vui lòng không để trống!',
-                        'warning'
-                    );
-                }
-                else {
-                    this.props.updateKhachHang(makh, tenkh, sdt, diachi, email, anhdaidienNew);
-                    Swal.fire(
-                        'Thay đổi thành công!',
-                        'Thông tin của bạn đã được thay đổi.',
-                        'success'
-                    );
-                    this.onChangePage(<Thongtintk />);
-                }
 
-            }
-        })
+        if(!tenkh || !sdt || !diachi || !email || !anhdaidienNew){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else if(tenkh.length < 6){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tên không hợp lệ!'
+            });
+        }
+        else if(sdt.length < 9){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Số điện thoại không hợp lệ!'
+            });
+        }
+        else if(!re.test(email)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Email không hợp lệ!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Bạn có muốn thay đổi?',
+                text: "Bạn không thể quay về dữ liệu cũ",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (makh == '' || tenkh == '' || sdt == '' || diachi == '' || email == '' || anhdaidien == '') {
+                        Swal.fire(
+                            'Warning!',
+                            'Vui lòng không để trống!',
+                            'warning'
+                        );
+                    }
+                    else {                    
+                        this.props.updateKhachHang(makh, tenkh, sdt, diachi, email, anhdaidienNew);
+                                           
+                        Swal.fire(
+                            'Thay đổi thành công!',
+                            'Thông tin của bạn đã được thay đổi.',
+                            'success'
+                        );
+                        this.onChangePage(<Thongtintk />);
+                    }
+    
+                }
+            });
+        }
+        
     }
 
     render() {

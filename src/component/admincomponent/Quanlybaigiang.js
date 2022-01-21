@@ -64,64 +64,87 @@ class Quanlybaigiang extends Component {
         });
     }
 
+    getId = (url) => {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
+    }
+
     handleOkThem = () => {
         var khoahoc = JSON.parse(sessionStorage.getItem('idkhoahoc'));
         var idkhoahoc = khoahoc.id;
         var { video } = this.props;
         var { tenbaigiang, luutru, tentailieu } = this.state;
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const dbref = ref(db, "khoahoc");
-                const dbref2 = child(dbref, idkhoahoc.toString());
-                var setthem = false;
-                
-                for (let i = 0; i < video.length; i++) {
-                    if (video[i] == "0") {
-                        set(child(dbref2, '0'), {
-                            key: i.toString(),
-                            link: luutru,
-                            ten: tenbaigiang,
-                            tentailieu: tentailieu
-                        });
-                        setthem = true;
-                        break;
-                    }
-                    if(video[i].ten == 'khongco'){
-                        set(child(dbref2, i.toString()), {
-                            key: i.toString(),
-                            link: luutru,
-                            ten: tenbaigiang,
-                            tentailieu: tentailieu
-                        });
-                        setthem = true;
-                        break;
-                    }
-                }
-                if (setthem === false) {
-                    set(child(dbref2, (video.length).toString()), {
-                        key: (video.length).toString(),
-                        link: luutru,
-                        ten: tenbaigiang,
-                        tentailieu: tentailieu
-                    });
+        if (luutru) {
+            let videoid = this.getId(luutru);
+            luutru = "https://www.youtube.com/embed/" + videoid;
+        }
+        if(tenbaigiang === '' || luutru === '' || tentailieu === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Xác nhận',
+                text: "Bạn có muốn thêm",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có!',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const dbref = ref(db, "khoahoc");
+                    const dbref2 = child(dbref, idkhoahoc.toString());
+                    var setthem = false;
                     
+                    for (let i = 0; i < video.length; i++) {
+                        if (video[i] == "0") {
+                            set(child(dbref2, '0'), {
+                                key: i.toString(),
+                                link: luutru,
+                                ten: tenbaigiang,
+                                tentailieu: tentailieu
+                            });
+                            setthem = true;
+                            break;
+                        }
+                        if(video[i].ten == 'khongco'){
+                            set(child(dbref2, i.toString()), {
+                                key: i.toString(),
+                                link: luutru,
+                                ten: tenbaigiang,
+                                tentailieu: tentailieu
+                            });
+                            setthem = true;
+                            break;
+                        }
+                    }
+                    if (setthem === false) {
+                        set(child(dbref2, (video.length).toString()), {
+                            key: (video.length).toString(),
+                            link: luutru,
+                            ten: tenbaigiang,
+                            tentailieu: tentailieu
+                        });
+                        
+                    }
+                    Swal.fire(
+                        'Thêm thành công!',
+                        'Dữ liệu đã được thêm.',
+                        'success'
+                    );
+                    this.props.togglePageAdmin(<Detailkhoahoc />)
                 }
-                Swal.fire(
-                    'Thêm thành công!',
-                    'Dữ liệu đã được thêm.',
-                    'success'
-                );
-                this.props.togglePageAdmin(<Detailkhoahoc />)
-            }
-        })
+            });
+        }        
     }
 
     handleOk = () => {
@@ -132,32 +155,46 @@ class Quanlybaigiang extends Component {
         var idkhoahoc = khoahoc.id;
         var { video } = this.props;
         var { tenbaigiang, luutru, tentailieu } = this.state;
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const dbref = ref(db, "khoahoc");
-                const dbref2 = child(dbref, idkhoahoc.toString());
-                set(child(dbref2, key.toString()), {
-                    key: key.toString(),
-                    link: luutru,
-                    ten: tenbaigiang,
-                    tentailieu: tentailieu
-                });
-                Swal.fire(
-                    'Sửa thành công!',
-                    'Dữ liệu đã được cập nhật.',
-                    'success'
-                )
-                this.props.togglePageAdmin(<Detailkhoahoc />)
-            }
-        })
+        if (luutru) {
+            let videoid = this.getId(luutru);
+            luutru = "https://www.youtube.com/embed/" + videoid;
+        }
+        if(tenbaigiang === '' || luutru === '' || tentailieu === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Xác nhận',
+                text: "Bạn có muốn sửa",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const dbref = ref(db, "khoahoc");
+                    const dbref2 = child(dbref, idkhoahoc.toString());
+                    set(child(dbref2, key.toString()), {
+                        key: key.toString(),
+                        link: luutru,
+                        ten: tenbaigiang,
+                        tentailieu: tentailieu
+                    });
+                    Swal.fire(
+                        'Sửa thành công!',
+                        'Dữ liệu đã được cập nhật.',
+                        'success'
+                    )
+                    this.props.togglePageAdmin(<Detailkhoahoc />)
+                }
+            });
+        }       
     }
 
     handleCancel = () => {
@@ -182,13 +219,14 @@ class Quanlybaigiang extends Component {
         var khoahoc = JSON.parse(sessionStorage.getItem('idkhoahoc'));
         var idkhoahoc = khoahoc.id;
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Xác nhận?',
+            text: "Bạn có muốn xoá?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
         }).then((result) => {
             if (result.isConfirmed) {
                 const dbref = ref(db, "khoahoc");
@@ -199,8 +237,8 @@ class Quanlybaigiang extends Component {
                     ten: 'khongco'
                 });
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'Thành công!',
+                    'Đã xoá.',
                     'success'
                 );
                 this.props.togglePageAdmin(<Detailkhoahoc />)

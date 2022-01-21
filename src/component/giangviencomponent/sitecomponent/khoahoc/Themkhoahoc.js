@@ -86,7 +86,8 @@ class Themkhoahoc extends Component {
         })
     }
 
-    onClear = () => {
+    onClear = (e) => {
+        e.preventDefault();
         this.setState({
             tenkhoahoc: '',
             theloai: '1',
@@ -112,25 +113,49 @@ class Themkhoahoc extends Component {
     onSubmit = (e) =>{
         e.preventDefault();
         var { tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu,gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6 } = this.state;
-        
+        console.log(this.state);
         var idgv = JSON.parse(sessionStorage.getItem('magv'));
         var magv = idgv.id;
         var ngaydang = null;
         var date = new Date();
         anh = this.getId(anh);
         videogioithieu = this.getIdYouTube(videogioithieu);
-        var ngaydang = date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear();
-        this.props.insertKhoaHoc(tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, ngaydang, magv,
-            gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6);
-            
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Lưu thành công',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        this.props.togglepagegiangvien(<Khoahoc />);
+        ngaydang = date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear();
+        if(tenkhoahoc === '' ||mota === '' || gia === '' || anh === '' || videogioithieu === '' ||dieu1 === '' ||dieu2 === '' ||dieu3 === '' ||dieu4 === '' ||dieu5 === '' ||dieu6 === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else if(gia < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(isNaN(gia)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else{
+            this.props.insertKhoaHoc(tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, ngaydang, magv,
+                gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6);
+                
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Lưu thành công',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            this.props.togglepagegiangvien(<Khoahoc />);
+        }
+        
     }
 
     getId = (url) => {
@@ -319,9 +344,9 @@ const mapDispatchToProps = (dispatch, props) => {
         requestCapBac: () => {
             dispatch(action.requestCapBac());
         },
-        insertKhoaHoc: (tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu,magv,
+        insertKhoaHoc: (tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu,ngaydang,magv,
             gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6) =>{
-            dispatch(action.insertKhoaHoc(tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu,magv,
+            dispatch(action.insertKhoaHoc(tenkhoahoc, theloai, capbacst, mota, gia, anh, videogioithieu, ngaydang, magv,
                 gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6));
         }
     }

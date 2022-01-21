@@ -17,6 +17,8 @@ class Tailieu extends Component {
 
     showContent = (datainput) => {
         var data = [];
+        datainput.sort((a, b) => new Date(...a.NgayDang.split('-').reverse()) - 
+                                    new Date(...b.NgayDang.split('-').reverse())).reverse();
         if(datainput.length < 9){
             data = datainput;
         }
@@ -59,7 +61,7 @@ class Tailieu extends Component {
         
         return (
             <div className="container khoahoc">
-                <h3>TÀI LIỆU</h3>
+                <h3>TÀI LIỆU <span className="hot-td">Mới</span></h3>
                 <br />
                 <div className="row">
                     {this.showContent(tailieu)}

@@ -492,3 +492,36 @@
 .timgiangvien button:hover{
     opacity: 0.6;
 }
+.hot-td{
+    border-radius: 10px;
+    border: 1px solid #000;
+    padding: 3px 6px 3px 6px;
+    font-size: 12px;    
+    -webkit-animation: glowing 1500ms infinite;
+    -moz-animation: glowing 1500ms infinite;
+    -o-animation: glowing 1500ms infinite;
+    animation: glowing 1500ms infinite;
+}
+@-webkit-keyframes glowing {
+    0% { background-color: #b11515; -webkit-box-shadow: 0 0 3px #b11515; }
+    50% { background-color: #fa7c7c; -webkit-box-shadow: 0 0 10px #fa7c7c; }
+    100% { background-color: #ff0000; -webkit-box-shadow: 0 0 3px #ff0000; }
+  }
+   
+  @-moz-keyframes glowing {
+    0% { background-color: #b11515; -webkit-box-shadow: 0 0 3px #b11515; }
+    50% { background-color: #fa7c7c; -webkit-box-shadow: 0 0 10px #fa7c7c; }
+    100% { background-color: #ff0000; -webkit-box-shadow: 0 0 3px #ff0000; }
+  }
+   
+  @-o-keyframes glowing {
+    0% { background-color: #b11515; -webkit-box-shadow: 0 0 3px #b11515; }
+    50% { background-color: #fa7c7c; -webkit-box-shadow: 0 0 10px #fa7c7c; }
+    100% { background-color: #ff0000; -webkit-box-shadow: 0 0 3px #ff0000; }
+  }
+   
+  @keyframes glowing {
+    0% { background-color: #b11515; -webkit-box-shadow: 0 0 3px #b11515; }
+    50% { background-color: #fa7c7c; -webkit-box-shadow: 0 0 10px #fa7c7c; }
+    100% { background-color: #ff0000; -webkit-box-shadow: 0 0 3px #ff0000; }
+  }

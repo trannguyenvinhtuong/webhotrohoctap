@@ -83,27 +83,42 @@ class Chinhsua extends Component {
         var logg = localStorage.getItem('user');
         var jslog = JSON.parse(logg);
         var makh = jslog.makh;
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.props.updateGiangVien(makh, noicongtac, trinhdo, kinhnghiem, gioithieubanthan,
-                    gioithieunghenghiep, gioithieukinhnghiem, macb, chuyennganh);
-                Swal.fire(
-                    'Thành công!',
-                    'Cập nhật đã lưu.',
-                    'success'
-                )
-                this.props.togglepagegiangvien(<Hoso />)
-            }
-        })
-
+        if(!noicongtac || !trinhdo || !kinhnghiem ||!gioithieubanthan || !gioithieukinhnghiem || !gioithieunghenghiep || !macb || !chuyennganh){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else if(kinhnghiem < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền thông tin hợp lệ!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.props.updateGiangVien(makh, noicongtac, trinhdo, kinhnghiem, gioithieubanthan,
+                        gioithieunghenghiep, gioithieukinhnghiem, macb, chuyennganh);
+                    Swal.fire(
+                        'Thành công!',
+                        'Cập nhật đã lưu.',
+                        'success'
+                    )
+                    this.props.togglepagegiangvien(<Hoso />)
+                }
+            });
+        }
     }
 
     onChange = (event) => {
@@ -172,7 +187,7 @@ class Chinhsua extends Component {
                     <br />
                     <label>Cấp bậc</label>
                     <br />
-                    <Select defaultValue={macb} style={{ width: '80%' }} onChange={this.handleChangeCB}>
+                    <Select value={macb} style={{ width: '80%' }} onChange={this.handleChangeCB}>
                         {this.showOptionCapBac(capbac)}
                     </Select>
                     <br />

@@ -85,116 +85,127 @@ class Quanlybaigiang extends Component {
             let videoid = this.getId(luutru);
             luutru = "https://www.youtube.com/embed/" + videoid;
         }
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const dbref = ref(db, "khoahoc");
-                const dbref2 = child(dbref, idkhoahoc.toString());
-                var setthem = false;
-                
-                if (tentailieu != "123") {
-                    const storageRef = ref2(storage, "NoiDungKhoaHoc/" + tentailieu.name);
+        if(tenbaigiang === '' || luutru === '' || tentailieu === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
 
-                    uploadBytes(storageRef, tentailieu).then((snapshot) => {
-                        console.log('Uploaded a blob or file!');
-                    });
-
-                    if(!dekiemtra){
-                        dekiemtra="khongco";
-                    }
-
-                    for (let i = 0; i < video.length; i++) {
-                        if (video[i] == "0") {
-                            set(child(dbref2, '0'), {
-                                key: i.toString(),
+        else{
+            Swal.fire({
+                title: 'Xác nhận',
+                text: "Bạn có muốn thêm",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có!',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const dbref = ref(db, "khoahoc");
+                    const dbref2 = child(dbref, idkhoahoc.toString());
+                    var setthem = false;
+                    
+                    if (tentailieu != "123") {
+                        const storageRef = ref2(storage, "NoiDungKhoaHoc/" + tentailieu.name);
+    
+                        uploadBytes(storageRef, tentailieu).then((snapshot) => {
+                            console.log('Uploaded a blob or file!');
+                        });
+    
+                        if(!dekiemtra){
+                            dekiemtra="khongco";
+                        }
+    
+                        for (let i = 0; i < video.length; i++) {
+                            if (video[i] == "0") {
+                                set(child(dbref2, '0'), {
+                                    key: i.toString(),
+                                    link: luutru,
+                                    ten: tenbaigiang,
+                                    tentailieu: tentailieu.name,
+                                    dekiemtra: dekiemtra
+                                });
+                                setthem = true;
+                                break;
+                            }
+                            if (video[i].ten == 'khongco') {
+                                set(child(dbref2, i.toString()), {
+                                    key: i.toString(),
+                                    link: luutru,
+                                    ten: tenbaigiang,
+                                    tentailieu: tentailieu.name,
+                                    dekiemtra: dekiemtra
+                                });
+                                setthem = true;
+                                break;
+                            }
+                        }
+                        if (setthem === false) {
+                            set(child(dbref2, (video.length).toString()), {
+                                key: (video.length).toString(),
                                 link: luutru,
                                 ten: tenbaigiang,
                                 tentailieu: tentailieu.name,
                                 dekiemtra: dekiemtra
                             });
-                            setthem = true;
-                            break;
+    
                         }
-                        if (video[i].ten == 'khongco') {
-                            set(child(dbref2, i.toString()), {
-                                key: i.toString(),
-                                link: luutru,
-                                ten: tenbaigiang,
-                                tentailieu: tentailieu.name,
-                                dekiemtra: dekiemtra
-                            });
-                            setthem = true;
-                            break;
-                        }
+                        Swal.fire(
+                            'Thêm thành công!',
+                            'Dữ liệu đã được thêm.',
+                            'success'
+                        );
+                        this.props.togglepagegiangvien(<Detailkhoahoc />);
                     }
-                    if (setthem === false) {
-                        set(child(dbref2, (video.length).toString()), {
-                            key: (video.length).toString(),
-                            link: luutru,
-                            ten: tenbaigiang,
-                            tentailieu: tentailieu.name,
-                            dekiemtra: dekiemtra
-                        });
-
-                    }
-                    Swal.fire(
-                        'Thêm thành công!',
-                        'Dữ liệu đã được thêm.',
-                        'success'
-                    );
-                    this.props.togglepagegiangvien(<Detailkhoahoc />);
-                }
-                else{
-                    for (let i = 0; i < video.length; i++) {
-                        if (video[i] == "0") {
-                            set(child(dbref2, '0'), {
-                                key: i.toString(),
-                                link: luutru,
-                                ten: tenbaigiang,
-                                tentailieu: tentailieu,
-                                dekiemtra: dekiemtra
-                            });
-                            setthem = true;
-                            break;
+                    else{
+                        for (let i = 0; i < video.length; i++) {
+                            if (video[i] == "0") {
+                                set(child(dbref2, '0'), {
+                                    key: i.toString(),
+                                    link: luutru,
+                                    ten: tenbaigiang,
+                                    tentailieu: tentailieu,
+                                    dekiemtra: dekiemtra
+                                });
+                                setthem = true;
+                                break;
+                            }
+                            if (video[i].ten == 'khongco') {
+                                set(child(dbref2, i.toString()), {
+                                    key: i.toString(),
+                                    link: luutru,
+                                    ten: tenbaigiang,
+                                    tentailieu: tentailieu,
+                                    dekiemtra: dekiemtra
+                                });
+                                setthem = true;
+                                break;
+                            }
                         }
-                        if (video[i].ten == 'khongco') {
-                            set(child(dbref2, i.toString()), {
-                                key: i.toString(),
+                        if (setthem === false) {
+                            set(child(dbref2, (video.length).toString()), {
+                                key: (video.length).toString(),
                                 link: luutru,
                                 ten: tenbaigiang,
                                 tentailieu: tentailieu,
                                 dekiemtra: dekiemtra
                             });
-                            setthem = true;
-                            break;
+    
                         }
+                        Swal.fire(
+                            'Thêm thành công!',
+                            'Dữ liệu đã được thêm.',
+                            'success'
+                        );
+                        this.props.togglepagegiangvien(<Detailkhoahoc />);
                     }
-                    if (setthem === false) {
-                        set(child(dbref2, (video.length).toString()), {
-                            key: (video.length).toString(),
-                            link: luutru,
-                            ten: tenbaigiang,
-                            tentailieu: tentailieu,
-                            dekiemtra: dekiemtra
-                        });
-
-                    }
-                    Swal.fire(
-                        'Thêm thành công!',
-                        'Dữ liệu đã được thêm.',
-                        'success'
-                    );
-                    this.props.togglepagegiangvien(<Detailkhoahoc />);
                 }
-            }
-        })
+            });
+        }        
     }
 
     handleOk = () => {
@@ -209,33 +220,43 @@ class Quanlybaigiang extends Component {
             let videoid = this.getId(luutru);
             luutru = "https://www.youtube.com/embed/" + videoid;
         }
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const dbref = ref(db, "khoahoc");
-                const dbref2 = child(dbref, idkhoahoc.toString());
-                set(child(dbref2, key.toString()), {
-                    key: key.toString(),
-                    link: luutru,
-                    ten: tenbaigiang,
-                    tentailieu: tentailieu,
-                    dekiemtra: dekiemtra
-                });
-                Swal.fire(
-                    'Sửa thành công!',
-                    'Dữ liệu đã được cập nhật.',
-                    'success'
-                )
-                this.props.togglepagegiangvien(<Detailkhoahoc />)
-            }
-        })
+        if(tenbaigiang === '' || luutru === '' || tentailieu === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Xác nhận',
+                text: "Bạn có muốn sửa",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const dbref = ref(db, "khoahoc");
+                    const dbref2 = child(dbref, idkhoahoc.toString());
+                    set(child(dbref2, key.toString()), {
+                        key: key.toString(),
+                        link: luutru,
+                        ten: tenbaigiang,
+                        tentailieu: tentailieu,
+                        dekiemtra: dekiemtra
+                    });
+                    Swal.fire(
+                        'Sửa thành công!',
+                        'Dữ liệu đã được cập nhật.',
+                        'success'
+                    )
+                    this.props.togglepagegiangvien(<Detailkhoahoc />)
+                }
+            });
+        }       
     }
 
     handleCancel = () => {
@@ -260,13 +281,14 @@ class Quanlybaigiang extends Component {
         var khoahoc = JSON.parse(sessionStorage.getItem('idkhoahoc'));
         var idkhoahoc = khoahoc.id;
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Xác nhận?',
+            text: "Bạn có muốn xoá?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
         }).then((result) => {
             if (result.isConfirmed) {
                 const dbref = ref(db, "khoahoc");
@@ -277,13 +299,21 @@ class Quanlybaigiang extends Component {
                     ten: 'khongco'
                 });
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'Thành công!',
+                    'Đã xoá.',
                     'success'
                 );
                 this.props.togglepagegiangvien(<Detailkhoahoc />)
             }
         })
+    }
+
+    checkTenTL = (ten) =>{
+        var rs= null;
+        if(ten == '123'){
+            rs = "không có";
+        }
+        return rs;
     }
 
     render() {
@@ -316,7 +346,7 @@ class Quanlybaigiang extends Component {
             },
             {
                 title: 'Tài liệu',
-                render: (record) => <p className="notCap">{record.tentailieu != undefined ? record.tentailieu : ''}</p>
+                render: (record) => <p className="notCap">{record.tentailieu != undefined ? this.checkTenTL(record.tentailieu) : ''}</p>
             },
             {
                 title: 'Mã đề kiểm tra',

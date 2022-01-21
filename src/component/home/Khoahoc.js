@@ -17,6 +17,8 @@ class Khoahoc extends Component {
 
     showContent = (datainput, km) => {
         var data = [];
+        datainput.sort((a, b) => new Date(...a.NgayDang.split('-').reverse()) - 
+                                    new Date(...b.NgayDang.split('-').reverse())).reverse();
         if(datainput.length < 8){
             data = datainput;
         }
@@ -39,7 +41,7 @@ class Khoahoc extends Component {
                                         <h1>{da.TenKH}</h1>
                                     </div>
                                     <div className="col">
-                                        <p className="giacu" style={{textDecoration: 'none'}}>{this.loadPhanTramGiam(km,da.MaKhoaHoc)} %</p>
+                                        <p className="giacu" style={{textDecoration: 'none'}}>- {this.loadPhanTramGiam(km,da.MaKhoaHoc)} %</p>
                                         <p className="giacu">{formatter.format(da.GiaKH)}</p>
                                         <p className="giamoi">
                                             {
@@ -86,7 +88,7 @@ class Khoahoc extends Component {
         var { khuyenmai } = this.props;
         return (
             <div className="container khoahoc">
-                <h3>KHÓA HỌC</h3>
+                <h3>KHÓA HỌC <span className="hot-td">Mới</span></h3>
                 <br />
                 <div className="row">
                     {this.showContent(khoahoc, khuyenmai)}

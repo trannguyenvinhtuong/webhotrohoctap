@@ -105,27 +105,66 @@ class Detailtailieu extends Component {
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         var { giangvien } = this.props;
         var magv = giangvien[0].MaGV;
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.props.updateTaiLieu(matl, tentl, mota,
-                    magv, macb, macd, gia, anhtl, filedemo, sotrang,
-                    ngaydang, link);
-                Swal.fire(
-                    'Thành công!',
-                    'Cập nhật đã lưu.',
-                    'success'
-                )
-                this.tooglePage(<Tailieu />)
-            }
-        })
+        if (tentl === '' || mota === '' || magv === '' || macb === '' ||macd === '' ||anhtl === '' ||gia === '' ||filedemo === '' ||sotrang === '' ||ngaydang === '' ||link === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else if(gia < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(isNaN(gia)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(sotrang < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(isNaN(sotrang)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else {
+            Swal.fire({
+                title: 'Xác nhận',
+                text: "Bạn có chắc chắn",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.props.updateTaiLieu(matl, tentl, mota,
+                        magv, macb, macd, gia, anhtl, filedemo, sotrang,
+                        ngaydang, link);
+                    Swal.fire(
+                        'Thành công!',
+                        'Cập nhật đã lưu.',
+                        'success'
+                    )
+                    this.tooglePage(<Tailieu />)
+                }
+            });
+        }
+        
     }
 
     showOptionChuDe = (data) => {
@@ -199,14 +238,14 @@ class Detailtailieu extends Component {
                         <Col span={12}>
                             <label>Thể loại</label>
                             <br />
-                            <Select defaultValue={macd} style={{ width: '80%' }} onChange={this.handleChangeCD}>
+                            <Select value={macd} style={{ width: '80%' }} onChange={this.handleChangeCD}>
                                 {this.showOptionChuDe(chude)}
                             </Select>
                         </Col>
                         <Col span={12}>
                             <label>Cấp bậc</label>
                             <br />
-                            <Select defaultValue={macb} style={{ width: '80%' }} onChange={this.handleChangeCB}>
+                            <Select value={macb} style={{ width: '80%' }} onChange={this.handleChangeCB}>
                                 {this.showOptionCapBac(capbac)}
                             </Select>
                         </Col>

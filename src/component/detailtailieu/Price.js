@@ -65,8 +65,8 @@ class Price extends Component {
                             ? formatter.format(((tl.GiaTL * (100 - km.PhanTramGiam)) / 100))
                             : 0
                     }</h1>
-                    <h2>{tailieu.GiaTL === undefined ? formatter.format(tl.GiaTL) : tailieu.GiaTL}</h2>
-                    <h3>( - {khuyenmai.PhanTramGiam === undefined ? km.PhanTramGiam : khuyenmai.PhanTramGiam} % )</h3>
+                    <h2>{formatter.format(0)}</h2>
+                    <h3>( - 100 % )</h3>
                 </div>
                 <br />
                 <br />

@@ -97,37 +97,74 @@ class Themtailieu extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         var { tentl, mota, macb, macd, anhtl, demo, sotrang, link, giatl } = this.state;
-        var {giangvien} = this.props;
+        var { giangvien } = this.props;
         // var idgv = JSON.parse(sessionStorage.getItem('magv'));
         // var magv = idgv.id;
         var magv = giangvien[0].MaGV;
         var date = new Date();
-        
-        if(anhtl){
+
+        if (anhtl) {
             anhtl = this.getId(anhtl);
         }
-        if(demo){
+        if (demo) {
             let id = this.getId(demo);
-            demo = "https://drive.google.com/file/d/"+id+"/preview";
+            demo = "https://drive.google.com/file/d/" + id + "/preview";
         }
-        if(link){
+        if (link) {
             let id = this.getId(link);
-            link = "https://drive.google.com/file/d/"+id+"/preview";
+            link = "https://drive.google.com/file/d/" + id + "/preview";
         }
-       
+
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-        this.props.insertTaiLieu(tentl, mota, magv, macb, macd, anhtl, giatl, demo, sotrang, ngaydang, link)
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Lưu thành công',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        window.location.reload();
+        if (tentl === '' || mota === '' || magv === '' || macb === '' ||macd === '' ||anhtl === '' ||giatl === '' ||demo === '' ||sotrang === '' ||ngaydang === '' ||link === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else if(giatl < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(isNaN(giatl)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(sotrang < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(isNaN(sotrang)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else {
+            this.props.insertTaiLieu(tentl, mota, magv, macb, macd, anhtl, giatl, demo, sotrang, ngaydang, link)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Lưu thành công',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            window.location.reload();
+        }
     }
 
-    onCancel = () =>{
+    onCancel = () => {
         window.location.reload();
     }
 
@@ -264,7 +301,7 @@ const mapDispatchToProps = (dispatch, props) => {
         insertTaiLieu: (tentl, mota, magv, macb, macd, anh, giatl, demo, sotrang, ngaydang, link) => {
             dispatch(action.insertTaiLieu(tentl, mota, magv, macb, macd, anh, giatl, demo, sotrang, ngaydang, link));
         },
-        requestCheckGV: (idkh) =>{
+        requestCheckGV: (idkh) => {
             dispatch(action.requestCheckGV(idkh));
         }
     }

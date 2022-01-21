@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Logo from './../../../imgs/LOGO_OF_LOGO.svg';
 import './../../../SASS/giangvienpage.sass';
+import router from './../../../config/router';
 
 class Navbar extends Component{
     render() {
@@ -12,7 +13,7 @@ class Navbar extends Component{
                 <a href="#">
                     <h3>Teacher Dashboard</h3>
                 </a>
-                <a className="backtotk" href="http://localhost:3000/nguoidung/quantritk">X</a>
+                <a className="backtotk" href={router + "/nguoidung/quantritk"}>X</a>
             </div>
         );
     }

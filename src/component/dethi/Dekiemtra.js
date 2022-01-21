@@ -97,44 +97,43 @@ class Dekiemtra extends Component{
             }
         ]
         var {toggledekt,onfilterkt} = this.props;
-        if(onfilterkt.keyword){
-            if(dethi){
-                dethi = dethi.filter((kh)=>{
-                    return (kh.ten).toLowerCase().indexOf(onfilterkt.keyword.toLowerCase()) != -1;
-                })
-            }            
-        }
-        if(onfilterkt.machude){
-            if(dethi){
-                dethi = dethi.filter((kh)=>{
-                    return kh.macd == onfilterkt.machude
-                })
-            }
-        }
-        if(onfilterkt.macapbac){
-            if(dethi){
-                dethi = dethi.filter((kh)=>{
-                    return kh.macb == onfilterkt.macapbac
-                })
-            }
-        }
+        // if(onfilterkt.keyword){
+        //     if(dethi){
+        //         dethi = dethi.filter((kh)=>{
+        //             return (kh.ten).toLowerCase().indexOf(onfilterkt.keyword) != -1;
+        //         })
+        //     }            
+        // }
+        // if(onfilterkt.machude){
+        //     if(dethi){
+        //         dethi = dethi.filter((kh)=>{
+        //             return kh.macd == onfilterkt.machude
+        //         })
+        //     }
+        // }
+        // if(onfilterkt.macapbac){
+        //     if(dethi){
+        //         dethi = dethi.filter((kh)=>{
+        //             return kh.macb == onfilterkt.macapbac
+        //         })
+        //     }
+        // }
 
-        dethi.filter((de,index)=>{
-            if(de == "0"){
-                dethi.splice(index,1);
-            }
-        })
+        // dethi.filter((de,index)=>{
+        //     if(de == "0"){
+        //         dethi.splice(index,1);
+        //     }
+        // })
         
-        console.log(dethi);
         return (           
             <div className="alldisplaydekiemtra" style={{marginTop:'4.3rem'}} >                
-                <Tab />
+                {/* <Tab /> */}
                 <Row className="padding-element">
                     <Col span={toggledekt === true ? 6 : 0}>
                         <Filter />
                     </Col>
                     <Col span={toggledekt === true ? 18 : 24}>
-                        <Table dataSource={dethi} columns={columns} rowKey="ten"/>
+                        <Table dataSource={[...dethi]} columns={columns} rowKey="ma"/>
                     </Col>
                 </Row>
             </div>

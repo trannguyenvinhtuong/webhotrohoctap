@@ -43,6 +43,9 @@ class Doimatkhau extends Component {
         else if (xnmatkhau !== matkhaumoi) {
             alert("Xác nhận không đúng");
         }
+        else if(matkhaumoi.length < 8){
+            alert("Mật khẩu phải nhiều hơn 8 ký tự");
+        }
         else if (kh.MatKhau === matkhaucu && xnmatkhau === matkhaumoi) {
             var data = JSON.parse(localStorage.getItem('user'));
             var idkh = data.makh;

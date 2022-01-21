@@ -3,8 +3,9 @@ import axios from 'axios';
 //firebase
 import db from './../config/firebase.config';
 import { ref, child, set } from "firebase/database";
+import api from './../config/api';
 
-const host = "http://localhost";
+const host = api;
 
 export const getKhoaHoc = (khoahoc) => {
     return {
@@ -608,13 +609,12 @@ export const insertKhoaHoc = (tenkhoahoc, theloai, capbacst, mota, gia, anh, vid
             method: 'get',
             url: host+'/backendAPI/api/insertkhoahoc?tenkhoahoc=' + tenkhoahoc + '&theloai=' + theloai + '&capbac=' + capbacst +
                 '&mota=' + mota + '&gia=' + gia + '&anh=' + anh + '&video=' + videogioithieu + '&magv=' + magv + '&ngaydang=' + ngaydang +
-                '&gioithieu=' + gioithieu + '&dieu2=' + dieu2 + '&dieu3=' + dieu3 +
-                '&dieu4=' + dieu4 + '&dieu5=' + dieu5 + '&dieu6=' + dieu6 + '&dieu1=' + dieu1,
+                '&gioithieu=' + gioithieu + '&dieu1=' + dieu1 + '&dieu2=' + dieu2 + '&dieu3=' + dieu3 +
+                '&dieu4=' + dieu4 + '&dieu5=' + dieu5 + '&dieu6=' + dieu6,
             data: null
         }).then(res => {
             if (res.data) {
                 var makhoahoc = res.data;
-
                 const dbref = ref(db, "khoahoc");
                 set(child(dbref, makhoahoc.toString()), {
                     '0': '0'

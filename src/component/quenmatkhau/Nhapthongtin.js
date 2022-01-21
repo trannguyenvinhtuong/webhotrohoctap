@@ -5,6 +5,7 @@ import * as action from './../../actions/index';
 import emailjs from 'emailjs-com';
 import Swal from "sweetalert2";
 import {withRouter} from 'react-router-dom';
+import router from './../../config/router';
 
 class Nhapthongtin extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class Nhapthongtin extends Component {
         var { khachhang } = this.props;
         console.log(khachhang);
         if (khachhang.length > 0) {
-            var message = "http://localhost:3000/nguoidung/doimatkhau/" + khachhang[0].MaKH;
+            var message = router + "/nguoidung/doimatkhau/" + khachhang[0].MaKH;
             var templateParams = {
                 name: khachhang[0].TenKH,
                 email: khachhang[0].Email,

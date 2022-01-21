@@ -1,12 +1,12 @@
 import { Component } from "react";
 import th from "./../../imgs/toanhoc.jpg";
 import vl from "./../../imgs/physics.jpg";
-import lt from "./../../imgs/laptrinh.jpg";
+import lt from "./../../imgs/ngoaingu.jpg";
 import ls from "./../../imgs/lichsu.jpg";
 import vh from "./../../imgs/vanhoc.jpg";
 import imath from "./../../imgs/math.svg";
 import iphysics from "./../../imgs/Physics.svg";
-import ilaptrinh from "./../../imgs/laptrinh.svg";
+import ilaptrinh from "./../../imgs/ngoaingu.svg";
 import ivh from "./../../imgs/vanhoc.svg";
 import ils from "./../../imgs/lichsu.svg";
 import {Link} from 'react-router-dom';
@@ -50,7 +50,7 @@ class Chinhphuc extends Component {
                                     <i>
                                         <img className="cp-icon" src={ilaptrinh} />
                                     </i>
-                                    <label>Lập trình</label>
+                                    <label>Ngoại ngữ</label>
                                 </div>
                             </div>
                         </Link>

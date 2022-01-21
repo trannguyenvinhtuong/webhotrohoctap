@@ -117,35 +117,58 @@ class Detailkhoahoc extends Component {
         event.preventDefault();
         var { makhoahoc, tenkhoahoc, mota, gia, anh, videogioithieu, gioithieu, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6, macb, macd } = this.state;
         var date = new Date();
-        anh = this.getId(anh);
-        videogioithieu = this.getIdYouTube(videogioithieu);
+        var anhnew = this.getId(anh);
+        var videogioithieunew = this.getIdYouTube(videogioithieu);
         var ngaydang = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         var idgv = JSON.parse(sessionStorage.getItem('magv'));
         var magv = idgv.id;
         var sohs = '0';
-        
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.props.updateKhoaHoc(makhoahoc, tenkhoahoc, mota, gia, magv,
-                    macd, macb, anh, videogioithieu, ngaydang,
-                    sohs, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6,
-                    gioithieu);
-                Swal.fire(
-                    'Thành công!',
-                    'Cập nhật đã lưu.',
-                    'success'
-                )
-                this.props.togglepagegiangvien(<Khoahoc />)
-            }
-        })
+        if(tenkhoahoc === '' ||mota === '' || gia === '' || anh === '' || videogioithieu === '' ||dieu1 === '' ||dieu2 === '' ||dieu3 === '' ||dieu4 === '' ||dieu5 === '' ||dieu6 === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else if(gia < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(isNaN(gia)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Xác nhận',
+                text: "Bạn có chắc chắn?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có!',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.props.updateKhoaHoc(makhoahoc, tenkhoahoc, mota, gia, magv,
+                        macd, macb, anhnew, videogioithieunew, ngaydang,
+                        sohs, dieu1, dieu2, dieu3, dieu4, dieu5, dieu6,
+                        gioithieu);
+                    Swal.fire(
+                        'Thành công!',
+                        'Cập nhật đã lưu.',
+                        'success'
+                    )
+                    this.props.togglepagegiangvien(<Khoahoc />)
+                }
+            });
+        }        
     }
 
     showOptionChuDe = (data) => {
@@ -186,25 +209,49 @@ class Detailkhoahoc extends Component {
 
     handleOk = () => {
         var { makhoahoc, tenkhuyenmai, phantramgiam, ngaybatdau, ngayhethan } = this.state;
-        Swal.fire({
-            title: 'Bạn có chắc chắn?',
-            text: "Bạn không thể khôi phục dữ liệu cũ!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.props.updateKhuyenMaiKH(makhoahoc, tenkhuyenmai, phantramgiam, ngaybatdau, ngayhethan);
-                Swal.fire(
-                    'Đã lưu!',
-                    'Sửa khuyến mãi thành công.',
-                    'success'
-                );
-                this.props.togglepagegiangvien(<Khoahoc />);
-            }
-        })
+        if(tenkhuyenmai === '' || phantramgiam === '' || ngaybatdau === '' || ngayhethan === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else if(phantramgiam < 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else if(isNaN(phantramgiam)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng điền dữ liệu hợp lệ!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Bạn có chắc chắn?',
+                text: "Bạn không thể khôi phục dữ liệu cũ!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có!',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.props.updateKhuyenMaiKH(makhoahoc, tenkhuyenmai, phantramgiam, ngaybatdau, ngayhethan);
+                    Swal.fire(
+                        'Đã lưu!',
+                        'Sửa khuyến mãi thành công.',
+                        'success'
+                    );
+                    this.props.togglepagegiangvien(<Khoahoc />);
+                }
+            });
+        }       
 
     }
 
@@ -243,6 +290,7 @@ class Detailkhoahoc extends Component {
             videogioithieu, gioithieu, dieu1, dieu2, dieu3,
             dieu4, dieu5, dieu6, macb, macd, tenkhuyenmai, phantramgiam,
             ngaybatdau, ngayhethan } = this.state;
+        console.log(macd);
         var { chude, capbac } = this.props;
         return (
             <div className="themkhoahoc">
@@ -270,14 +318,14 @@ class Detailkhoahoc extends Component {
                         <Col span={12}>
                             <label>Thể loại</label>
                             <br />
-                            <Select defaultValue={macd} style={{ width: '80%' }} onChange={this.handleChangeCD}>
+                            <Select value={macd} style={{ width: '80%' }} onChange={this.handleChangeCD}>
                                 {this.showOptionChuDe(chude)}
                             </Select>
                         </Col>
                         <Col span={12}>
                             <label>Cấp bậc</label>
                             <br />
-                            <Select defaultValue={macb} style={{ width: '80%' }} onChange={this.handleChangeCB}>
+                            <Select value={macb} style={{ width: '80%' }} onChange={this.handleChangeCB}>
                                 {this.showOptionCapBac(capbac)}
                             </Select>
                         </Col>

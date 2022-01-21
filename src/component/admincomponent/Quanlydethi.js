@@ -80,7 +80,8 @@ class Quanlydethi extends Component {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
         }).then((result) => {
             if (result.isConfirmed) {
                 var adaRef = ref(db, 'nganhangde/' + idde.toString());

@@ -128,7 +128,7 @@ class Quanlytaikhoan extends Component{
                     <label>Trạng thái</label>
                     <br />
                     <br />
-                    <Select defaultValue={trangthai} style={{ width: '100%' }} onChange={this.handleChange}>
+                    <Select value={trangthai} style={{ width: '100%' }} onChange={this.handleChange}>
                         <Option value="0">Hoạt động</Option>
                         <Option value="1">Khoá tài khoản</Option>
                     </Select>

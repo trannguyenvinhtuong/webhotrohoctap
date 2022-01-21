@@ -112,48 +112,59 @@ class Detaildethi extends Component {
         var { cauhoi, dapanA, dapanB, dapanC, dapanD, dapan } = this.state;
         var suach = JSON.parse(sessionStorage.getItem('suach'));
         var idch = suach.ma;
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, change it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var madethi = JSON.parse(sessionStorage.getItem('madethi'));
-                var id = madethi.made;
-                const dbref = ref(db, "nganhangde");
-                const dbref2 = child(dbref, id.toString());
-                const dbref3 = child(dbref2, "bocauhoi");
-                set(child(dbref3, idch.toString()), {
-                    cauhoi: cauhoi,
-                    A: dapanA,
-                    B: dapanB,
-                    C: dapanC,
-                    D: dapanD,
-                    dapan: dapan
-                });
-                Swal.fire(
-                    'Thay đổi thành công!',
-                    'Câu hỏi của bạn đã được thay đổi.',
-                    'success'
-                );
-                this.onRefesh();
-            }
-        })
+        if(cauhoi === '' || dapanA === '' || dapanB === '' || dapanC === '' || dapanD === '' || dapan === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Xác nhận',
+                text: "Bạn có muốn sửa?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var madethi = JSON.parse(sessionStorage.getItem('madethi'));
+                    var id = madethi.made;
+                    const dbref = ref(db, "nganhangde");
+                    const dbref2 = child(dbref, id.toString());
+                    const dbref3 = child(dbref2, "bocauhoi");
+                    set(child(dbref3, idch.toString()), {
+                        cauhoi: cauhoi,
+                        A: dapanA,
+                        B: dapanB,
+                        C: dapanC,
+                        D: dapanD,
+                        dapan: dapan
+                    });
+                    Swal.fire(
+                        'Thay đổi thành công!',
+                        'Câu hỏi của bạn đã được thay đổi.',
+                        'success'
+                    );
+                    this.onRefesh();
+                }
+            });
+        }        
     }
 
     onDeleteQ = (idch) => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Xác nhận',
+            text: "Bạn có muốn xoá?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
         }).then((result) => {
             if (result.isConfirmed) {
                 var madethi = JSON.parse(sessionStorage.getItem('madethi'));
@@ -166,10 +177,10 @@ class Detaildethi extends Component {
                 });
                 
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'Thay đổi thành công!',
+                    'Câu hỏi của bạn đã được thay đổi.',
                     'success'
-                )
+                );
 
                 this.onRefesh();
             }
@@ -213,38 +224,19 @@ class Detaildethi extends Component {
         var i = getde.length;
         var madethi = JSON.parse(sessionStorage.getItem('madethi'));
         var id = madethi.made;
-        const dbref = ref(db, "nganhangde");
-        const dbref2 = child(dbref, id.toString());
-        const dbref3 = child(dbref2, "bocauhoi");
-        if (getde == 0) {
-            set(child(dbref3, "0"), {
-                cauhoi: cauhoi,
-                A: dapanA,
-                B: dapanB,
-                C: dapanC,
-                D: dapanD,
-                dapan: dapan
+        if(cauhoi === '' || dapanA === '' || dapanB === '' || dapanC === '' || dapanD === '' || dapan === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
             });
         }
-        else {
-            var setda = false;
-            for (let j = 0; j < getde.length; j++) {
-                if (getde[j].cauhoi == 'khongco') {
-                    set(child(dbref3, j.toString()), {
-                        cauhoi: cauhoi,
-                        A: dapanA,
-                        B: dapanB,
-                        C: dapanC,
-                        D: dapanD,
-                        dapan: dapan
-                    });
-                    setda = true;
-                    break;
-                }
-
-            }
-            if (setda === false) {
-                set(child(dbref3, i.toString()), {
+        else{
+            const dbref = ref(db, "nganhangde");
+            const dbref2 = child(dbref, id.toString());
+            const dbref3 = child(dbref2, "bocauhoi");
+            if (getde == 0) {
+                set(child(dbref3, "0"), {
                     cauhoi: cauhoi,
                     A: dapanA,
                     B: dapanB,
@@ -253,24 +245,52 @@ class Detaildethi extends Component {
                     dapan: dapan
                 });
             }
-        }
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        this.setState({
-            showThemCauHoi: false,
-            cauhoi: '',
-            dapanA: '',
-            dapanB: '',
-            dapanC: '',
-            dapanD: '',
-            dapan: ''
-        });
-        this.onRefesh();
+            else {
+                var setda = false;
+                for (let j = 0; j < getde.length; j++) {
+                    if (getde[j].cauhoi == 'khongco') {
+                        set(child(dbref3, j.toString()), {
+                            cauhoi: cauhoi,
+                            A: dapanA,
+                            B: dapanB,
+                            C: dapanC,
+                            D: dapanD,
+                            dapan: dapan
+                        });
+                        setda = true;
+                        break;
+                    }
+    
+                }
+                if (setda === false) {
+                    set(child(dbref3, i.toString()), {
+                        cauhoi: cauhoi,
+                        A: dapanA,
+                        B: dapanB,
+                        C: dapanC,
+                        D: dapanD,
+                        dapan: dapan
+                    });
+                }
+            }
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Thành công',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            this.setState({
+                showThemCauHoi: false,
+                cauhoi: '',
+                dapanA: '',
+                dapanB: '',
+                dapanC: '',
+                dapanD: '',
+                dapan: ''
+            });
+            this.onRefesh();
+        }       
     }
 
     handleCancelThem = () => {

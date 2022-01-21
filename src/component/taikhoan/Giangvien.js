@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as action from "./../../actions/index";
 import './../../SASS/tk_giangvien.sass';
 import { Link } from 'react-router-dom';
+import router from './../../config/router';
 
 class Giangvien extends Component {
     componentDidMount() {
@@ -36,7 +37,7 @@ class Giangvien extends Component {
                 <div className="tk_giangvien" style={{ paddingTop: '2rem', textAlign: 'left' }}>
                     <h2>Truy cập trang quản trị dành cho giảng viên</h2>
                     <br />
-                    <a href="http://localhost:3000/giangvienpage">
+                    <a href={router + "/giangvienpage"}>
                         {window.location.reload}
                         <button>Truy cập</button>
                     </a>

@@ -20,6 +20,10 @@ class Dangky extends Component {
         }
     }
 
+    componentDidMount(){
+        this.props.requestAllKhachHang();
+    }
+
     onChange = (event) => {
         var target = event.target;
         var name = target.name;
@@ -29,9 +33,24 @@ class Dangky extends Component {
         })
     }
 
+    checkEmail = (email) =>{
+        var rs = false;
+        var {khachhang} = this.props;
+        if(khachhang.length > 0){
+            khachhang.map((kh)=>{
+                if(kh.Email == email){
+                    rs = true;
+                }
+            })
+        }
+        return rs;
+    }
+
     onClick = (e) => {
         e.preventDefault();
+        
         var { tenkh, sdt, diachi, email, taikhoan, matkhau, xnmatkhau } = this.state;
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!tenkh || !sdt || !diachi || !email || !taikhoan || !matkhau || !xnmatkhau) {
             Swal.fire({
                 icon: 'error',
@@ -39,6 +58,42 @@ class Dangky extends Component {
                 text: 'Vui lòng nhập đầy đủ thông tin!'
             });
         }
+        else if(tenkh.length < 6){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tên không hợp lệ!'
+            });
+        }
+        else if(sdt.length < 9){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Số điện thoại không hợp lệ!'
+            });
+        }
+        else if(!re.test(email)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Email không hợp lệ!'
+            });
+        }
+        else if(this.checkEmail(email) === true){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Email đã sử dụng!'
+            });
+        }
+        else if(matkhau.length<8){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Mật khẩu phải lớn hơn 8 ký tự!'
+            });
+        }
+        
         else if (xnmatkhau != matkhau) {
             Swal.fire({
                 icon: 'error',
@@ -152,14 +207,23 @@ class Dangky extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        khachhang: state.getallkh
+    }
+}
+
 const mapDispatchToProps = (dispatch, props) => {
     return {
         insertKhachHang: (tenkh, sdt, diachi, email,
             taikhoan, matkhau) => {
             dispatch(action.insertKhachHang(tenkh, sdt, diachi, email,
                 taikhoan, matkhau));
+        },
+        requestAllKhachHang: () =>{
+            dispatch(action.requestAllKhachHang());
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(Dangky));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dangky));

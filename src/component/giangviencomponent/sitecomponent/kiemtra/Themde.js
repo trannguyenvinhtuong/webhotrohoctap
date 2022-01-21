@@ -122,23 +122,32 @@ class Themde extends Component {
         
         var { giangvien } = this.props;
         var magv = giangvien[0].MaGV;
-        const dbref = ref(db, "nganhangde");
-        set(child(dbref, dethi.length.toString()), {
-            ten: tende,
-            macb: macb,
-            macd: macd,
-            ma: dethi.length.toString(),
-            magv: magv,
-            bocauhoi: '0'
-        });
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Thêm mới thành công',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        this.tooglePage(<Dethicuatoi />);
+        if(tende === ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đầy đủ thông tin!'
+            });
+        }
+        else{
+            const dbref = ref(db, "nganhangde");
+            set(child(dbref, dethi.length.toString()), {
+                ten: tende,
+                macb: macb,
+                macd: macd,
+                ma: dethi.length.toString(),
+                magv: magv,
+                bocauhoi: '0'
+            });
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Thêm mới thành công',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            this.tooglePage(<Dethicuatoi />);
+        }        
     }
 
     render() {
