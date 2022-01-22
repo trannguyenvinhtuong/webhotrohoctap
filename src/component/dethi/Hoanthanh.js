@@ -12,10 +12,6 @@ class Hoanthanh extends Component{
         return (
             <div className="hoanthanhkt container">
                 <br />
-                <br />
-                <br />
-                <br />
-                <br />
                 <h1>Chúc mừng bạn đã hoàn thành bài kiểm tra!</h1>
                 <br />
                 <h3>Điểm số của bạn là: {data.diem}/10 </h3>
